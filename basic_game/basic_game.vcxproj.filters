@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="window">
+      <UniqueIdentifier>{71f49a1f-bcb9-4f7e-ac1f-e5afe3c33df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{dc7e6539-7d16-4a60-b7fc-ffa1dd10d3d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="scripts\application\application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\window\window.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scripts\application\application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\window\window.h">
+      <Filter>window</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
