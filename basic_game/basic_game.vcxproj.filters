@@ -7,6 +7,9 @@
     <Filter Include="application">
       <UniqueIdentifier>{dc7e6539-7d16-4a60-b7fc-ffa1dd10d3d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{815d86db-0057-4c2b-8c63-837675568c4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -16,6 +19,9 @@
       <Filter>window</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scripts\renderer\renderer.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -23,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="scripts\window\window.h">
       <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\renderer.h">
+      <Filter>renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
