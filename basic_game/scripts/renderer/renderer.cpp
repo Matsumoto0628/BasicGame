@@ -25,6 +25,10 @@ bool Renderer::Initialize(HWND hWindow)
 
     initBackBuffer();
 
+    CompileShader(L"scripts/shader/vertex_shader.hlsl", L"scripts/shader/pixel_shader.hlsl", DefaultShader);
+
+	m_sampleTriangle.CreateVertexBuffer(*this);
+
     return true;
 }
 
@@ -80,9 +84,18 @@ void Renderer::Draw()
 {
     if (!m_pImmediateContext || !m_pRenderTargetView) return;
 
+    m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+
     // 青でクリア
     float color[] = { 0.f, 0.f, 1.f, 0.f };
-    m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);
+    m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);    
+    
+    m_pImmediateContext->IASetInputLayout(DefaultShader.pInputLayout);
+    m_pImmediateContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    m_pImmediateContext->VSSetShader(DefaultShader.pVertexShader, nullptr, 0);
+    m_pImmediateContext->PSSetShader(DefaultShader.pPixelShader, nullptr, 0);
+
+    m_sampleTriangle.Draw(*this);
 }
 
 void Renderer::Swap()
@@ -151,4 +164,78 @@ void Renderer::Terminate()
 
     DX_SAFE_RELEASE(m_pImmediateContext);
     DX_SAFE_RELEASE(m_pD3DDevice);
+}
+
+bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader)
+{
+    ID3DBlob* vsBlob = nullptr;
+    ID3DBlob* errBlob = nullptr;
+    auto pDevice = GetDevice();
+
+    // シェーダーコンパイル
+    auto hr = D3DCompileFromFile(
+        vsPath,
+        nullptr,
+        D3D_COMPILE_STANDARD_FILE_INCLUDE,
+        "main",
+        "vs_4_0",
+        D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+        0,
+        &vsBlob,
+        &errBlob
+    );
+    if (FAILED(hr)) return false;
+
+    // 頂点シェーダ作成(シェーダオブジェクト作成)
+    ID3D11VertexShader* pVertexShader = nullptr;
+    hr = pDevice->CreateVertexShader(
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        nullptr,
+        &pVertexShader
+    );
+    if (FAILED(hr)) return false;
+
+    // 入力レイアウトオブジェクト作成
+    ID3D11InputLayout* pInputLayout = nullptr;
+    D3D11_INPUT_ELEMENT_DESC layout[] = {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    hr = pDevice->CreateInputLayout(
+        layout,
+        _countof(layout),
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        &pInputLayout
+    );
+    if (FAILED(hr)) return false;
+
+    // ピクセルシェーダー作成
+    ID3DBlob* psBlob = nullptr;
+    hr = D3DCompileFromFile(
+        psPath,
+        nullptr,
+        D3D_COMPILE_STANDARD_FILE_INCLUDE,
+        "main",
+        "ps_4_0",
+        D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+        0,
+        &psBlob,
+        &errBlob
+    );
+
+    ID3D11PixelShader* pPixelShader = nullptr;
+    hr = pDevice->CreatePixelShader(
+        psBlob->GetBufferPointer(),
+        psBlob->GetBufferSize(),
+        nullptr,
+        &pPixelShader
+    );
+    if (FAILED(hr)) return false;
+
+    outShader.pVertexShader = pVertexShader;
+    outShader.pPixelShader = pPixelShader;
+    outShader.pInputLayout = pInputLayout;
+
+    return true;
 }
