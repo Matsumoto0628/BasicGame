@@ -35,9 +35,24 @@
     <ClInclude Include="scripts\application\application.h" />
     <ClInclude Include="scripts\pch.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />
+    <ClInclude Include="scripts\renderer\shader.h" />
     <ClInclude Include="scripts\renderer\triangle.h" />
     <ClInclude Include="scripts\renderer\vertex.h" />
     <ClInclude Include="scripts\window\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="scripts\shader\pixel_shader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\vertex_shader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

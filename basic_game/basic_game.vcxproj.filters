@@ -10,6 +10,9 @@
     <Filter Include="renderer">
       <UniqueIdentifier>{815d86db-0057-4c2b-8c63-837675568c4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{52eeb90e-e80a-48d8-b987-a9dfc7a6aecb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -44,5 +47,16 @@
     <ClInclude Include="scripts\renderer\vertex.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\renderer\shader.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="scripts\shader\pixel_shader.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\vertex_shader.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
