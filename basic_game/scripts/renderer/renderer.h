@@ -1,21 +1,22 @@
 #pragma once
+#include "triangle.h"
+#include "shader.h"
 
 class Renderer
 {
 public:
     Renderer();
     ~Renderer();
-
     bool Initialize(HWND hWindow);
-
     void Terminate();
-
     void Draw();
-
     void Swap();
-
+    bool CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader);
     ID3D11Device* GetDevice() { return m_pD3DDevice; }
     ID3D11DeviceContext* GetDeviceContext() { return m_pImmediateContext; }
+
+public:
+    Shader DefaultShader;
 
 private:
     bool initDeviceAndSwapChain(HWND hWindow);
@@ -43,5 +44,7 @@ private:
     UINT    m_backBufferNum = 3;
     UINT    m_screenWidth = 0;
     UINT    m_screenHeight = 0;
+
+    Triangle m_sampleTriangle;
 
 };
