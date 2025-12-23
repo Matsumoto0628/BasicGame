@@ -29,6 +29,8 @@ bool Renderer::Initialize(HWND hWindow)
 
 	m_sampleTriangle.CreateVertexBuffer(*this);
 
+	m_renderParam.Initialize(*this);
+
     return true;
 }
 

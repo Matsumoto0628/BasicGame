@@ -1,6 +1,7 @@
 #pragma once
 #include "triangle.h"
 #include "shader.h"
+#include "render_param.h"
 
 class Renderer
 {
@@ -14,6 +15,7 @@ public:
     bool CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader);
     ID3D11Device* GetDevice() { return m_pD3DDevice; }
     ID3D11DeviceContext* GetDeviceContext() { return m_pImmediateContext; }
+    RenderParam GetRenderParam() { return m_renderParam; }
 
 public:
     Shader DefaultShader;
@@ -46,5 +48,7 @@ private:
     UINT    m_screenHeight = 0;
 
     Triangle m_sampleTriangle;
+
+	RenderParam m_renderParam;
 
 };

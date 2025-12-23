@@ -36,9 +36,35 @@ bool Triangle::CreateVertexBuffer(Renderer& renderer)
 
 void Triangle::Draw(Renderer& renderer)
 {
+	setupTransform(renderer);
     auto pDeviceContext = renderer.GetDeviceContext();
     uint32_t strides[1] = { sizeof(Vertex) };
     uint32_t offsets[1] = { 0 };
     pDeviceContext->IASetVertexBuffers(0, 1, &VertexBuffer, strides, offsets);
     pDeviceContext->Draw(VERTEX_NUM, 0);
+}
+
+void Triangle::setupTransform(Renderer& renderer)
+{
+    auto cb = renderer.GetRenderParam().CbTransformSet;
+    auto mtx = DirectX::XMMatrixTranslation(0.5f, 0.5f, 0);
+    DirectX::XMStoreFloat4x4(&cb.Data.Transform, XMMatrixTranspose(mtx));
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
+    auto pDeviceContext = renderer.GetDeviceContext();
+    // Mapでロックして安全にデータ書き込み
+    HRESULT hr = pDeviceContext->Map(
+        cb.pBuffer,
+        0,
+        D3D11_MAP_WRITE_DISCARD,
+        0,
+        &mappedResource);
+    if (FAILED(hr)) {
+        //DXTRACE_ERR(L"DrawSceneGraph failed", hr);
+        return;
+    }
+    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
+    // マップ解除
+    pDeviceContext->Unmap(cb.pBuffer, 0);
+    pDeviceContext->VSSetConstantBuffers(0, 1, &cb.pBuffer);
 }
