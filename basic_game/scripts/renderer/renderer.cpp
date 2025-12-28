@@ -88,6 +88,10 @@ void Renderer::Draw()
 
     m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
 
+    // OMにブレンドステートオブジェクトを設定
+    FLOAT BlendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
+    m_pImmediateContext->OMSetBlendState(m_pBlendState, BlendFactor, 0xffffffff);
+
     // 青でクリア
     float color[] = { 0.f, 0.f, 1.f, 0.f };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);    
@@ -149,6 +153,25 @@ bool Renderer::initBackBuffer()
     m_viewPort[0].MaxDepth = 1.0f; // ビューポート領域の深度値の最大値
     m_pImmediateContext->RSSetViewports(1, &m_viewPort[0]);
 
+    // RenderTarget0へのAlphaブレンド描画設定
+    D3D11_BLEND_DESC BlendState;
+    ZeroMemory(&BlendState, sizeof(D3D11_BLEND_DESC));
+    BlendState.AlphaToCoverageEnable = FALSE;
+    BlendState.IndependentBlendEnable = FALSE;
+    BlendState.RenderTarget[0].BlendEnable = TRUE;
+    BlendState.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    BlendState.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    BlendState.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    BlendState.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    BlendState.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    BlendState.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    BlendState.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    hr = m_pD3DDevice->CreateBlendState(&BlendState, &m_pBlendState);
+    if (FAILED(hr)) {
+        //TRACE(L"InitDirect3D g_pD3DDevice->CreateBlendState", hr);
+        return false;
+    }
+
     return true;
 }
 
@@ -166,6 +189,8 @@ void Renderer::Terminate()
 
     DX_SAFE_RELEASE(m_pImmediateContext);
     DX_SAFE_RELEASE(m_pD3DDevice);
+
+	DX_SAFE_RELEASE(m_pBlendState);
 }
 
 bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader)
@@ -202,6 +227,7 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     ID3D11InputLayout* pInputLayout = nullptr;
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
     };
     hr = pDevice->CreateInputLayout(
         layout,

@@ -6,6 +6,11 @@ Triangle::Triangle()
     Vertices[0] = { 0.f, 0.5f, 0.f };
     Vertices[1] = { 0.5f, -0.5f, 0.f };
     Vertices[2] = { -0.5f, -0.5f, 0.f };
+
+    constexpr float ALPHA = 1.f;
+    Vertices[0].Color = { 1.f, 0.f, 0.f, ALPHA };
+    Vertices[1].Color = { 0.f, 1.f, 0.f, ALPHA };
+    Vertices[2].Color = { 0.f, 0.f, 1.f, ALPHA };
 }
 
 Triangle::~Triangle()
@@ -47,7 +52,7 @@ void Triangle::Draw(Renderer& renderer)
 void Triangle::setupTransform(Renderer& renderer)
 {
     auto cb = renderer.GetRenderParam().CbTransformSet;
-    auto mtx = DirectX::XMMatrixTranslation(0.5f, 0.5f, 0);
+    auto mtx = DirectX::XMMatrixIdentity();
     DirectX::XMStoreFloat4x4(&cb.Data.Transform, XMMatrixTranspose(mtx));
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）

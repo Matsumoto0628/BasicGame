@@ -47,6 +47,8 @@ private:
     UINT    m_screenWidth = 0;
     UINT    m_screenHeight = 0;
 
+	ID3D11BlendState* m_pBlendState = nullptr;
+
     Triangle m_sampleTriangle;
 
 	RenderParam m_renderParam;
