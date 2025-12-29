@@ -1,6 +1,10 @@
 #include "renderer.h"
+#include "cb_view.h"
 
 Renderer::Renderer()
+    :m_nearClipDist(0.1f)
+	, m_farClipDist(1000.f)
+	, m_fov(DirectX::XMConvertToRadians(30.f))
 {
     m_pFeatureLevels[0] = D3D_FEATURE_LEVEL_11_1;
     m_pFeatureLevels[1] = D3D_FEATURE_LEVEL_11_0;
@@ -28,6 +32,10 @@ bool Renderer::Initialize(HWND hWindow)
     CompileShader(L"scripts/shader/vertex_shader.hlsl", L"scripts/shader/pixel_shader.hlsl", DefaultShader);
 
 	m_sampleTriangle.CreateVertexBuffer(*this);
+
+	m_renderParam.Initialize(*this);
+
+	setupProjectionTransform();
 
     return true;
 }
@@ -85,6 +93,10 @@ void Renderer::Draw()
     if (!m_pImmediateContext || !m_pRenderTargetView) return;
 
     m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+
+    // OMにブレンドステートオブジェクトを設定
+    FLOAT BlendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
+    m_pImmediateContext->OMSetBlendState(m_pBlendState, BlendFactor, 0xffffffff);
 
     // 青でクリア
     float color[] = { 0.f, 0.f, 1.f, 0.f };
@@ -147,6 +159,25 @@ bool Renderer::initBackBuffer()
     m_viewPort[0].MaxDepth = 1.0f; // ビューポート領域の深度値の最大値
     m_pImmediateContext->RSSetViewports(1, &m_viewPort[0]);
 
+    // RenderTarget0へのAlphaブレンド描画設定
+    D3D11_BLEND_DESC BlendState;
+    ZeroMemory(&BlendState, sizeof(D3D11_BLEND_DESC));
+    BlendState.AlphaToCoverageEnable = FALSE;
+    BlendState.IndependentBlendEnable = FALSE;
+    BlendState.RenderTarget[0].BlendEnable = TRUE;
+    BlendState.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    BlendState.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    BlendState.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    BlendState.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    BlendState.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    BlendState.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    BlendState.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    hr = m_pD3DDevice->CreateBlendState(&BlendState, &m_pBlendState);
+    if (FAILED(hr)) {
+        //TRACE(L"InitDirect3D g_pD3DDevice->CreateBlendState", hr);
+        return false;
+    }
+
     return true;
 }
 
@@ -164,6 +195,8 @@ void Renderer::Terminate()
 
     DX_SAFE_RELEASE(m_pImmediateContext);
     DX_SAFE_RELEASE(m_pD3DDevice);
+
+	DX_SAFE_RELEASE(m_pBlendState);
 }
 
 bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader)
@@ -200,6 +233,7 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     ID3D11InputLayout* pInputLayout = nullptr;
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
     };
     hr = pDevice->CreateInputLayout(
         layout,
@@ -236,6 +270,71 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     outShader.pVertexShader = pVertexShader;
     outShader.pPixelShader = pPixelShader;
     outShader.pInputLayout = pInputLayout;
+
+    return true;
+}
+
+/*
+ *    透視投影行列を設定
+ */
+bool Renderer::setupProjectionTransform()
+{
+    DirectX::XMMATRIX mat = DirectX::XMMatrixPerspectiveFovLH(
+        m_fov,
+        static_cast<float>(m_screenWidth) / static_cast<float>(m_screenHeight),   // アスペクト比
+        m_nearClipDist,
+        m_farClipDist);
+    mat = XMMatrixTranspose(mat);
+
+    auto cb = GetRenderParam().CbProjectionSet;
+    XMStoreFloat4x4(&cb.Data.Projection, mat);
+
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    auto pDeviceContext = GetDeviceContext();
+    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
+    HRESULT hr = pDeviceContext->Map(
+        cb.pBuffer,
+        0,
+        D3D11_MAP_WRITE_DISCARD,
+        0,
+        &mappedResource);
+    if (FAILED(hr)) {
+        return false;
+    }
+    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
+    // マップ解除
+    pDeviceContext->Unmap(cb.pBuffer, 0);
+
+    // VSにProjectionMatrixをセット(ここで1度セットして以後不変)
+    pDeviceContext->VSSetConstantBuffers(2, 1, &cb.pBuffer);
+
+    return true;
+}
+
+bool Renderer::SetupViewTransform(const DirectX::XMMATRIX& viewMat)
+{
+    auto cb = GetRenderParam().CbViewSet;
+    XMStoreFloat4x4(&cb.Data.View, XMMatrixTranspose(viewMat));
+
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    auto pDeviceContext = GetDeviceContext();
+    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
+    HRESULT hr = pDeviceContext->Map(
+        cb.pBuffer,
+        0,
+        D3D11_MAP_WRITE_DISCARD,
+        0,
+        &mappedResource);
+    if (FAILED(hr)) {
+        //DXTRACE_ERR(L"DrawSceneGraph failed", hr);
+        return false;
+    }
+    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
+    // マップ解除
+    pDeviceContext->Unmap(cb.pBuffer, 0);
+
+    // VSにViewMatrixをセット
+    pDeviceContext->VSSetConstantBuffers(1, 1, &cb.pBuffer);
 
     return true;
 }
