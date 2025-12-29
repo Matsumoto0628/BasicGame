@@ -1,6 +1,10 @@
 #include "renderer.h"
+#include "cb_view.h"
 
 Renderer::Renderer()
+    :m_nearClipDist(0.1f)
+	, m_farClipDist(1000.f)
+	, m_fov(DirectX::XMConvertToRadians(30.f))
 {
     m_pFeatureLevels[0] = D3D_FEATURE_LEVEL_11_1;
     m_pFeatureLevels[1] = D3D_FEATURE_LEVEL_11_0;
@@ -30,6 +34,8 @@ bool Renderer::Initialize(HWND hWindow)
 	m_sampleTriangle.CreateVertexBuffer(*this);
 
 	m_renderParam.Initialize(*this);
+
+	setupProjectionTransform();
 
     return true;
 }
@@ -264,6 +270,71 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     outShader.pVertexShader = pVertexShader;
     outShader.pPixelShader = pPixelShader;
     outShader.pInputLayout = pInputLayout;
+
+    return true;
+}
+
+/*
+ *    透視投影行列を設定
+ */
+bool Renderer::setupProjectionTransform()
+{
+    DirectX::XMMATRIX mat = DirectX::XMMatrixPerspectiveFovLH(
+        m_fov,
+        static_cast<float>(m_screenWidth) / static_cast<float>(m_screenHeight),   // アスペクト比
+        m_nearClipDist,
+        m_farClipDist);
+    mat = XMMatrixTranspose(mat);
+
+    auto cb = GetRenderParam().CbProjectionSet;
+    XMStoreFloat4x4(&cb.Data.Projection, mat);
+
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    auto pDeviceContext = GetDeviceContext();
+    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
+    HRESULT hr = pDeviceContext->Map(
+        cb.pBuffer,
+        0,
+        D3D11_MAP_WRITE_DISCARD,
+        0,
+        &mappedResource);
+    if (FAILED(hr)) {
+        return false;
+    }
+    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
+    // マップ解除
+    pDeviceContext->Unmap(cb.pBuffer, 0);
+
+    // VSにProjectionMatrixをセット(ここで1度セットして以後不変)
+    pDeviceContext->VSSetConstantBuffers(2, 1, &cb.pBuffer);
+
+    return true;
+}
+
+bool Renderer::SetupViewTransform(const DirectX::XMMATRIX& viewMat)
+{
+    auto cb = GetRenderParam().CbViewSet;
+    XMStoreFloat4x4(&cb.Data.View, XMMatrixTranspose(viewMat));
+
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    auto pDeviceContext = GetDeviceContext();
+    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
+    HRESULT hr = pDeviceContext->Map(
+        cb.pBuffer,
+        0,
+        D3D11_MAP_WRITE_DISCARD,
+        0,
+        &mappedResource);
+    if (FAILED(hr)) {
+        //DXTRACE_ERR(L"DrawSceneGraph failed", hr);
+        return false;
+    }
+    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
+    // マップ解除
+    pDeviceContext->Unmap(cb.pBuffer, 0);
+
+    // VSにViewMatrixをセット
+    pDeviceContext->VSSetConstantBuffers(1, 1, &cb.pBuffer);
 
     return true;
 }

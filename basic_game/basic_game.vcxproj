@@ -27,17 +27,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="scripts\renderer\camera.cpp" />
     <ClCompile Include="scripts\renderer\renderer.cpp" />
     <ClCompile Include="scripts\renderer\render_param.cpp" />
+    <ClCompile Include="scripts\renderer\scene_manager.cpp" />
     <ClCompile Include="scripts\renderer\triangle.cpp" />
     <ClCompile Include="scripts\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h" />
     <ClInclude Include="scripts\pch.h" />
+    <ClInclude Include="scripts\renderer\camera.h" />
+    <ClInclude Include="scripts\renderer\cb_projection.h" />
     <ClInclude Include="scripts\renderer\cb_transform.h" />
+    <ClInclude Include="scripts\renderer\cb_view.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />
     <ClInclude Include="scripts\renderer\render_param.h" />
+    <ClInclude Include="scripts\renderer\scene_manager.h" />
     <ClInclude Include="scripts\renderer\shader.h" />
     <ClInclude Include="scripts\renderer\triangle.h" />
     <ClInclude Include="scripts\renderer\vertex.h" />

@@ -16,6 +16,7 @@ public:
     ID3D11Device* GetDevice() { return m_pD3DDevice; }
     ID3D11DeviceContext* GetDeviceContext() { return m_pImmediateContext; }
     RenderParam GetRenderParam() { return m_renderParam; }
+	bool SetupViewTransform(const DirectX::XMMATRIX& viewMat);
 
 public:
     Shader DefaultShader;
@@ -23,6 +24,7 @@ public:
 private:
     bool initDeviceAndSwapChain(HWND hWindow);
     bool initBackBuffer();
+    bool setupProjectionTransform();
 
 private:
     //! 機能レベルの配列
@@ -52,5 +54,9 @@ private:
     Triangle m_sampleTriangle;
 
 	RenderParam m_renderParam;
+
+    float m_nearClipDist = 0.f;
+    float m_farClipDist = 0.f;
+    float m_fov = 0.f;
 
 };

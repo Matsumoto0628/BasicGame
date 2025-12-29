@@ -15,7 +15,7 @@ Triangle::Triangle()
 
 Triangle::~Triangle()
 {
-    DX_SAFE_RELEASE(VertexBuffer);
+    DestroyVertexBuffer();
 }
 
 bool Triangle::CreateVertexBuffer(Renderer& renderer)
@@ -37,6 +37,11 @@ bool Triangle::CreateVertexBuffer(Renderer& renderer)
     if (FAILED(hr)) return false;
 
     return true;
+}
+
+void Triangle::DestroyVertexBuffer()
+{
+    DX_SAFE_RELEASE(VertexBuffer);
 }
 
 void Triangle::Draw(Renderer& renderer)

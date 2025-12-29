@@ -14,6 +14,7 @@ public:
 	Triangle();
 	~Triangle();
 	bool CreateVertexBuffer(Renderer& renderer);
+	void DestroyVertexBuffer();
 	void Draw(Renderer& renderer);
 
 private:
