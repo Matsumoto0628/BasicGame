@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "input_manager.h"
 
 Camera::Camera()
     : m_eyePos(0, 0, -5)
@@ -13,12 +14,11 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-    if (GetKeyState(VK_LEFT) & 0x80){
+    if (InputManager::Instance().GetKeyUp(VK_UP)) {
         m_eyePos.y += 0.03f;
     }
-    // 0.03‚Í“K“–‚È‚Ì‚ÅŠÂ‹«‚É‡‚í‚¹‚Ä•Ï‚¦‚ÄOK
-    if (m_eyePos.z < -1000.f) {
-        m_eyePos.z = 0.f;
+    if (InputManager::Instance().GetKeyUp(VK_DOWN)) {
+        m_eyePos.y -= 0.03f;
     }
 }
 

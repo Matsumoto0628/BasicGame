@@ -1,5 +1,6 @@
 #include "scene_manager.h"
 #include "renderer.h"
+#include "input_manager.h"
 
 SceneManager::SceneManager()
 {
@@ -27,6 +28,7 @@ void SceneManager::Terminate()
 void SceneManager::Update()
 {
     m_camera.Update();
+    InputManager::Instance().Update();
 }
 
 void SceneManager::Draw()
