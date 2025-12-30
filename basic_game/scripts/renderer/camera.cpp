@@ -13,10 +13,12 @@ Camera::~Camera()
 
 void Camera::Update()
 {
+    if (GetKeyState(VK_LEFT) & 0x80){
+        m_eyePos.y += 0.03f;
+    }
     // 0.03‚Í“K“–‚È‚Ì‚ÅŠÂ‹«‚É‡‚í‚¹‚Ä•Ï‚¦‚ÄOK
-    m_eyePos.y += 0.03f;
-    if (m_eyePos.y > 10.f) {
-        m_eyePos.y = 0.f;
+    if (m_eyePos.z < -1000.f) {
+        m_eyePos.z = 0.f;
     }
 }
 

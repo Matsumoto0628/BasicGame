@@ -51,8 +51,6 @@ private:
 
 	ID3D11BlendState* m_pBlendState = nullptr;
 
-    Triangle m_sampleTriangle;
-
 	RenderParam m_renderParam;
 
     float m_nearClipDist = 0.f;

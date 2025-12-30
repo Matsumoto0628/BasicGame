@@ -31,8 +31,6 @@ bool Renderer::Initialize(HWND hWindow)
 
     CompileShader(L"scripts/shader/vertex_shader.hlsl", L"scripts/shader/pixel_shader.hlsl", DefaultShader);
 
-	m_sampleTriangle.CreateVertexBuffer(*this);
-
 	m_renderParam.Initialize(*this);
 
 	setupProjectionTransform();
@@ -106,8 +104,6 @@ void Renderer::Draw()
     m_pImmediateContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     m_pImmediateContext->VSSetShader(DefaultShader.pVertexShader, nullptr, 0);
     m_pImmediateContext->PSSetShader(DefaultShader.pPixelShader, nullptr, 0);
-
-    m_sampleTriangle.Draw(*this);
 }
 
 void Renderer::Swap()

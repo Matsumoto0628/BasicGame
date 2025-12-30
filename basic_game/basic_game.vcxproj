@@ -28,6 +28,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="scripts\renderer\camera.cpp" />
+    <ClCompile Include="scripts\renderer\mesh.cpp" />
+    <ClCompile Include="scripts\renderer\model.cpp" />
     <ClCompile Include="scripts\renderer\renderer.cpp" />
     <ClCompile Include="scripts\renderer\render_param.cpp" />
     <ClCompile Include="scripts\renderer\scene_manager.cpp" />
@@ -41,6 +43,8 @@
     <ClInclude Include="scripts\renderer\cb_projection.h" />
     <ClInclude Include="scripts\renderer\cb_transform.h" />
     <ClInclude Include="scripts\renderer\cb_view.h" />
+    <ClInclude Include="scripts\renderer\mesh.h" />
+    <ClInclude Include="scripts\renderer\model.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />
     <ClInclude Include="scripts\renderer\render_param.h" />
     <ClInclude Include="scripts\renderer\scene_manager.h" />
@@ -62,6 +66,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -189,5 +196,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets" Condition="Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets'))" />
+  </Target>
 </Project>
