@@ -28,8 +28,14 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
     if (m_meshNum > 0) {
         m_meshes = new Mesh[m_meshNum];
         for (unsigned int meshIdx = 0; meshIdx < pScene->mNumMeshes; ++meshIdx) {
+
             auto pMeshData = pScene->mMeshes[meshIdx];
-            if (m_meshes[meshIdx].Setup(renderer, pMeshData) == false) {
+
+            // ここで Material を取得
+            auto mat = pScene->mMaterials[pMeshData->mMaterialIndex];
+
+            // Mesh に Mesh + Material を渡す
+            if (m_meshes[meshIdx].Setup(renderer, pMeshData, mat) == false) {
                 return false;
             }
         }
@@ -54,10 +60,16 @@ void Model::Draw(Renderer& renderer)
     }
 }
 
-void Model::setupTransform(Renderer& renderer)
+void Model::Rotate(Renderer& renderer, float rot)
 {
     auto cb = renderer.GetRenderParam().CbTransformSet;
-    auto mtx = DirectX::XMMatrixIdentity();
+
+    float scale = 0.1f;
+    float angle = DirectX::XMConvertToRadians(rot); // 回転角（度→ラジアン）
+
+    auto mtx = DirectX::XMMatrixScaling(scale, scale, scale) 
+        * DirectX::XMMatrixRotationX(angle);
+
     DirectX::XMStoreFloat4x4(&cb.Data.Transform, DirectX::XMMatrixTranspose(mtx));
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）

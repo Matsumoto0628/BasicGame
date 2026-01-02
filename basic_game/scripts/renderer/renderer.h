@@ -57,4 +57,6 @@ private:
     float m_farClipDist = 0.f;
     float m_fov = 0.f;
 
+    ID3D11DepthStencilView* m_pDepthStencilView = nullptr;
+    ID3D11DepthStencilState* m_pDepthState = nullptr;
 };

@@ -19,6 +19,5 @@ public:
 private:
     Renderer* m_pRenderer = nullptr;
     Camera m_camera;
-    Triangle m_sampleTriangle;
 	Model m_sampleModel;
 };

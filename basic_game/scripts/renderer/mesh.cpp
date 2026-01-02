@@ -1,6 +1,7 @@
 #include "mesh.h"
 #include "renderer.h"
 #include <assimp/mesh.h>
+#include <assimp/material.h>
 
 Mesh::Mesh()
 {
@@ -12,16 +13,42 @@ Mesh::~Mesh()
 	Terminate();
 }
 
-bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData)
+bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 {
+	// ライトの設定
+	m_light.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
+	m_light.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	m_light.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
+
+	bool result = createLightBuffer(renderer);
+	updateLight(renderer);
+
+	// マテリアルの Diffuse Color を取得
+	aiColor4D diffuse, specular;
+	float shininess = 0.0f;
+
+	aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
+	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
+	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
+
+	m_material.Data.Diffuse =
+		DirectX::XMFLOAT4(diffuse.r, diffuse.g, diffuse.b, diffuse.a);
+	m_material.Data.Specular =
+		DirectX::XMFLOAT4(1, 1, 1, 1);//本来はspecular.r
+	m_material.Data.Shininess = 10;//本来はshininess
+
+	createMaterialBuffer(renderer);
+
 	// 頂点データ取得
 	m_vertexNum = pMeshData->mNumVertices;
 	m_vertices = new Vertex[m_vertexNum];
+
 	for (unsigned int vertexIdx = 0; vertexIdx < m_vertexNum; ++vertexIdx) {
-		auto& pos = pMeshData->mVertices[vertexIdx];
-		m_vertices[vertexIdx].Position = DirectX::XMFLOAT3(pos.x, pos.y, pos.z);
-		constexpr float COLOR = 0.5f;
-		m_vertices[vertexIdx].Color = DirectX::XMFLOAT4(COLOR, COLOR, COLOR, 1.f);
+		auto& v = pMeshData->mVertices[vertexIdx];
+		auto& n = pMeshData->mNormals[vertexIdx];
+
+		m_vertices[vertexIdx].Position = { v.x, v.y, v.z };
+		m_vertices[vertexIdx].Normal = { n.x, n.y, n.z };
 	}
 	if (createVertexBuffer(renderer) == false) {
 		return false;
@@ -111,10 +138,57 @@ void Mesh::Draw(Renderer& renderer)
 	//setupTransform(renderer);
 
 	auto pDeviceContext = renderer.GetDeviceContext();
+
 	UINT strides[1] = { sizeof(Vertex) };
 	UINT offsets[1] = { 0 };
 	pDeviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, strides, offsets);
 	pDeviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
+	// Material CBuffer 更新
+	D3D11_MAPPED_SUBRESOURCE mapped;
+	pDeviceContext->Map(m_materialBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	CopyMemory(mapped.pData, &m_material, sizeof(Material));
+	pDeviceContext->Unmap(m_materialBuffer, 0);
+
+	// PixelShader にバインド
+	pDeviceContext->PSSetConstantBuffers(0, 1, &m_materialBuffer);
+	pDeviceContext->PSSetConstantBuffers(1, 1, &m_light.pBuffer);
+
 	pDeviceContext->DrawIndexed(m_indexNum, 0, 0);
+}
+
+bool Mesh::createMaterialBuffer(Renderer& renderer)
+{
+	D3D11_BUFFER_DESC desc = {};
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.ByteWidth = sizeof(Material);
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	return SUCCEEDED(
+		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_materialBuffer)
+	);
+}
+
+bool Mesh::createLightBuffer(Renderer& renderer)
+{
+	D3D11_BUFFER_DESC desc = {};
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.ByteWidth = sizeof(LightData);
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	return SUCCEEDED(
+		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_light.pBuffer)
+	);
+}
+
+void Mesh::updateLight(Renderer& renderer)
+{
+	auto ctx = renderer.GetDeviceContext();
+
+	D3D11_MAPPED_SUBRESOURCE mapped;
+	ctx->Map(m_light.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	memcpy(mapped.pData, &m_light.Data, sizeof(LightData));
+	ctx->Unmap(m_light.pBuffer, 0);
 }

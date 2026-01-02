@@ -44,6 +44,8 @@
     <ClInclude Include="scripts\renderer\cb_projection.h" />
     <ClInclude Include="scripts\renderer\cb_transform.h" />
     <ClInclude Include="scripts\renderer\cb_view.h" />
+    <ClInclude Include="scripts\renderer\light.h" />
+    <ClInclude Include="scripts\renderer\material.h" />
     <ClInclude Include="scripts\renderer\mesh.h" />
     <ClInclude Include="scripts\renderer\model.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />

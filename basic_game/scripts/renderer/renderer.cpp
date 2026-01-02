@@ -90,15 +90,19 @@ void Renderer::Draw()
 {
     if (!m_pImmediateContext || !m_pRenderTargetView) return;
 
-    m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+    m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 
     // OMにブレンドステートオブジェクトを設定
     FLOAT BlendFactor[4] = { 0.f, 0.f, 0.f, 0.f };
     m_pImmediateContext->OMSetBlendState(m_pBlendState, BlendFactor, 0xffffffff);
 
+    m_pImmediateContext->OMSetDepthStencilState(m_pDepthState, 0);
+
     // 青でクリア
     float color[] = { 0.f, 0.f, 1.f, 0.f };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);    
+
+    m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     
     m_pImmediateContext->IASetInputLayout(DefaultShader.pInputLayout);
     m_pImmediateContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -145,6 +149,32 @@ bool Renderer::initBackBuffer()
         //TRACE("InitBackBuffer g_pD3DDevice->CreateRenderTargetView(%0x08x)n", hr);  // 失敗
         return false;
     }
+
+    // 深度ステンシルバッファをつくる
+    // DepthStencil Texture 作成
+    D3D11_TEXTURE2D_DESC depthDesc = {};
+    depthDesc.Width = m_screenWidth;
+    depthDesc.Height = m_screenHeight;
+    depthDesc.MipLevels = 1;
+    depthDesc.ArraySize = 1;
+    depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    depthDesc.SampleDesc.Count = 1;
+    depthDesc.Usage = D3D11_USAGE_DEFAULT;
+    depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+    ID3D11Texture2D* depthTexture = nullptr;
+    hr = m_pD3DDevice->CreateTexture2D(&depthDesc, nullptr, &depthTexture);
+    if (FAILED(hr)) return false;
+
+    // DepthStencilView 作成
+    hr = m_pD3DDevice->CreateDepthStencilView(
+        depthTexture,
+        nullptr,
+        &m_pDepthStencilView
+    );
+    DX_SAFE_RELEASE(depthTexture);
+
+    if (FAILED(hr)) return false;
 
     // ビューポートの設定
     m_viewPort[0].TopLeftX = 0.0f;    // ビューポート領域の左上X座標。
@@ -230,6 +260,7 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
         { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
     hr = pDevice->CreateInputLayout(
         layout,

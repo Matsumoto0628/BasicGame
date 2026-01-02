@@ -14,11 +14,11 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-    if (InputManager::Instance().GetKeyUp(VK_UP)) {
-        m_eyePos.y += 0.03f;
+    if (InputManager::Instance().GetKey('W')) {
+        m_eyePos.z += 0.03f;
     }
-    if (InputManager::Instance().GetKeyUp(VK_DOWN)) {
-        m_eyePos.y -= 0.03f;
+    if (InputManager::Instance().GetKey('S')) {
+        m_eyePos.z -= 0.03f;
     }
 }
 
