@@ -1,13 +1,12 @@
 #pragma once
 
-struct LightData {
+struct Light {
 	DirectX::XMFLOAT4 LightDir;
 	DirectX::XMFLOAT4 LightColor;
 	DirectX::XMFLOAT4 EyePos;
 };
 
-class Light {
-public:
-	LightData Data;
+struct LightSet {
+	Light Data;
 	ID3D11Buffer* pBuffer = nullptr;
 };

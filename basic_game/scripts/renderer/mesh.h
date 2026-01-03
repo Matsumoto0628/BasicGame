@@ -39,9 +39,8 @@ private:
     ID3D11Buffer* m_vertexBuffer = nullptr;
     ID3D11Buffer* m_indexBuffer = nullptr;
 
-	Material m_material;
-	ID3D11Buffer* m_materialBuffer = nullptr;
-    Light m_light;
+	MaterialSet m_materialSet;
+    LightSet m_lightSet;
 
     DirectX::XMFLOAT4X4 m_localTransform;
 };

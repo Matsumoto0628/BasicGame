@@ -16,9 +16,9 @@ Mesh::~Mesh()
 bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 {
 	// ライトの設定
-	m_light.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
-	m_light.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-	m_light.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
+	m_lightSet.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
+	m_lightSet.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+	m_lightSet.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
 
 	bool result = createLightBuffer(renderer);
 	updateLight(renderer);
@@ -31,11 +31,11 @@ bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
 	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
 
-	m_material.Data.Diffuse =
+	m_materialSet.Data.Diffuse =
 		DirectX::XMFLOAT4(diffuse.r, diffuse.g, diffuse.b, diffuse.a);
-	m_material.Data.Specular =
+	m_materialSet.Data.Specular =
 		DirectX::XMFLOAT4(1, 1, 1, 1);//本来はspecular.r
-	m_material.Data.Shininess = 10;//本来はshininess
+	m_materialSet.Data.Shininess = 10;//本来はshininess
 
 	createMaterialBuffer(renderer);
 
@@ -146,13 +146,13 @@ void Mesh::Draw(Renderer& renderer)
 
 	// Material CBuffer 更新
 	D3D11_MAPPED_SUBRESOURCE mapped;
-	pDeviceContext->Map(m_materialBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
-	CopyMemory(mapped.pData, &m_material, sizeof(Material));
-	pDeviceContext->Unmap(m_materialBuffer, 0);
+	pDeviceContext->Map(m_materialSet.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	CopyMemory(mapped.pData, &m_materialSet.Data, sizeof(Material));
+	pDeviceContext->Unmap(m_materialSet.pBuffer, 0);
 
 	// PixelShader にバインド
-	pDeviceContext->PSSetConstantBuffers(0, 1, &m_materialBuffer);
-	pDeviceContext->PSSetConstantBuffers(1, 1, &m_light.pBuffer);
+	pDeviceContext->PSSetConstantBuffers(0, 1, &m_materialSet.pBuffer);
+	pDeviceContext->PSSetConstantBuffers(1, 1, &m_lightSet.pBuffer);
 
 	pDeviceContext->DrawIndexed(m_indexNum, 0, 0);
 }
@@ -166,7 +166,7 @@ bool Mesh::createMaterialBuffer(Renderer& renderer)
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	return SUCCEEDED(
-		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_materialBuffer)
+		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_materialSet.pBuffer)
 	);
 }
 
@@ -174,12 +174,12 @@ bool Mesh::createLightBuffer(Renderer& renderer)
 {
 	D3D11_BUFFER_DESC desc = {};
 	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.ByteWidth = sizeof(LightData);
+	desc.ByteWidth = sizeof(Light);
 	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	return SUCCEEDED(
-		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_light.pBuffer)
+		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_lightSet.pBuffer)
 	);
 }
 
@@ -188,9 +188,9 @@ void Mesh::updateLight(Renderer& renderer)
 	auto ctx = renderer.GetDeviceContext();
 
 	D3D11_MAPPED_SUBRESOURCE mapped;
-	ctx->Map(m_light.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
-	memcpy(mapped.pData, &m_light.Data, sizeof(LightData));
-	ctx->Unmap(m_light.pBuffer, 0);
+	ctx->Map(m_lightSet.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	memcpy(mapped.pData, &m_lightSet.Data, sizeof(Light));
+	ctx->Unmap(m_lightSet.pBuffer, 0);
 }
 
 void Mesh::SetLocalTransform(const DirectX::XMMATRIX& mtx)
