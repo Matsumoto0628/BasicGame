@@ -16,6 +16,8 @@ public:
     bool Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat);
     void Terminate();
     void Draw(Renderer& renderer);
+    void SetLocalTransform(const DirectX::XMMATRIX& mtx);
+    const DirectX::XMFLOAT4X4& GetLocalTransform() const { return m_localTransform; }
 
 private:
     bool createVertexBuffer(Renderer& renderer);
@@ -40,4 +42,6 @@ private:
 	Material m_material;
 	ID3D11Buffer* m_materialBuffer = nullptr;
     Light m_light;
+
+    DirectX::XMFLOAT4X4 m_localTransform;
 };

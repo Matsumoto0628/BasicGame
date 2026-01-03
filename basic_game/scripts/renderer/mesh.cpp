@@ -192,3 +192,8 @@ void Mesh::updateLight(Renderer& renderer)
 	memcpy(mapped.pData, &m_light.Data, sizeof(LightData));
 	ctx->Unmap(m_light.pBuffer, 0);
 }
+
+void Mesh::SetLocalTransform(const DirectX::XMMATRIX& mtx)
+{
+	DirectX::XMStoreFloat4x4(&m_localTransform, mtx);
+}
