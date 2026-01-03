@@ -1,6 +1,5 @@
 #pragma once
 #include "material.h"
-#include "light.h"
 
 struct aiMesh;
 struct Vertex;
@@ -25,8 +24,7 @@ private:
     void destroyVertexBuffer();
     void destroyIndexBuffer();
 	bool createMaterialBuffer(Renderer& renderer);
-    bool createLightBuffer(Renderer& renderer);
-    void updateLight(Renderer& renderer);
+    void setMaterial(Renderer& renderer);
 
 private:
     // データの解釈ワーク
@@ -40,7 +38,6 @@ private:
     ID3D11Buffer* m_indexBuffer = nullptr;
 
 	MaterialSet m_materialSet;
-    LightSet m_lightSet;
 
     DirectX::XMFLOAT4X4 m_localTransform;
 };

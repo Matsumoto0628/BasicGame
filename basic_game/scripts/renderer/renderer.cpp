@@ -35,6 +35,13 @@ bool Renderer::Initialize(HWND hWindow)
 
 	setupProjectionTransform();
 
+    // ƒ‰ƒCƒg‚ÌÝ’è
+    m_lightSet.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
+    m_lightSet.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+    m_lightSet.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
+    createLightBuffer();
+    setLight();
+
     return true;
 }
 
@@ -364,4 +371,27 @@ bool Renderer::SetupViewTransform(const DirectX::XMMATRIX& viewMat)
     pDeviceContext->VSSetConstantBuffers(1, 1, &cb.pBuffer);
 
     return true;
+}
+
+bool Renderer::createLightBuffer()
+{
+    D3D11_BUFFER_DESC desc = {};
+    desc.Usage = D3D11_USAGE_DYNAMIC;
+    desc.ByteWidth = sizeof(Light);
+    desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+    return SUCCEEDED(
+        m_pD3DDevice->CreateBuffer(&desc, nullptr, &m_lightSet.pBuffer)
+    );
+}
+
+void Renderer::setLight()
+{
+    auto pDeviceContext = m_pImmediateContext;
+
+    D3D11_MAPPED_SUBRESOURCE mapped;
+    pDeviceContext->Map(m_lightSet.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+    CopyMemory(mapped.pData, &m_lightSet.Data, sizeof(Light));
+    pDeviceContext->Unmap(m_lightSet.pBuffer, 0);
 }

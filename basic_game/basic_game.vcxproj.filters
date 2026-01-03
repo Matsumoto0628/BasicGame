@@ -13,6 +13,9 @@
     <Filter Include="shader">
       <UniqueIdentifier>{52eeb90e-e80a-48d8-b987-a9dfc7a6aecb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{8b750398-e110-4f2d-9616-26a321e35509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -36,6 +39,15 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="scripts\renderer\scene_manager.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\utility\input_manager.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\mesh.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\model.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,6 +89,21 @@
     <ClInclude Include="scripts\renderer\scene_manager.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\utility\input_manager.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\light.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\material.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\mesh.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\model.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="scripts\shader\pixel_shader.hlsl">
@@ -85,5 +112,8 @@
     <FxCompile Include="scripts\shader\vertex_shader.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

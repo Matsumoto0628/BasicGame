@@ -1,6 +1,5 @@
 #pragma once
 #include "camera.h"
-#include "triangle.h"
 #include "model.h"
 
 class Renderer;
