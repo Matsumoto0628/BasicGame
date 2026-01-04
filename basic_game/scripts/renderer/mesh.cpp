@@ -2,6 +2,7 @@
 #include "renderer.h"
 #include <assimp/mesh.h>
 #include <assimp/material.h>
+#include <WICTextureLoader.h>
 
 Mesh::Mesh()
 {
@@ -32,16 +33,37 @@ bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 	createMaterialBuffer(renderer);
 	setMaterial(renderer);
 
+	// テクスチャの設定
+	DirectX::CreateWICTextureFromFile(
+		renderer.GetDevice(),
+		renderer.GetDeviceContext(),
+		L"images/rainbow.jpeg",
+		nullptr,
+		&m_materialSet.DiffuseTex
+	);
+
 	// 頂点データ取得
 	m_vertexNum = pMeshData->mNumVertices;
 	m_vertices = new Vertex[m_vertexNum];
 
 	for (unsigned int vertexIdx = 0; vertexIdx < m_vertexNum; ++vertexIdx) {
+		// 位置、法線
 		auto& v = pMeshData->mVertices[vertexIdx];
 		auto& n = pMeshData->mNormals[vertexIdx];
-
 		m_vertices[vertexIdx].Position = { v.x, v.y, v.z };
 		m_vertices[vertexIdx].Normal = { n.x, n.y, n.z };
+
+		// テクスチャ
+		if (pMeshData->HasTextureCoords(0))
+		{
+			auto& uv = pMeshData->mTextureCoords[0][vertexIdx];
+			m_vertices[vertexIdx].TexCoord = { uv.x, uv.y };
+		}
+		else
+		{
+			m_vertices[vertexIdx].TexCoord = { 0.0f, 0.0f };
+		}
+
 	}
 	if (createVertexBuffer(renderer) == false) {
 		return false;
@@ -137,6 +159,7 @@ void Mesh::Draw(Renderer& renderer)
 
 	pDeviceContext->PSSetConstantBuffers(0, 1, &m_materialSet.pBuffer);
 	pDeviceContext->PSSetConstantBuffers(1, 1, &renderer.GetLightSet().pBuffer);
+	pDeviceContext->PSSetShaderResources(0, 1, &m_materialSet.DiffuseTex);
 
 	pDeviceContext->DrawIndexed(m_indexNum, 0, 0);
 }

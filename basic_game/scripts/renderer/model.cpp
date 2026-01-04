@@ -134,11 +134,7 @@ void Model::SetScale(const DirectX::XMFLOAT3& scale)
 
 void Model::Update()
 {
-    static float tx = 0.f;
-    static float ry = 0.f;
-	tx += 0.001f;
-	ry += 1.0f;
-    SetPosition({ tx, 0.f, 0.f });
-    SetRotation({ 0.0f, DirectX::XMConvertToRadians(ry), 0.0f });
-    SetScale({ 0.01f, 0.01f, 0.01f });
+    SetPosition({ 0.f, -0.5f, 0.f });
+    SetRotation({ 0.0f, 0.f, 0.0f });
+    SetScale({ 0.01f, 0.001f, 0.01f });
 }

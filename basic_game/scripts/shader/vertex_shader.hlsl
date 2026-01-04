@@ -20,6 +20,7 @@ struct VS_INPUT
     float3 Pos : POSITION; // 頂点座標(モデル座標系)
     float4 Col : COLOR; // 頂点色
     float3 Normal : NORMAL;
+    float2 Tex : TEXCOORD0;
 };
 
 struct VS_OUTPUT
@@ -28,6 +29,7 @@ struct VS_OUTPUT
     float4 Col : COLOR;
     float3 Normal : NORMAL;
     float3 WorldPos : TEXCOORD0;
+    float2 Tex : TEXCOORD1;
 };
 
 VS_OUTPUT main(VS_INPUT input)
@@ -42,6 +44,7 @@ VS_OUTPUT main(VS_INPUT input)
     output.Normal = mul(input.Normal, (float3x3)Transform);
     output.WorldPos = worldPos.xyz;
     output.Col = input.Col;
+    output.Tex = input.Tex;
 
     return output;
 }

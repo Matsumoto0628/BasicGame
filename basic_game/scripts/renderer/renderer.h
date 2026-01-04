@@ -29,6 +29,7 @@ private:
     bool setupProjectionTransform();
     bool createLightBuffer();
     void setLight();
+	bool createSamplerState();
 
 private:
     //! 機能レベルの配列
@@ -65,4 +66,6 @@ private:
     ID3D11DepthStencilState* m_pDepthState = nullptr;
 
     LightSet m_lightSet;
+
+    ID3D11SamplerState* m_samplerState = nullptr;
 };
