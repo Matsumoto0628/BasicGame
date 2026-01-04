@@ -1,6 +1,5 @@
 #include "scene_manager.h"
 #include "renderer.h"
-#include "input_manager.h"
 
 SceneManager::SceneManager()
 {
@@ -16,8 +15,8 @@ void SceneManager::Initialize(Renderer& renderer)
 
     const char* STAGE_PATH = "models/field/field.obj";
     m_stage.Setup(renderer, STAGE_PATH);
-    m_stage.SetPosition({0.f, -1.f, 0.f });
-    m_stage.SetScale({ 0.01f, 0.01f, 0.01f });
+    m_stage.SetPosition({0.f, 0.f, 0.f });
+    m_stage.SetScale({ 0.05f, 0.05f, 0.05f });
 }
 
 void SceneManager::Terminate()
@@ -29,7 +28,6 @@ void SceneManager::Update()
 {
     m_camera.Update();
 	m_stage.Update();
-    InputManager::Instance().Update();
 }
 
 void SceneManager::Draw()
