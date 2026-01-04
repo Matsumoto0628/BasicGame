@@ -42,13 +42,5 @@ float4 main(PS_INPUT input) : SV_TARGET
         Specular.rgb * spec;
     
     float4 texColor = DiffuseTex.Sample(Samp, input.Tex);
-    if (texColor.a == 0)
-    {
-        return float4(color * LightColor.rgb, Diffuse.a);
-    }
-    else
-    {
-        return float4(color * LightColor.rgb * texColor.rgb, Diffuse.a);
-    }
-    
+    return float4(color * LightColor.rgb * texColor.rgb, Diffuse.a);
 }

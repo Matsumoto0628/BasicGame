@@ -1,5 +1,7 @@
 #pragma once
 
+struct Shader;
+
 struct Material
 {
     DirectX::XMFLOAT4 Diffuse;
@@ -12,5 +14,6 @@ struct MaterialSet
 {
     Material Data;
     ID3D11ShaderResourceView* DiffuseTex = nullptr;
+    Shader* pShader;
     ID3D11Buffer* pBuffer = nullptr;
 };

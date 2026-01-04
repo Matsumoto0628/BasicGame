@@ -2,7 +2,6 @@
 #include "renderer.h"
 #include <assimp/mesh.h>
 #include <assimp/material.h>
-#include <WICTextureLoader.h>
 
 Mesh::Mesh()
 {
@@ -14,33 +13,13 @@ Mesh::~Mesh()
 	Terminate();
 }
 
-bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
+bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, MaterialSet& mat)
 {
-	// マテリアルの設定
-	aiColor4D diffuse, specular;
-	float shininess = 0.0f;
-
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
-	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
-
-	m_materialSet.Data.Diffuse =
-		DirectX::XMFLOAT4(diffuse.r, diffuse.g, diffuse.b, diffuse.a);
-	m_materialSet.Data.Specular =
-		DirectX::XMFLOAT4(1, 1, 1, 1);//本来はspecular.r
-	m_materialSet.Data.Shininess = 10;//本来はshininess
-
-	createMaterialBuffer(renderer);
-	setMaterial(renderer);
-
-	// テクスチャの設定
-	DirectX::CreateWICTextureFromFile(
-		renderer.GetDevice(),
-		renderer.GetDeviceContext(),
-		L"images/rainbow.jpeg",
-		nullptr,
-		&m_materialSet.DiffuseTex
-	);
+	m_pRenderer = &renderer;
+	m_pMaterialSet = &mat;
+	
+	createMaterialBuffer();
+	setMaterial();
 
 	// 頂点データ取得
 	m_vertexNum = pMeshData->mNumVertices;
@@ -65,7 +44,7 @@ bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 		}
 
 	}
-	if (createVertexBuffer(renderer) == false) {
+	if (createVertexBuffer() == false) {
 		return false;
 	}
 
@@ -79,7 +58,7 @@ bool Mesh::Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat)
 			m_indices[faceIdx * 3 + idx] = face.mIndices[idx];
 		}
 	}
-	if (createIndexBuffer(renderer) == false) {
+	if (createIndexBuffer() == false) {
 		return false;
 	}
 
@@ -96,7 +75,7 @@ void Mesh::Terminate()
 	m_indexNum = 0;
 }
 
-bool Mesh::createVertexBuffer(Renderer& renderer)
+bool Mesh::createVertexBuffer()
 {
 	D3D11_BUFFER_DESC vertexBufferDesc = {};
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -106,7 +85,7 @@ bool Mesh::createVertexBuffer(Renderer& renderer)
 	D3D11_SUBRESOURCE_DATA vertexSubData;
 	vertexSubData.pSysMem = m_vertices;
 
-	auto hr = renderer.GetDevice()->CreateBuffer(
+	auto hr = m_pRenderer->GetDevice()->CreateBuffer(
 		&vertexBufferDesc,
 		&vertexSubData,
 		&m_vertexBuffer
@@ -117,7 +96,7 @@ bool Mesh::createVertexBuffer(Renderer& renderer)
 	return true;
 }
 
-bool Mesh::createIndexBuffer(Renderer& renderer)
+bool Mesh::createIndexBuffer()
 {
 	D3D11_BUFFER_DESC indexBufferDesc = {};
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -127,7 +106,7 @@ bool Mesh::createIndexBuffer(Renderer& renderer)
 	D3D11_SUBRESOURCE_DATA indexSubData;
 	indexSubData.pSysMem = m_indices;
 
-	auto hr = renderer.GetDevice()->CreateBuffer(
+	auto hr = m_pRenderer->GetDevice()->CreateBuffer(
 		&indexBufferDesc,
 		&indexSubData,
 		&m_indexBuffer
@@ -148,23 +127,33 @@ void Mesh::destroyIndexBuffer()
 	DX_SAFE_RELEASE(m_indexBuffer);
 }
 
-void Mesh::Draw(Renderer& renderer)
+void Mesh::Draw()
 {
-	auto pDeviceContext = renderer.GetDeviceContext();
+	auto pDeviceContext = m_pRenderer->GetDeviceContext();
 
 	UINT strides[1] = { sizeof(Vertex) };
 	UINT offsets[1] = { 0 };
 	pDeviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, strides, offsets);
 	pDeviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	pDeviceContext->PSSetConstantBuffers(0, 1, &m_materialSet.pBuffer);
-	pDeviceContext->PSSetConstantBuffers(1, 1, &renderer.GetLightSet().pBuffer);
-	pDeviceContext->PSSetShaderResources(0, 1, &m_materialSet.DiffuseTex);
+	pDeviceContext->PSSetConstantBuffers(0, 1, &m_pMaterialSet->pBuffer);
+	pDeviceContext->PSSetConstantBuffers(1, 1, &m_pRenderer->GetLightSet().pBuffer);
+	pDeviceContext->PSSetShaderResources(0, 1, &m_pMaterialSet->DiffuseTex);
+
+	pDeviceContext->IASetInputLayout(m_pMaterialSet->pShader->pInputLayout);
+	pDeviceContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	pDeviceContext->VSSetShader(m_pMaterialSet->pShader->pVertexShader, nullptr, 0);
+	pDeviceContext->PSSetShader(m_pMaterialSet->pShader->pPixelShader, nullptr, 0);
 
 	pDeviceContext->DrawIndexed(m_indexNum, 0, 0);
 }
 
-bool Mesh::createMaterialBuffer(Renderer& renderer)
+void Mesh::SetLocalTransform(const DirectX::XMMATRIX& mtx)
+{
+	DirectX::XMStoreFloat4x4(&m_localTransform, mtx);
+}
+
+bool Mesh::createMaterialBuffer()
 {
 	D3D11_BUFFER_DESC desc = {};
 	desc.Usage = D3D11_USAGE_DYNAMIC;
@@ -173,21 +162,16 @@ bool Mesh::createMaterialBuffer(Renderer& renderer)
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	return SUCCEEDED(
-		renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_materialSet.pBuffer)
+		m_pRenderer->GetDevice()->CreateBuffer(&desc, nullptr, &m_pMaterialSet->pBuffer)
 	);
 }
 
-void Mesh::SetLocalTransform(const DirectX::XMMATRIX& mtx)
+void Mesh::setMaterial() 
 {
-	DirectX::XMStoreFloat4x4(&m_localTransform, mtx);
-}
-
-void Mesh::setMaterial(Renderer& renderer) 
-{
-	auto pDeviceContext = renderer.GetDeviceContext();
+	auto pDeviceContext = m_pRenderer->GetDeviceContext();
 
 	D3D11_MAPPED_SUBRESOURCE mapped;
-	pDeviceContext->Map(m_materialSet.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
-	CopyMemory(mapped.pData, &m_materialSet.Data, sizeof(Material));
-	pDeviceContext->Unmap(m_materialSet.pBuffer, 0);
+	pDeviceContext->Map(m_pMaterialSet->pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	CopyMemory(mapped.pData, &m_pMaterialSet->Data, sizeof(Material));
+	pDeviceContext->Unmap(m_pMaterialSet->pBuffer, 0);
 }

@@ -14,19 +14,21 @@ void SceneManager::Initialize(Renderer& renderer)
 {
     m_pRenderer = &renderer;
 
-    const char* MODEL_PATH = "models/box.fbx";
-    m_sampleModel.Setup(renderer, MODEL_PATH);
+    const char* STAGE_PATH = "models/field/field.obj";
+    m_stage.Setup(renderer, STAGE_PATH);
+    m_stage.SetPosition({0.f, -1.f, 0.f });
+    m_stage.SetScale({ 0.01f, 0.01f, 0.01f });
 }
 
 void SceneManager::Terminate()
 {
-    m_sampleModel.Terminate();
+	m_stage.Terminate();
 }
 
 void SceneManager::Update()
 {
     m_camera.Update();
-	m_sampleModel.Update();
+	m_stage.Update();
     InputManager::Instance().Update();
 }
 
@@ -34,5 +36,5 @@ void SceneManager::Draw()
 {
     auto viewMatrix = m_camera.GetViewMatrix();
     m_pRenderer->SetupViewTransform(viewMatrix);
-    m_sampleModel.Draw(*m_pRenderer);
+	m_stage.Draw();
 }

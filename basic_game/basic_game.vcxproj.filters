@@ -16,6 +16,9 @@
     <Filter Include="utility">
       <UniqueIdentifier>{8b750398-e110-4f2d-9616-26a321e35509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="actor">
+      <UniqueIdentifier>{c49c9438-2231-4c58-9573-d80efd15c3c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -50,6 +53,9 @@
     <ClCompile Include="scripts\renderer\model.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\actor\stage.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -66,9 +72,6 @@
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\vertex.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\renderer\shader.h">
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\cb_transform.h">
@@ -104,12 +107,24 @@
     <ClInclude Include="scripts\renderer\model.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\actor\stage.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="scripts\shader\pixel_shader.hlsl">
+    <FxCompile Include="scripts\shader\texture_specular_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
-    <FxCompile Include="scripts\shader\vertex_shader.hlsl">
+    <FxCompile Include="scripts\shader\texture_specular_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\texture_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\texture_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>

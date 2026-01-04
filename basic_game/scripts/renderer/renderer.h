@@ -21,7 +21,8 @@ public:
     const LightSet& GetLightSet() const { return m_lightSet; }
 
 public:
-    Shader DefaultShader;
+    Shader TextureSpecularShader;
+    Shader TextureShader;
 
 private:
     bool initDeviceAndSwapChain(HWND hWindow);
@@ -30,6 +31,7 @@ private:
     bool createLightBuffer();
     void setLight();
 	bool createSamplerState();
+    void compileShaders();
 
 private:
     //! 機能レベルの配列

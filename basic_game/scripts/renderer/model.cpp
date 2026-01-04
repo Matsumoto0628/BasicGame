@@ -16,6 +16,8 @@ Model::~Model()
 
 bool Model::Setup(Renderer& renderer, const char* filePath)
 {
+	m_pRenderer = &renderer;
+
     // load処理
     Assimp::Importer importer;
     unsigned int flag = aiProcess_Triangulate;
@@ -32,9 +34,10 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
 
             // ここで Material を取得
             auto mat = pScene->mMaterials[pMeshData->mMaterialIndex];
+            initializeMaterialSet(meshIdx, mat);
 
             // Mesh に Mesh + Material を渡す
-            if (m_meshes[meshIdx].Setup(renderer, pMeshData, mat) == false) {
+            if (m_meshes[meshIdx].Setup(*m_pRenderer, pMeshData, m_materialSets[meshIdx]) == false) {
                 return false;
             }
         }
@@ -54,14 +57,14 @@ void Model::Terminate()
     m_meshNum = 0;
 }
 
-void Model::Draw(Renderer& renderer)
+void Model::Draw()
 {
     // SRTを取得
     auto modelWorld = getModelTransform();
 
     // メッシュごとに描画
     for (unsigned int meshIdx = 0; meshIdx < m_meshNum; ++meshIdx) {
-        auto cb = renderer.GetRenderParam().CbTransformSet;
+        auto cb = m_pRenderer->GetRenderParam().CbTransformSet;
         DirectX::XMMATRIX meshLocal = DirectX::XMLoadFloat4x4(&m_meshes[meshIdx].GetLocalTransform());
         DirectX::XMMATRIX world = meshLocal * modelWorld;
 
@@ -69,7 +72,7 @@ void Model::Draw(Renderer& renderer)
 
         D3D11_MAPPED_SUBRESOURCE mappedResource;
         // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
-        auto pDeviceContext = renderer.GetDeviceContext();
+        auto pDeviceContext = m_pRenderer->GetDeviceContext();
         // Mapでロックして安全にデータ書き込み
         HRESULT hr = pDeviceContext->Map(cb.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         if (FAILED(hr)) {
@@ -82,7 +85,7 @@ void Model::Draw(Renderer& renderer)
 
         pDeviceContext->VSSetConstantBuffers(0, 1, &cb.pBuffer);
 
-        m_meshes[meshIdx].Draw(renderer);
+        m_meshes[meshIdx].Draw();
     }
 }
 
@@ -130,11 +133,4 @@ void Model::SetRotation(const DirectX::XMFLOAT3& rot)
 void Model::SetScale(const DirectX::XMFLOAT3& scale)
 {
     m_scale = scale;
-}
-
-void Model::Update()
-{
-    SetPosition({ 0.f, -0.5f, 0.f });
-    SetRotation({ 0.0f, 0.f, 0.0f });
-    SetScale({ 0.01f, 0.001f, 0.01f });
 }

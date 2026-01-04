@@ -29,7 +29,7 @@ bool Renderer::Initialize(HWND hWindow)
 
     initBackBuffer();
 
-    CompileShader(L"scripts/shader/vertex_shader.hlsl", L"scripts/shader/pixel_shader.hlsl", DefaultShader);
+    compileShaders();
 
 	m_renderParam.Initialize(*this);
 
@@ -113,10 +113,10 @@ void Renderer::Draw()
 
     m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     
-    m_pImmediateContext->IASetInputLayout(DefaultShader.pInputLayout);
+    m_pImmediateContext->IASetInputLayout(TextureSpecularShader.pInputLayout);
     m_pImmediateContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    m_pImmediateContext->VSSetShader(DefaultShader.pVertexShader, nullptr, 0);
-    m_pImmediateContext->PSSetShader(DefaultShader.pPixelShader, nullptr, 0);
+    m_pImmediateContext->VSSetShader(TextureSpecularShader.pVertexShader, nullptr, 0);
+    m_pImmediateContext->PSSetShader(TextureSpecularShader.pPixelShader, nullptr, 0);
     m_pImmediateContext->PSSetSamplers(0, 1, &m_samplerState);
 }
 
@@ -416,4 +416,10 @@ bool Renderer::createSamplerState()
         &m_samplerState
     );
     return SUCCEEDED(hr);
+}
+
+void Renderer::compileShaders() 
+{
+    CompileShader(L"scripts/shader/texture_specular_vs.hlsl", L"scripts/shader/texture_specular_ps.hlsl", TextureSpecularShader);
+    CompileShader(L"scripts/shader/texture_vs.hlsl", L"scripts/shader/texture_ps.hlsl", TextureShader);
 }

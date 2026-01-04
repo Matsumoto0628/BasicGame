@@ -1,6 +1,6 @@
 #pragma once
 #include "camera.h"
-#include "model.h"
+#include "stage.h"
 
 class Renderer;
 
@@ -15,8 +15,9 @@ public:
 
     void Update();
     void Draw();
+
 private:
     Renderer* m_pRenderer = nullptr;
     Camera m_camera;
-	Model m_sampleModel;
+    Stage m_stage;
 };
