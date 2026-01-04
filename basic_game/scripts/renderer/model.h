@@ -13,8 +13,14 @@ public:
     bool Setup(Renderer& renderer, const char* filePath);
     void Terminate();
     void Draw(Renderer& renderer);
-    void Rotate(Renderer& renderer, float rot);
     void ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransform);
+    void SetPosition(const DirectX::XMFLOAT3& pos);
+    void SetRotation(const DirectX::XMFLOAT3& rot);
+    void SetScale(const DirectX::XMFLOAT3& scale);
+    void Update();
+
+private:
+    DirectX::XMMATRIX getModelTransform() const;
 
 private:
     Mesh* m_meshes = nullptr;

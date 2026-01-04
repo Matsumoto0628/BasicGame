@@ -14,7 +14,7 @@ void SceneManager::Initialize(Renderer& renderer)
 {
     m_pRenderer = &renderer;
 
-    const char* MODEL_PATH = "models/tea.glb";
+    const char* MODEL_PATH = "models/box.fbx";
     m_sampleModel.Setup(renderer, MODEL_PATH);
 }
 
@@ -25,10 +25,8 @@ void SceneManager::Terminate()
 
 void SceneManager::Update()
 {
-    static float rot = 0.0f;
-    rot += 0.1f;
     m_camera.Update();
-	m_sampleModel.Rotate(*m_pRenderer, rot);
+	m_sampleModel.Update();
     InputManager::Instance().Update();
 }
 
