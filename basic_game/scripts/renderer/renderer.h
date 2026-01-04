@@ -2,6 +2,7 @@
 #include "triangle.h"
 #include "shader.h"
 #include "render_param.h"
+#include "light.h"
 
 class Renderer
 {
@@ -17,14 +18,20 @@ public:
     ID3D11DeviceContext* GetDeviceContext() { return m_pImmediateContext; }
     RenderParam GetRenderParam() { return m_renderParam; }
 	bool SetupViewTransform(const DirectX::XMMATRIX& viewMat);
+    const LightSet& GetLightSet() const { return m_lightSet; }
 
 public:
-    Shader DefaultShader;
+    Shader TextureSpecularShader;
+    Shader TextureShader;
 
 private:
     bool initDeviceAndSwapChain(HWND hWindow);
     bool initBackBuffer();
     bool setupProjectionTransform();
+    bool createLightBuffer();
+    void setLight();
+	bool createSamplerState();
+    void compileShaders();
 
 private:
     //! 機能レベルの配列
@@ -59,4 +66,8 @@ private:
 
     ID3D11DepthStencilView* m_pDepthStencilView = nullptr;
     ID3D11DepthStencilState* m_pDepthState = nullptr;
+
+    LightSet m_lightSet;
+
+    ID3D11SamplerState* m_samplerState = nullptr;
 };

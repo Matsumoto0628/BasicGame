@@ -1,3 +1,6 @@
+Texture2D DiffuseTex : register(t0);
+SamplerState Samp : register(s0);
+
 cbuffer MaterialCBuffer : register(b0)
 {
     float4 Diffuse;
@@ -18,6 +21,7 @@ struct PS_INPUT
     float4 Col : COLOR;
     float3 Normal : NORMAL;
     float3 WorldPos : TEXCOORD0;
+    float2 Tex : TEXCOORD1;
 };
 
 float4 main(PS_INPUT input) : SV_TARGET
@@ -36,6 +40,7 @@ float4 main(PS_INPUT input) : SV_TARGET
     float3 color =
         Diffuse.rgb * diff +
         Specular.rgb * spec;
-
-    return float4(color * LightColor.rgb, Diffuse.a);
+    
+    float4 texColor = DiffuseTex.Sample(Samp, input.Tex);
+    return float4(color * LightColor.rgb * texColor.rgb, Diffuse.a);
 }

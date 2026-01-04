@@ -29,11 +29,20 @@ bool Renderer::Initialize(HWND hWindow)
 
     initBackBuffer();
 
-    CompileShader(L"scripts/shader/vertex_shader.hlsl", L"scripts/shader/pixel_shader.hlsl", DefaultShader);
+    compileShaders();
 
 	m_renderParam.Initialize(*this);
 
 	setupProjectionTransform();
+
+    // ƒ‰ƒCƒg‚ÌÝ’è
+    m_lightSet.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
+    m_lightSet.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
+    m_lightSet.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
+    createLightBuffer();
+    setLight();
+
+    createSamplerState();
 
     return true;
 }
@@ -104,10 +113,11 @@ void Renderer::Draw()
 
     m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     
-    m_pImmediateContext->IASetInputLayout(DefaultShader.pInputLayout);
+    m_pImmediateContext->IASetInputLayout(TextureSpecularShader.pInputLayout);
     m_pImmediateContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    m_pImmediateContext->VSSetShader(DefaultShader.pVertexShader, nullptr, 0);
-    m_pImmediateContext->PSSetShader(DefaultShader.pPixelShader, nullptr, 0);
+    m_pImmediateContext->VSSetShader(TextureSpecularShader.pVertexShader, nullptr, 0);
+    m_pImmediateContext->PSSetShader(TextureSpecularShader.pPixelShader, nullptr, 0);
+    m_pImmediateContext->PSSetSamplers(0, 1, &m_samplerState);
 }
 
 void Renderer::Swap()
@@ -260,7 +270,8 @@ bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& o
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
         { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 40, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
     hr = pDevice->CreateInputLayout(
         layout,
@@ -364,4 +375,51 @@ bool Renderer::SetupViewTransform(const DirectX::XMMATRIX& viewMat)
     pDeviceContext->VSSetConstantBuffers(1, 1, &cb.pBuffer);
 
     return true;
+}
+
+bool Renderer::createLightBuffer()
+{
+    D3D11_BUFFER_DESC desc = {};
+    desc.Usage = D3D11_USAGE_DYNAMIC;
+    desc.ByteWidth = sizeof(Light);
+    desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+    return SUCCEEDED(
+        m_pD3DDevice->CreateBuffer(&desc, nullptr, &m_lightSet.pBuffer)
+    );
+}
+
+void Renderer::setLight()
+{
+    auto pDeviceContext = m_pImmediateContext;
+
+    D3D11_MAPPED_SUBRESOURCE mapped;
+    pDeviceContext->Map(m_lightSet.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+    CopyMemory(mapped.pData, &m_lightSet.Data, sizeof(Light));
+    pDeviceContext->Unmap(m_lightSet.pBuffer, 0);
+}
+
+bool Renderer::createSamplerState()
+{
+    D3D11_SAMPLER_DESC desc = {};
+    desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    desc.MinLOD = 0;
+    desc.MaxLOD = D3D11_FLOAT32_MAX;
+
+    HRESULT hr = m_pD3DDevice->CreateSamplerState(
+        &desc,
+        &m_samplerState
+    );
+    return SUCCEEDED(hr);
+}
+
+void Renderer::compileShaders() 
+{
+    CompileShader(L"scripts/shader/texture_specular_vs.hlsl", L"scripts/shader/texture_specular_ps.hlsl", TextureSpecularShader);
+    CompileShader(L"scripts/shader/texture_vs.hlsl", L"scripts/shader/texture_ps.hlsl", TextureShader);
 }

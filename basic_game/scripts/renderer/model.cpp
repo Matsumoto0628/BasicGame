@@ -16,6 +16,8 @@ Model::~Model()
 
 bool Model::Setup(Renderer& renderer, const char* filePath)
 {
+	m_pRenderer = &renderer;
+
     // load処理
     Assimp::Importer importer;
     unsigned int flag = aiProcess_Triangulate;
@@ -32,9 +34,10 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
 
             // ここで Material を取得
             auto mat = pScene->mMaterials[pMeshData->mMaterialIndex];
+            initializeMaterialSet(meshIdx, mat);
 
             // Mesh に Mesh + Material を渡す
-            if (m_meshes[meshIdx].Setup(renderer, pMeshData, mat) == false) {
+            if (m_meshes[meshIdx].Setup(*m_pRenderer, pMeshData, m_materialSets[meshIdx]) == false) {
                 return false;
             }
         }
@@ -54,25 +57,24 @@ void Model::Terminate()
     m_meshNum = 0;
 }
 
-void Model::Draw(Renderer& renderer)
+void Model::Draw()
 {
-    auto modelWorld = DirectX::XMMatrixIdentity();
+    // SRTを取得
+    auto modelWorld = getModelTransform();
+
+    // メッシュごとに描画
     for (unsigned int meshIdx = 0; meshIdx < m_meshNum; ++meshIdx) {
-        auto cb = renderer.GetRenderParam().CbTransformSet;
+        auto cb = m_pRenderer->GetRenderParam().CbTransformSet;
         DirectX::XMMATRIX meshLocal = DirectX::XMLoadFloat4x4(&m_meshes[meshIdx].GetLocalTransform());
         DirectX::XMMATRIX world = meshLocal * modelWorld;
 
         DirectX::XMStoreFloat4x4(&cb.Data.Transform, DirectX::XMMatrixTranspose(world));
+
         D3D11_MAPPED_SUBRESOURCE mappedResource;
         // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
-        auto pDeviceContext = renderer.GetDeviceContext();
+        auto pDeviceContext = m_pRenderer->GetDeviceContext();
         // Mapでロックして安全にデータ書き込み
-        HRESULT hr = pDeviceContext->Map(
-            cb.pBuffer,
-            0,
-            D3D11_MAP_WRITE_DISCARD,
-            0,
-            &mappedResource);
+        HRESULT hr = pDeviceContext->Map(cb.pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         if (FAILED(hr)) {
             //DXTRACE_ERR(L"DrawSceneGraph failed", hr);
             return;
@@ -80,41 +82,11 @@ void Model::Draw(Renderer& renderer)
         CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
         // マップ解除
         pDeviceContext->Unmap(cb.pBuffer, 0);
+
         pDeviceContext->VSSetConstantBuffers(0, 1, &cb.pBuffer);
 
-        m_meshes[meshIdx].Draw(renderer);
+        m_meshes[meshIdx].Draw();
     }
-}
-
-void Model::Rotate(Renderer& renderer, float rot)
-{
-    auto cb = renderer.GetRenderParam().CbTransformSet;
-
-    float scale = 0.1f;
-    float angle = DirectX::XMConvertToRadians(rot); // 回転角（度→ラジアン）
-
-    auto mtx = DirectX::XMMatrixScaling(scale, scale, scale) 
-        * DirectX::XMMatrixRotationX(angle);
-
-    DirectX::XMStoreFloat4x4(&cb.Data.Transform, DirectX::XMMatrixTranspose(mtx));
-    D3D11_MAPPED_SUBRESOURCE mappedResource;
-    // CBufferにひもづくハードウェアリソースマップ取得（ロックして取得）
-    auto pDeviceContext = renderer.GetDeviceContext();
-    // Mapでロックして安全にデータ書き込み
-    HRESULT hr = pDeviceContext->Map(
-        cb.pBuffer,
-        0,
-        D3D11_MAP_WRITE_DISCARD,
-        0,
-        &mappedResource);
-    if (FAILED(hr)) {
-        //DXTRACE_ERR(L"DrawSceneGraph failed", hr);
-        return;
-    }
-    CopyMemory(mappedResource.pData, &cb.Data, sizeof(cb.Data));
-    // マップ解除
-    pDeviceContext->Unmap(cb.pBuffer, 0);
-    pDeviceContext->VSSetConstantBuffers(0, 1, &cb.pBuffer);
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransform)
@@ -134,4 +106,31 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMAT
     {
         ProcessNode(node->mChildren[i], scene, globalTransform);
     }
+}
+
+DirectX::XMMATRIX Model::getModelTransform() const
+{
+    DirectX::XMMATRIX S = DirectX::XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
+    DirectX::XMMATRIX R =
+        DirectX::XMMatrixRotationX(m_rotation.x) *
+        DirectX::XMMatrixRotationY(m_rotation.y) *
+        DirectX::XMMatrixRotationZ(m_rotation.z);
+    DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_position.x, m_position.y, m_position.z);
+
+    return S * R * T;
+}
+
+void Model::SetPosition(const DirectX::XMFLOAT3& pos)
+{
+    m_position = pos;
+}
+
+void Model::SetRotation(const DirectX::XMFLOAT3& rot)
+{
+    m_rotation = rot;
+}
+
+void Model::SetScale(const DirectX::XMFLOAT3& scale)
+{
+    m_scale = scale;
 }

@@ -13,6 +13,12 @@
     <Filter Include="shader">
       <UniqueIdentifier>{52eeb90e-e80a-48d8-b987-a9dfc7a6aecb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{8b750398-e110-4f2d-9616-26a321e35509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="actor">
+      <UniqueIdentifier>{c49c9438-2231-4c58-9573-d80efd15c3c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -38,6 +44,18 @@
     <ClCompile Include="scripts\renderer\scene_manager.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\utility\input_manager.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\mesh.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\model.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\stage.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -54,9 +72,6 @@
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\vertex.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\renderer\shader.h">
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\cb_transform.h">
@@ -77,13 +92,43 @@
     <ClInclude Include="scripts\renderer\scene_manager.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\utility\input_manager.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\light.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\material.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\mesh.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\model.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\stage.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="scripts\shader\pixel_shader.hlsl">
+    <FxCompile Include="scripts\shader\texture_specular_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
-    <FxCompile Include="scripts\shader\vertex_shader.hlsl">
+    <FxCompile Include="scripts\shader\texture_specular_vs.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
+    <FxCompile Include="scripts\shader\texture_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\texture_ps.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,9 @@
 #pragma once
 #include "material.h"
-#include "light.h"
 
 struct aiMesh;
 struct Vertex;
 class Renderer;
-class aiMaterial;
 
 class Mesh
 {
@@ -13,22 +11,23 @@ public:
     Mesh();
     ~Mesh();
 
-    bool Setup(Renderer& renderer, aiMesh* pMeshData, aiMaterial* mat);
+    bool Setup(Renderer& renderer, aiMesh* pMeshData, MaterialSet& mat);
     void Terminate();
-    void Draw(Renderer& renderer);
+    void Draw();
     void SetLocalTransform(const DirectX::XMMATRIX& mtx);
     const DirectX::XMFLOAT4X4& GetLocalTransform() const { return m_localTransform; }
 
 private:
-    bool createVertexBuffer(Renderer& renderer);
-    bool createIndexBuffer(Renderer& renderer);
+    bool createVertexBuffer();
+    bool createIndexBuffer();
     void destroyVertexBuffer();
     void destroyIndexBuffer();
-	bool createMaterialBuffer(Renderer& renderer);
-    bool createLightBuffer(Renderer& renderer);
-    void updateLight(Renderer& renderer);
+	bool createMaterialBuffer();
+    void setMaterial();
 
 private:
+    Renderer* m_pRenderer;
+
     // データの解釈ワーク
     Vertex* m_vertices = nullptr;
     unsigned int* m_indices = nullptr;
@@ -39,9 +38,7 @@ private:
     ID3D11Buffer* m_vertexBuffer = nullptr;
     ID3D11Buffer* m_indexBuffer = nullptr;
 
-	Material m_material;
-	ID3D11Buffer* m_materialBuffer = nullptr;
-    Light m_light;
-
     DirectX::XMFLOAT4X4 m_localTransform;
+
+    MaterialSet* m_pMaterialSet;
 };
