@@ -15,7 +15,7 @@ public:
     bool Setup(Renderer& renderer, const char* filePath);
     void Terminate();
     void Draw();
-    void ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransform);
+    void ProcessNode(aiNode* node, const DirectX::XMMATRIX& parentTransform);
     void SetPosition(const DirectX::XMFLOAT3& pos);
     void SetRotation(const DirectX::XMFLOAT3& rot);
     void SetScale(const DirectX::XMFLOAT3& scale);
@@ -38,5 +38,6 @@ protected:
     virtual void initializeMaterialSet(int idx, aiMaterial* mat) = 0;
 
     Renderer* m_pRenderer = nullptr;
-	MaterialSet m_materialSets[3];
+	MaterialSet m_materialSets[10];
+	const aiScene* m_pScene = nullptr;
 };

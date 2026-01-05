@@ -36,9 +36,9 @@ bool Renderer::Initialize(HWND hWindow)
 	setupProjectionTransform();
 
     // ÉâÉCÉgÇÃê›íË
-    m_lightSet.Data.LightDir = DirectX::XMFLOAT4(5.f, -5.f, 0.f, 1.f);
+    m_lightSet.Data.LightDir = DirectX::XMFLOAT4(1.f, -1.f, 1.f, 1.f);
     m_lightSet.Data.LightColor = DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f);
-    m_lightSet.Data.EyePos = DirectX::XMFLOAT4(10.f, 10.f, -10.f, 1.f);
+    m_lightSet.Data.EyePos = DirectX::XMFLOAT4(0.f, 0.f, 0.f, 1.f);
     createLightBuffer();
     setLight();
 
@@ -422,4 +422,10 @@ void Renderer::compileShaders()
 {
     CompileShader(L"scripts/shader/texture_specular_vs.hlsl", L"scripts/shader/texture_specular_ps.hlsl", TextureSpecularShader);
     CompileShader(L"scripts/shader/texture_vs.hlsl", L"scripts/shader/texture_ps.hlsl", TextureShader);
+}
+
+void Renderer::SetEyePosLight(DirectX::XMFLOAT4 eyePos)
+{
+	m_lightSet.Data.EyePos = eyePos;
+	setLight();
 }

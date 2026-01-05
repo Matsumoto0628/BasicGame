@@ -8,6 +8,7 @@ public:
 
     void Update();
     DirectX::XMMATRIX GetViewMatrix() const;
+    DirectX::XMFLOAT4 GetEyePos() const;
 
     void SetPosition(const DirectX::XMFLOAT3& pos);
     void SetRotation(const DirectX::XMFLOAT3& rot); // pitch, yaw, roll

@@ -56,6 +56,9 @@
     <ClCompile Include="scripts\actor\stage.cpp">
       <Filter>actor</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\actor\weapon.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="scripts\renderer\shader.h">
       <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\weapon.h">
+      <Filter>actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

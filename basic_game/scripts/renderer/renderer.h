@@ -19,6 +19,7 @@ public:
     RenderParam GetRenderParam() { return m_renderParam; }
 	bool SetupViewTransform(const DirectX::XMMATRIX& viewMat);
     const LightSet& GetLightSet() const { return m_lightSet; }
+    void SetEyePosLight(DirectX::XMFLOAT4 eyePos);
 
 public:
     Shader TextureSpecularShader;

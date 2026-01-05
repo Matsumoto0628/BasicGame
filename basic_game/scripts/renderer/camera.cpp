@@ -16,7 +16,7 @@ Camera::~Camera()
 void Camera::Update()
 {
     move();
-    look();
+    //look();
 	calcAxis();
     calcMoveAxis();
 }
@@ -139,4 +139,9 @@ void Camera::calcMoveAxis()
 
     DirectX::XMStoreFloat3(&m_moveForward, moveForward);
     DirectX::XMStoreFloat3(&m_moveRight, moveRight);
+}
+
+DirectX::XMFLOAT4 Camera::GetEyePos() const
+{
+    return DirectX::XMFLOAT4(m_position.x, m_position.y, m_position.z, 1.f);
 }

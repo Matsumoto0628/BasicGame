@@ -4,8 +4,8 @@
 Window::Window()
     : m_sizeWindow()
 {
-    m_sizeWindow.cx = 1920;
-    m_sizeWindow.cy = 1080;
+    m_sizeWindow.cx = 960;
+    m_sizeWindow.cy = 540;
 }
 
 Window::~Window()

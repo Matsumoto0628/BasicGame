@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scripts\actor\stage.cpp" />
+    <ClCompile Include="scripts\actor\weapon.cpp" />
     <ClCompile Include="scripts\application\application.cpp" />
     <ClCompile Include="scripts\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\actor\stage.h" />
+    <ClInclude Include="scripts\actor\weapon.h" />
     <ClInclude Include="scripts\application\application.h" />
     <ClInclude Include="scripts\pch.h" />
     <ClInclude Include="scripts\renderer\camera.h" />

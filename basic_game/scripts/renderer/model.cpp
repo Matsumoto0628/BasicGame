@@ -20,20 +20,22 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
 
     // loadˆ—
     Assimp::Importer importer;
-    unsigned int flag = aiProcess_Triangulate;
-    auto pScene = importer.ReadFile(filePath, flag);
+    unsigned int flag = 
+        aiProcess_Triangulate |
+        aiProcess_FlipUVs;
+    m_pScene = importer.ReadFile(filePath, flag);
 
-    if (pScene == nullptr) return false;
+    if (m_pScene == nullptr) return false;
 
-    m_meshNum = pScene->mNumMeshes;
+    m_meshNum = m_pScene->mNumMeshes;
     if (m_meshNum > 0) {
         m_meshes = new Mesh[m_meshNum];
-        for (unsigned int meshIdx = 0; meshIdx < pScene->mNumMeshes; ++meshIdx) {
+        for (unsigned int meshIdx = 0; meshIdx < m_pScene->mNumMeshes; ++meshIdx) {
 
-            auto pMeshData = pScene->mMeshes[meshIdx];
+            auto pMeshData = m_pScene->mMeshes[meshIdx];
 
             // ‚±‚±‚Å Material ‚ðŽæ“¾
-            auto mat = pScene->mMaterials[pMeshData->mMaterialIndex];
+            auto mat = m_pScene->mMaterials[pMeshData->mMaterialIndex];
             initializeMaterialSet(meshIdx, mat);
 
             // Mesh ‚É Mesh + Material ‚ð“n‚·
@@ -43,7 +45,7 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
         }
     }
 
-    ProcessNode(pScene->mRootNode, pScene, DirectX::XMMatrixIdentity());
+    ProcessNode(m_pScene->mRootNode, DirectX::XMMatrixIdentity());
 
     return true;
 }
@@ -89,7 +91,7 @@ void Model::Draw()
     }
 }
 
-void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransform)
+void Model::ProcessNode(aiNode* node, const DirectX::XMMATRIX& parentTransform)
 {
     DirectX::XMMATRIX nodeTransform = DirectX::XMLoadFloat4x4(reinterpret_cast<DirectX::XMFLOAT4X4*>(&node->mTransformation));
 
@@ -104,7 +106,7 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMAT
 
     for (unsigned int i = 0; i < node->mNumChildren; i++)
     {
-        ProcessNode(node->mChildren[i], scene, globalTransform);
+        ProcessNode(node->mChildren[i], globalTransform);
     }
 }
 
