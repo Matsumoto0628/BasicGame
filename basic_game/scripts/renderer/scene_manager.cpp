@@ -13,6 +13,8 @@ void SceneManager::Initialize(Renderer& renderer)
 {
     m_pRenderer = &renderer;
 
+	m_player.Initialize(&m_camera);
+
     const char* STAGE_PATH = "models/field/field.obj";
     m_stage.Setup(renderer, STAGE_PATH);
     m_stage.SetPosition({0.f, 0.f, 0.f });
@@ -34,6 +36,7 @@ void SceneManager::Terminate()
 void SceneManager::Update()
 {
 	m_pRenderer->SetEyePosLight(m_camera.GetEyePos());
+	m_player.Update();
     m_camera.Update();
 	m_stage.Update();
 	m_weapon.Update();

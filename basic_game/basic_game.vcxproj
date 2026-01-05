@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scripts\actor\player.cpp" />
     <ClCompile Include="scripts\actor\stage.cpp" />
     <ClCompile Include="scripts\actor\weapon.cpp" />
     <ClCompile Include="scripts\application\application.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="scripts\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\actor\player.h" />
     <ClInclude Include="scripts\actor\stage.h" />
     <ClInclude Include="scripts\actor\weapon.h" />
     <ClInclude Include="scripts\application\application.h" />

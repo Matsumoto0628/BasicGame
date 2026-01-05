@@ -1,6 +1,5 @@
 #include "camera.h"
 #include "input_manager.h"
-#include "window.h"
 
 Camera::Camera()
     : m_position(0, 0.5, 0)
@@ -15,10 +14,7 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-    move();
-    //look();
 	calcAxis();
-    calcMoveAxis();
 }
 
 /*
@@ -50,49 +46,6 @@ void Camera::SetRotation(const DirectX::XMFLOAT3& rot)
     m_rotation.z = rot.z;
 }
 
-void Camera::AddPosition(const DirectX::XMFLOAT3& dir, float amount) 
-{
-	m_position.x += dir.x * amount;
-	m_position.y += dir.y * amount;
-	m_position.z += dir.z * amount;
-}
-
-void Camera::AddRotation(const DirectX::XMFLOAT3& dir, float amount)
-{
-    m_rotation.x += dir.x * amount;
-    m_rotation.y += dir.y * amount;
-    m_rotation.z += dir.z * amount;
-}
-
-void Camera::move() 
-{
-    if (InputManager::Instance().GetKey('W'))
-    {
-        AddPosition(m_moveForward, 0.025f);
-    }
-    if (InputManager::Instance().GetKey('S'))
-    {
-        AddPosition(m_moveForward, -0.025f);
-    }
-    if (InputManager::Instance().GetKey('A'))
-    {
-        AddPosition(m_moveRight, -0.025f);
-    }
-    if (InputManager::Instance().GetKey('D'))
-    {
-        AddPosition(m_moveRight, 0.025f);
-    }
-}
-
-void Camera::look()
-{
-    POINT delta = InputManager::Instance().GetMouseDelta();
-    float sensitivity = 0.002f;
-
-    m_rotation.y += delta.x * sensitivity; // Yaw
-    m_rotation.x += delta.y * sensitivity; // Pitch
-}
-
 void Camera::calcAxis()
 {
     // 回転行列（Yaw → Pitch → Roll）
@@ -120,25 +73,6 @@ void Camera::calcAxis()
     DirectX::XMStoreFloat3(&m_forward, forward);
     DirectX::XMStoreFloat3(&m_up, up);
     DirectX::XMStoreFloat3(&m_right, right);
-}
-
-void Camera::calcMoveAxis() 
-{
-    // 移動用回転行列（Yawのみ）
-    DirectX::XMMATRIX yawMat =
-        DirectX::XMMatrixRotationY(m_rotation.y);
-
-    DirectX::XMVECTOR moveForward = DirectX::XMVectorSet(0, 0, 1, 0);
-    DirectX::XMVECTOR moveRight = DirectX::XMVectorSet(1, 0, 0, 0);
-
-    moveForward = DirectX::XMVector3TransformNormal(moveForward, yawMat);
-    moveRight = DirectX::XMVector3TransformNormal(moveRight, yawMat);
-
-    moveForward = DirectX::XMVector3Normalize(moveForward);
-    moveRight = DirectX::XMVector3Normalize(moveRight);
-
-    DirectX::XMStoreFloat3(&m_moveForward, moveForward);
-    DirectX::XMStoreFloat3(&m_moveRight, moveRight);
 }
 
 DirectX::XMFLOAT4 Camera::GetEyePos() const

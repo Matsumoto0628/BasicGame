@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "stage.h"
 #include "weapon.h"
+#include "player.h"
 
 class Renderer;
 
@@ -22,4 +23,5 @@ private:
     Camera m_camera;
     Stage m_stage;
     Weapon m_weapon;
+	Player m_player;
 };
