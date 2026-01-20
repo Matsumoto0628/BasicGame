@@ -5,20 +5,23 @@
 #include "euler_converter.h"
 
 Player::Player()
-    : m_position(0, 0.5, 0)
-    , m_rotation(0, 0, 0, 0)
 {
 }
 
 Player::~Player()
 {
-
 }
 
 void Player::Initialize(Camera* pCamera, Weapon* pWeapon)
 {
 	m_pCamera = pCamera;
 	m_pWeapon = pWeapon;
+}
+
+void Player::Setup() 
+{
+	m_position = { 0.f, 0.5f, 0.f };
+	m_rotation = { 0.f, 0.f, 0.f, 0.f };
 }
 
 void Player::Update()
@@ -32,6 +35,14 @@ void Player::Update()
 
 	calcWeaponPos();
     calcWeaponRot();
+}
+
+void Player::Draw() 
+{
+}
+
+void Player::Terminate()
+{
 }
 
 void Player::move()

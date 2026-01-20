@@ -15,22 +15,22 @@ void SceneManager::Initialize(Renderer& renderer)
 	m_pRenderer = &renderer;
 
 	m_player.Initialize(&m_camera, &m_weapon);
+	m_player.Setup();
+
+	m_weapon.Initialize(renderer);
+	m_weapon.Setup();
 
 	const char* STAGE_PATH = "models/field/field.obj";
 	m_stage.Setup(renderer, STAGE_PATH);
 	m_stage.SetPosition({ 0.f, 0.f, 0.f });
 	m_stage.SetScale({ 0.05f, 0.05f, 0.05f });
-
-	const char* WEAPON_PATH = "models/weapon/weapon.obj";
-	m_weapon.Setup(renderer, WEAPON_PATH);
-	m_weapon.SetPivot({ 0, -0.1f, 0 });
-    m_weapon.SetScale({ 0.1f, 0.1f, 0.1f });
 }
 
 void SceneManager::Terminate()
 {
 	m_stage.Terminate();
 	m_weapon.Terminate();
+	m_player.Terminate();
 }
 
 void SceneManager::Update()
@@ -38,7 +38,6 @@ void SceneManager::Update()
 	m_pRenderer->SetEyePosLight(m_camera.GetEyePos());
 	m_player.Update();
     m_camera.Update();
-	m_stage.Update();
 	m_weapon.Update();
 }
 
@@ -46,6 +45,7 @@ void SceneManager::Draw()
 {
     auto viewMatrix = m_camera.GetViewMatrix();
     m_pRenderer->SetupViewTransform(viewMatrix);
+	m_player.Draw();
 	m_stage.Draw();
 	m_weapon.Draw();
 }

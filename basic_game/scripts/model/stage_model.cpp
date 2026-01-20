@@ -1,23 +1,18 @@
-#include "stage.h"
+#include "stage_model.h"
 #include <assimp/scene.h>
 #include <WICTextureLoader.h>
 #include "renderer.h"
 #include "string_converter.h"
 
-Stage::Stage()
+StageModel::StageModel()
 {
 }
 
-Stage::~Stage() 
+StageModel::~StageModel() 
 {
 }
 
-void Stage::Update()
-{
-
-}
-
-void Stage::initializeMaterialSet(int idx, aiMaterial* mat)
+void StageModel::initializeMaterialSet(int idx, aiMaterial* mat)
 {
 	switch (idx)
 	{
@@ -33,7 +28,7 @@ void Stage::initializeMaterialSet(int idx, aiMaterial* mat)
 	}
 }
 
-void Stage::setupMaterialSetA(aiMaterial* mat)
+void StageModel::setupMaterialSetA(aiMaterial* mat)
 {
 	MaterialSet* pMaterialSet = &m_materialSets[0];
 
@@ -71,7 +66,7 @@ void Stage::setupMaterialSetA(aiMaterial* mat)
 	);
 }
 
-void Stage::setupMaterialSetB(aiMaterial* mat)
+void StageModel::setupMaterialSetB(aiMaterial* mat)
 {
 	MaterialSet* pMaterialSet = &m_materialSets[1];
 
@@ -109,6 +104,6 @@ void Stage::setupMaterialSetB(aiMaterial* mat)
 	);
 }
 
-void Stage::setupMaterialSetC(aiMaterial* mat)
+void StageModel::setupMaterialSetC(aiMaterial* mat)
 {
 }

@@ -1,9 +1,6 @@
 #include "weapon.h"
-#include <assimp/scene.h>
-#include <WICTextureLoader.h>
-#include "renderer.h"
-#include "string_converter.h"
 #include "euler_converter.h"
+#include "renderer.h"
 
 Weapon::Weapon()
 {
@@ -13,11 +10,23 @@ Weapon::~Weapon()
 {
 }
 
+void Weapon::Initialize(Renderer &renderer) 
+{
+	const char* WEAPON_PATH = "models/weapon/weapon.obj";
+	m_weaponModel.Setup(renderer, WEAPON_PATH);
+	SetPivot({ 0, -0.1f, 0 });
+	SetScale({ 0.1f, 0.1f, 0.1f });
+}
+
+void Weapon::Setup()
+{
+}
+
 void Weapon::Update()
-{	
-	if (m_isAnimation) 
+{
+	if (m_isAnimation)
 	{
-		if (m_animationTime >= ANIMATION_DURATION) 
+		if (m_animationTime >= ANIMATION_DURATION)
 		{
 			m_isAnimation = false;
 			m_animationTime = 0.f;
@@ -30,145 +39,42 @@ void Weapon::Update()
 	}
 }
 
-void Weapon::Slash()
+void Weapon::Draw()
+{
+	m_weaponModel.Draw();
+}
+
+void Weapon::Terminate()
+{
+	m_weaponModel.Terminate();
+}
+
+void Weapon::Slash() 
 {
 	m_isAnimation = true;
 }
 
-void Weapon::initializeMaterialSet(int idx, aiMaterial* mat)
+void Weapon::SetPosition(const DirectX::XMFLOAT3& pos) 
 {
-	switch (idx)
-	{
-	case 0:
-		setupMaterialSetA(mat);
-		break;
-	case 1:
-		setupMaterialSetB(mat);
-		break;
-	case 2:
-		setupMaterialSetC(mat);
-		break;
-	default:
-		setupMaterialSetA(mat);
-		break;
-	}
+	m_weaponModel.SetPosition(pos);
 }
 
-void Weapon::setupMaterialSetA(aiMaterial* mat)
+void Weapon::SetRotation(const DirectX::XMFLOAT4& rot) 
 {
-	MaterialSet* pMaterialSet = &m_materialSets[0];
-
-	// シェーダーの設定
-	pMaterialSet->pShader = &m_pRenderer->TextureSpecularShader;
-
-	// マテリアルの設定
-	aiColor4D diffuse, specular;
-	float shininess = 0.0f;
-
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
-	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
-
-	pMaterialSet->Data.Diffuse =
-		DirectX::XMFLOAT4(1, 1, 1, 1);
-	pMaterialSet->Data.Specular =
-		DirectX::XMFLOAT4(0, 0, 0, 1);
-	pMaterialSet->Data.Shininess = 1.0f;
-
-	// テクスチャの設定
-	aiString path;
-	std::string texPath;
-	if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
-	{
-		texPath = std::string("models/weapon/") + path.C_Str();
-	}
-
-	DirectX::CreateWICTextureFromFile(
-		m_pRenderer->GetDevice(),
-		m_pRenderer->GetDeviceContext(),
-		StringToWString(texPath).c_str(),
-		nullptr,
-		&pMaterialSet->DiffuseTex
-	);
+	m_weaponModel.SetRotation(rot);
 }
 
-void Weapon::setupMaterialSetB(aiMaterial* mat)
+void Weapon::SetScale(const DirectX::XMFLOAT3& scale)
 {
-	MaterialSet* pMaterialSet = &m_materialSets[1];
-
-	// シェーダーの設定
-	pMaterialSet->pShader = &m_pRenderer->TextureSpecularShader;
-
-	// マテリアルの設定
-	aiColor4D diffuse, specular;
-	float shininess = 0.0f;
-
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
-	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
-
-	pMaterialSet->Data.Diffuse =
-		DirectX::XMFLOAT4(1, 0.5f, 0.5f, 1);
-	pMaterialSet->Data.Specular =
-		DirectX::XMFLOAT4(2.5f, 1.5f, 1.5f, 1);
-	pMaterialSet->Data.Shininess = 2.f;
-
-	// テクスチャの設定
-	aiString path;
-	std::string texPath;
-	if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
-	{
-		texPath = std::string("models/weapon/") + path.C_Str();
-	}
-
-	DirectX::CreateWICTextureFromFile(
-		m_pRenderer->GetDevice(),
-		m_pRenderer->GetDeviceContext(),
-		StringToWString(texPath).c_str(),
-		nullptr,
-		&pMaterialSet->DiffuseTex
-	);
+	m_weaponModel.SetScale(scale);
 }
 
-void Weapon::setupMaterialSetC(aiMaterial* mat)
+void Weapon::SetPivot(const DirectX::XMFLOAT3& pivot) 
 {
-	MaterialSet* pMaterialSet = &m_materialSets[2];
+	m_weaponModel.SetPivot(pivot);
+}
 
-	// シェーダーの設定
-	pMaterialSet->pShader = &m_pRenderer->TextureSpecularShader;
-
-	// マテリアルの設定
-	aiColor4D diffuse, specular;
-	float shininess = 0.0f;
-
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-	aiGetMaterialColor(mat, AI_MATKEY_COLOR_SPECULAR, &specular);
-	aiGetMaterialFloat(mat, AI_MATKEY_SHININESS, &shininess);
-
-	pMaterialSet->Data.Diffuse =
-		DirectX::XMFLOAT4(1, 1, 1, 1);
-	pMaterialSet->Data.Specular =
-		DirectX::XMFLOAT4(2, 2, 2, 1);
-	pMaterialSet->Data.Shininess = 1;
-
-	// テクスチャの設定
-	aiString path;
-	std::string texPath;
-	if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
-	{
-		texPath = std::string("models/weapon/") + path.C_Str();
-	}
-
-	int len = MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, nullptr, 0);
-	std::wstring w(len, L'\0');
-	MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, &w[0], len);
-	w.pop_back();
-
-	DirectX::CreateWICTextureFromFile(
-		m_pRenderer->GetDevice(),
-		m_pRenderer->GetDeviceContext(),
-		StringToWString(texPath).c_str(),
-		nullptr,
-		&pMaterialSet->DiffuseTex
-	);
+void Weapon::SetPivotRotation(const DirectX::XMFLOAT4& rot) 
+{
+	m_weaponModel.SetPivotRotation(rot);
 }

@@ -1,15 +1,19 @@
 #pragma once
+#include "actor.h"
 
 class Camera;
 class Weapon;
 
-class Player 
+class Player : public Actor 
 {
 public:
 	Player();
 	~Player();
 	void Initialize(Camera* pCamera, Weapon* pWeapon);
-	void Update();
+	void Setup() override;
+	void Update() override;
+	void Draw() override;
+	void Terminate() override;
 
 private:
 	void move();

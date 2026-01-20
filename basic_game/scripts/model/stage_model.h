@@ -1,12 +1,11 @@
 #pragma once
-#include "../renderer/model.h"
+#include "model.h"
 
-class Stage : public Model
+class StageModel : public Model
 {
 public:
-	Stage();
-	~Stage();
-	void Update() override;
+	StageModel();
+	~StageModel();
 
 private:
 	void setupMaterialSetA(aiMaterial* mat);

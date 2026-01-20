@@ -19,7 +19,6 @@ public:
     void SetPosition(const DirectX::XMFLOAT3& pos);
     void SetRotation(const DirectX::XMFLOAT4& rot);
     void SetScale(const DirectX::XMFLOAT3& scale);
-    virtual void Update() = 0;
     void SetPivot(const DirectX::XMFLOAT3& pivot);
 	void SetPivotRotation(const DirectX::XMFLOAT4& rot);
 
