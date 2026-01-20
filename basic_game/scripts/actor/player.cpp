@@ -1,9 +1,12 @@
 #include "player.h"
 #include "input_manager.h"
+#include "camera.h"
+#include "weapon.h"
+#include "euler_converter.h"
 
 Player::Player()
     : m_position(0, 0.5, 0)
-    , m_rotation(0, 0, 0)
+    , m_rotation(0, 0, 0, 0)
 {
 }
 
@@ -12,9 +15,10 @@ Player::~Player()
 
 }
 
-void Player::Initialize(Camera* pCamera)
+void Player::Initialize(Camera* pCamera, Weapon* pWeapon)
 {
 	m_pCamera = pCamera;
+	m_pWeapon = pWeapon;
 }
 
 void Player::Update()
@@ -25,77 +29,73 @@ void Player::Update()
 
 	m_pCamera->SetPosition(m_position);
 	m_pCamera->SetRotation(m_rotation);
-}
 
-void Player::SetPosition(const DirectX::XMFLOAT3& pos)
-{
-    m_position.x = pos.x;
-    m_position.y = pos.y;
-    m_position.z = pos.z;
-}
-
-void Player::SetRotation(const DirectX::XMFLOAT3& rot)
-{
-    m_rotation.x = rot.x;
-    m_rotation.y = rot.y;
-    m_rotation.z = rot.z;
-}
-
-void Player::AddPosition(const DirectX::XMFLOAT3& dir, float amount)
-{
-    m_position.x += dir.x * amount;
-    m_position.y += dir.y * amount;
-    m_position.z += dir.z * amount;
-}
-
-void Player::AddRotation(const DirectX::XMFLOAT3& dir, float amount)
-{
-    m_rotation.x += dir.x * amount;
-    m_rotation.y += dir.y * amount;
-    m_rotation.z += dir.z * amount;
+	calcWeaponPos();
+    calcWeaponRot();
 }
 
 void Player::move()
 {
     if (InputManager::Instance().GetKey('W'))
     {
-        AddPosition(m_forward, 0.025f);
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_forward.x * 0.025f,
+            m_position.y + m_forward.y * 0.025f,
+            m_position.z + m_forward.z * 0.025f);
     }
     if (InputManager::Instance().GetKey('S'))
     {
-        AddPosition(m_forward, -0.025f);
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_forward.x * -0.025f,
+            m_position.y + m_forward.y * -0.025f,
+            m_position.z + m_forward.z * -0.025f);
     }
     if (InputManager::Instance().GetKey('A'))
     {
-        AddPosition(m_right, -0.025f);
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_right.x * -0.025f,
+            m_position.y + m_right.y * -0.025f,
+            m_position.z + m_right.z * -0.025f);
     }
     if (InputManager::Instance().GetKey('D'))
     {
-        AddPosition(m_right, 0.025f);
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_right.x * 0.025f,
+            m_position.y + m_right.y * 0.025f,
+            m_position.z + m_right.z * 0.025f);
     }
+	if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
+	{
+		m_pWeapon->Slash();
+	}
 }
 
 void Player::look()
 {
     POINT delta = InputManager::Instance().GetMouseDelta();
-    float sensitivity = 0.0002f;
+    const float sensitivity = 0.02f;
 
-    m_rotation.y += delta.x * sensitivity; // Yaw
-    m_rotation.x += delta.y * sensitivity; // Pitch
+    m_yaw += delta.x * sensitivity;
+    m_pitch += delta.y * sensitivity;
 
     // Pitch制限
-    const float kMaxPitch = DirectX::XM_PIDIV2 - 0.01f;
-    const float kMinPitch = -DirectX::XM_PIDIV2 + 0.01f;
+    const float maxPitch = 89.f;
+    const float minPitch = -89.f;
 
-    if (m_rotation.x > kMaxPitch) m_rotation.x = kMaxPitch;
-    if (m_rotation.x < kMinPitch) m_rotation.x = kMinPitch;
+    if (m_pitch > maxPitch) m_pitch = maxPitch;
+    if (m_pitch < minPitch) m_pitch = minPitch;
+
+	m_rotation = EulerToQuaternion(DirectX::XMFLOAT3(m_pitch, m_yaw, 0.f));
 }
 
 void Player::calcMoveAxis()
 {
     // 移動用回転行列（Yawのみ）
+    DirectX::XMFLOAT4 rot = EulerToQuaternion(DirectX::XMFLOAT3(0.f, m_yaw, 0.f));
     DirectX::XMMATRIX yawMat =
-        DirectX::XMMatrixRotationY(m_rotation.y);
+        DirectX::XMMatrixRotationQuaternion(
+            DirectX::XMLoadFloat4(&rot)
+        );
 
     DirectX::XMVECTOR moveForward = DirectX::XMVectorSet(0, 0, 1, 0);
     DirectX::XMVECTOR moveRight = DirectX::XMVectorSet(1, 0, 0, 0);
@@ -108,4 +108,39 @@ void Player::calcMoveAxis()
 
     DirectX::XMStoreFloat3(&m_forward, moveForward);
     DirectX::XMStoreFloat3(&m_right, moveRight);
+}
+
+void Player::calcWeaponPos() 
+{
+    DirectX::XMFLOAT3 f = m_pCamera->GetForward();
+    DirectX::XMFLOAT3 r = m_pCamera->GetRight();
+    DirectX::XMFLOAT3 u = m_pCamera->GetUp();
+
+    DirectX::XMFLOAT3 weaponPos{
+		m_position.x + f.x * 0.5f + r.x * 0.15f + u.x * -0.1f,
+        m_position.y + f.y * 0.5f + r.y * 0.15f + u.y * -0.1f,
+		m_position.z + f.z * 0.5f + r.z * 0.15f + u.z * -0.1f,
+    };
+
+    m_pWeapon->SetPosition(weaponPos);
+}
+
+void Player::calcWeaponRot()
+{
+    // カメラ回転
+    DirectX::XMFLOAT4 camRot = m_pCamera->GetRotation();
+    DirectX::XMVECTOR qCam =
+        DirectX::XMLoadFloat4(&camRot);
+
+    // 武器ローカル回転（固定）
+    DirectX::XMFLOAT4 weaponRot = EulerToQuaternion(DirectX::XMFLOAT3(45.f, -25.f, 0.f));
+    DirectX::XMVECTOR qWeaponOffset = DirectX::XMLoadFloat4(&weaponRot);
+
+    // 合成
+    DirectX::XMVECTOR qFinal = DirectX::XMQuaternionMultiply(qWeaponOffset, qCam);
+
+    DirectX::XMFLOAT4 rot;
+    DirectX::XMStoreFloat4(&rot, qFinal);
+
+    m_pWeapon->SetRotation(rot);
 }

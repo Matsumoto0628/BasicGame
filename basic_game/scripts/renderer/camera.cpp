@@ -1,9 +1,10 @@
 #include "camera.h"
 #include "input_manager.h"
+#include "euler_converter.h"
 
 Camera::Camera()
     : m_position(0, 0.5, 0)
-    , m_rotation(0, 0, 0)
+    , m_rotation(0, 0, 0, 0)
 {
 }
 
@@ -39,21 +40,17 @@ void Camera::SetPosition(const DirectX::XMFLOAT3& pos)
     m_position.z = pos.z;
 }
 
-void Camera::SetRotation(const DirectX::XMFLOAT3& rot)
+void Camera::SetRotation(const DirectX::XMFLOAT4& rot)
 {
-    m_rotation.x = rot.x;
-    m_rotation.y = rot.y;
-    m_rotation.z = rot.z;
+	m_rotation = rot;
 }
 
 void Camera::calcAxis()
 {
-    // 回転行列（Yaw → Pitch → Roll）
+    // 回転行列
     DirectX::XMMATRIX rotMat =
-        DirectX::XMMatrixRotationRollPitchYaw(
-            m_rotation.x,
-            m_rotation.y,
-            m_rotation.z
+        DirectX::XMMatrixRotationQuaternion(
+            DirectX::XMLoadFloat4(&m_rotation)
         );
 
     // 基準ベクトル

@@ -2,6 +2,7 @@
 #include <assimp/scene.h>
 #include <WICTextureLoader.h>
 #include "renderer.h"
+#include "string_converter.h"
 
 Stage::Stage()
 {
@@ -50,8 +51,8 @@ void Stage::setupMaterialSetA(aiMaterial* mat)
 	pMaterialSet->Data.Diffuse =
 		DirectX::XMFLOAT4(1, 1, 1, 1);
 	pMaterialSet->Data.Specular =
-		DirectX::XMFLOAT4(1, 1, 1, 1);
-	pMaterialSet->Data.Shininess = 100;
+		DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);
+	pMaterialSet->Data.Shininess = 1;
 
 	// テクスチャの設定
 	aiString path;
@@ -61,15 +62,10 @@ void Stage::setupMaterialSetA(aiMaterial* mat)
 		texPath = std::string("models/field/") + path.C_Str();
 	}
 
-	int len = MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, nullptr, 0);
-	std::wstring w(len, L'\0');
-	MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, &w[0], len);
-	w.pop_back();
-
 	DirectX::CreateWICTextureFromFile(
 		m_pRenderer->GetDevice(),
 		m_pRenderer->GetDeviceContext(),
-		w.c_str(),
+		StringToWString(texPath).c_str(),
 		nullptr,
 		&pMaterialSet->DiffuseTex
 	);
@@ -104,15 +100,10 @@ void Stage::setupMaterialSetB(aiMaterial* mat)
 		texPath = std::string("models/field/") + path.C_Str();
 	}
 
-	int len = MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, nullptr, 0);
-	std::wstring w(len, L'\0');
-	MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, &w[0], len);
-	w.pop_back();
-
 	DirectX::CreateWICTextureFromFile(
 		m_pRenderer->GetDevice(),
 		m_pRenderer->GetDeviceContext(),
-		w.c_str(),
+		StringToWString(texPath).c_str(),
 		nullptr,
 		&pMaterialSet->DiffuseTex
 	);

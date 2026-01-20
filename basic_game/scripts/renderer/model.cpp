@@ -114,12 +114,18 @@ DirectX::XMMATRIX Model::getModelTransform() const
 {
     DirectX::XMMATRIX S = DirectX::XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
     DirectX::XMMATRIX R =
-        DirectX::XMMatrixRotationX(m_rotation.x) *
-        DirectX::XMMatrixRotationY(m_rotation.y) *
-        DirectX::XMMatrixRotationZ(m_rotation.z);
+        DirectX::XMMatrixRotationQuaternion(
+            DirectX::XMLoadFloat4(&m_rotation)
+		);
+    DirectX::XMMATRIX Rp =
+        DirectX::XMMatrixRotationQuaternion(
+            DirectX::XMLoadFloat4(&m_pivotRotation)
+        );
     DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_position.x, m_position.y, m_position.z);
+	DirectX::XMMATRIX Tp = DirectX::XMMatrixTranslation(-m_pivot.x, -m_pivot.y, -m_pivot.z);
+	DirectX::XMMATRIX TpInv = DirectX::XMMatrixTranslation(m_pivot.x, m_pivot.y, m_pivot.z);
 
-    return S * R * T;
+    return S * Tp * Rp * TpInv * R * T;
 }
 
 void Model::SetPosition(const DirectX::XMFLOAT3& pos)
@@ -127,7 +133,7 @@ void Model::SetPosition(const DirectX::XMFLOAT3& pos)
     m_position = pos;
 }
 
-void Model::SetRotation(const DirectX::XMFLOAT3& rot)
+void Model::SetRotation(const DirectX::XMFLOAT4& rot)
 {
     m_rotation = rot;
 }
@@ -135,4 +141,14 @@ void Model::SetRotation(const DirectX::XMFLOAT3& rot)
 void Model::SetScale(const DirectX::XMFLOAT3& scale)
 {
     m_scale = scale;
+}
+
+void Model::SetPivot(const DirectX::XMFLOAT3& pivot)
+{
+	m_pivot = pivot;
+}
+
+void Model::SetPivotRotation(const DirectX::XMFLOAT4& rot)
+{
+    m_pivotRotation = rot;
 }

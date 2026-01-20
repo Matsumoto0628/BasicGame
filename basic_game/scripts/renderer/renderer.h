@@ -21,7 +21,6 @@ public:
     const LightSet& GetLightSet() const { return m_lightSet; }
     void SetEyePosLight(DirectX::XMFLOAT4 eyePos);
 
-public:
     Shader TextureSpecularShader;
     Shader TextureShader;
 
@@ -34,7 +33,6 @@ private:
 	bool createSamplerState();
     void compileShaders();
 
-private:
     //! 機能レベルの配列
     static const UINT   FEATURE_LEVELS_NUM = 4;
     D3D_FEATURE_LEVEL m_pFeatureLevels[FEATURE_LEVELS_NUM] = {};

@@ -2,6 +2,8 @@
 #include <assimp/scene.h>
 #include <WICTextureLoader.h>
 #include "renderer.h"
+#include "string_converter.h"
+#include "euler_converter.h"
 
 Weapon::Weapon()
 {
@@ -12,8 +14,25 @@ Weapon::~Weapon()
 }
 
 void Weapon::Update()
-{
+{	
+	if (m_isAnimation) 
+	{
+		if (m_animationTime >= ANIMATION_DURATION) 
+		{
+			m_isAnimation = false;
+			m_animationTime = 0.f;
+			SetPivotRotation(EulerToQuaternion(DirectX::XMFLOAT3(0, 0, 0)));
+			return;
+		}
+		m_animationTime += 0.017f;
+		float timeDecay = 1 - m_animationTime / ANIMATION_DURATION;
+		SetPivotRotation(EulerToQuaternion(DirectX::XMFLOAT3(400.f * m_animationTime * timeDecay, 0, 0.f)));
+	}
+}
 
+void Weapon::Slash()
+{
+	m_isAnimation = true;
 }
 
 void Weapon::initializeMaterialSet(int idx, aiMaterial* mat)
@@ -64,15 +83,10 @@ void Weapon::setupMaterialSetA(aiMaterial* mat)
 		texPath = std::string("models/weapon/") + path.C_Str();
 	}
 
-	int len = MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, nullptr, 0);
-	std::wstring w(len, L'\0');
-	MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, &w[0], len);
-	w.pop_back();
-
 	DirectX::CreateWICTextureFromFile(
 		m_pRenderer->GetDevice(),
 		m_pRenderer->GetDeviceContext(),
-		w.c_str(),
+		StringToWString(texPath).c_str(),
 		nullptr,
 		&pMaterialSet->DiffuseTex
 	);
@@ -107,15 +121,10 @@ void Weapon::setupMaterialSetB(aiMaterial* mat)
 		texPath = std::string("models/weapon/") + path.C_Str();
 	}
 
-	int len = MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, nullptr, 0);
-	std::wstring w(len, L'\0');
-	MultiByteToWideChar(CP_UTF8, 0, texPath.c_str(), -1, &w[0], len);
-	w.pop_back();
-
 	DirectX::CreateWICTextureFromFile(
 		m_pRenderer->GetDevice(),
 		m_pRenderer->GetDeviceContext(),
-		w.c_str(),
+		StringToWString(texPath).c_str(),
 		nullptr,
 		&pMaterialSet->DiffuseTex
 	);
@@ -158,7 +167,7 @@ void Weapon::setupMaterialSetC(aiMaterial* mat)
 	DirectX::CreateWICTextureFromFile(
 		m_pRenderer->GetDevice(),
 		m_pRenderer->GetDeviceContext(),
-		w.c_str(),
+		StringToWString(texPath).c_str(),
 		nullptr,
 		&pMaterialSet->DiffuseTex
 	);
