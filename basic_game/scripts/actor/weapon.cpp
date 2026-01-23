@@ -12,10 +12,15 @@ Weapon::~Weapon()
 
 void Weapon::Initialize(Renderer &renderer) 
 {
+	m_pRenderer = &renderer;
+
 	const char* WEAPON_PATH = "models/weapon/weapon.obj";
 	m_weaponModel.Setup(renderer, WEAPON_PATH);
 	SetPivot({ 0, -0.1f, 0 });
 	SetScale({ 0.1f, 0.1f, 0.1f });
+	
+	m_collider.Initialize(renderer);
+	m_collider.SetRadius(0.1f);
 }
 
 void Weapon::Setup()
@@ -24,6 +29,8 @@ void Weapon::Setup()
 
 void Weapon::Update()
 {
+	m_collider.Update();
+
 	if (m_isAnimation)
 	{
 		if (m_animationTime >= ANIMATION_DURATION)
@@ -42,6 +49,7 @@ void Weapon::Update()
 void Weapon::Draw()
 {
 	m_weaponModel.Draw();
+	m_collider.Draw();
 }
 
 void Weapon::Terminate()
@@ -49,9 +57,10 @@ void Weapon::Terminate()
 	m_weaponModel.Terminate();
 }
 
-void Weapon::Slash() 
+void Weapon::Slash(const DirectX::XMFLOAT3& pos)
 {
 	m_isAnimation = true;
+	m_collider.SetPosition(pos);
 }
 
 void Weapon::SetPosition(const DirectX::XMFLOAT3& pos) 

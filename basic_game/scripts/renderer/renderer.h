@@ -23,6 +23,7 @@ public:
 
     Shader TextureSpecularShader;
     Shader TextureShader;
+    Shader SimpleShader;
 
 private:
     bool initDeviceAndSwapChain(HWND hWindow);

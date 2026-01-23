@@ -22,6 +22,9 @@
     <Filter Include="model">
       <UniqueIdentifier>{0e28475d-9455-4b07-8d36-bffa3a94b46e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{0b3433c1-7c31-4dda-887d-bbf968a01904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -73,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="scripts\actor\weapon.cpp">
       <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\sphere.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\component\collider.cpp">
+      <Filter>component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +158,12 @@
     <ClInclude Include="scripts\actor\weapon.h">
       <Filter>actor</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\renderer\sphere.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\component\collider.h">
+      <Filter>component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="scripts\shader\texture_specular_ps.hlsl">
@@ -161,6 +176,12 @@
       <Filter>shader</Filter>
     </FxCompile>
     <FxCompile Include="scripts\shader\texture_ps.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\simple_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\simple_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>

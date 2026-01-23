@@ -77,7 +77,9 @@ void Player::move()
     }
 	if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
 	{
-		m_pWeapon->Slash();
+		m_pWeapon->Slash({ m_position.x + m_pCamera->GetForward().x,
+            m_position.y + m_pCamera->GetForward().y,
+            m_position.z + m_pCamera->GetForward().z });
 	}
 }
 
