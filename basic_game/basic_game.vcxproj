@@ -20,8 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="scripts\actor\stage.cpp" />
+    <ClCompile Include="scripts\actor\player.cpp" />
+    <ClCompile Include="scripts\actor\weapon.cpp" />
     <ClCompile Include="scripts\application\application.cpp" />
+    <ClCompile Include="scripts\component\collider.cpp" />
+    <ClCompile Include="scripts\model\model.cpp" />
+    <ClCompile Include="scripts\model\stage_model.cpp" />
+    <ClCompile Include="scripts\model\weapon_model.cpp" />
     <ClCompile Include="scripts\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -30,17 +35,25 @@
     </ClCompile>
     <ClCompile Include="scripts\renderer\camera.cpp" />
     <ClCompile Include="scripts\renderer\mesh.cpp" />
-    <ClCompile Include="scripts\renderer\model.cpp" />
     <ClCompile Include="scripts\renderer\renderer.cpp" />
     <ClCompile Include="scripts\renderer\render_param.cpp" />
     <ClCompile Include="scripts\renderer\scene_manager.cpp" />
+    <ClCompile Include="scripts\renderer\sphere.cpp" />
     <ClCompile Include="scripts\renderer\triangle.cpp" />
+    <ClCompile Include="scripts\utility\euler_converter.cpp" />
     <ClCompile Include="scripts\utility\input_manager.cpp" />
+    <ClCompile Include="scripts\utility\string_converter.cpp" />
     <ClCompile Include="scripts\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scripts\actor\stage.h" />
+    <ClInclude Include="scripts\actor\actor.h" />
+    <ClInclude Include="scripts\actor\player.h" />
+    <ClInclude Include="scripts\actor\weapon.h" />
     <ClInclude Include="scripts\application\application.h" />
+    <ClInclude Include="scripts\component\collider.h" />
+    <ClInclude Include="scripts\model\model.h" />
+    <ClInclude Include="scripts\model\stage_model.h" />
+    <ClInclude Include="scripts\model\weapon_model.h" />
     <ClInclude Include="scripts\pch.h" />
     <ClInclude Include="scripts\renderer\camera.h" />
     <ClInclude Include="scripts\renderer\cb_projection.h" />
@@ -49,17 +62,31 @@
     <ClInclude Include="scripts\renderer\light.h" />
     <ClInclude Include="scripts\renderer\material.h" />
     <ClInclude Include="scripts\renderer\mesh.h" />
-    <ClInclude Include="scripts\renderer\model.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />
     <ClInclude Include="scripts\renderer\render_param.h" />
     <ClInclude Include="scripts\renderer\scene_manager.h" />
-    <ClInclude Include="scripts\renderer\shader.h" />
+    <ClInclude Include="scripts\renderer\sphere.h" />
     <ClInclude Include="scripts\renderer\triangle.h" />
     <ClInclude Include="scripts\renderer\vertex.h" />
+    <ClInclude Include="scripts\shader\shader.h" />
+    <ClInclude Include="scripts\utility\euler_converter.h" />
     <ClInclude Include="scripts\utility\input_manager.h" />
+    <ClInclude Include="scripts\utility\string_converter.h" />
     <ClInclude Include="scripts\window\window.h" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="scripts\shader\simple_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\simple_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="scripts\shader\texture_ps.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -146,7 +173,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -165,7 +192,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -184,7 +211,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -203,7 +230,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>

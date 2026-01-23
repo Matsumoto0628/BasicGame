@@ -1,6 +1,8 @@
 #pragma once
 #include "camera.h"
-#include "stage.h"
+#include "stage_model.h"
+#include "weapon.h"
+#include "player.h"
 
 class Renderer;
 
@@ -19,5 +21,7 @@ public:
 private:
     Renderer* m_pRenderer = nullptr;
     Camera m_camera;
-    Stage m_stage;
+    StageModel m_stage;
+    Weapon m_weapon;
+	Player m_player;
 };

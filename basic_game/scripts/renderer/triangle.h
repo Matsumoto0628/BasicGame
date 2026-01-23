@@ -10,7 +10,6 @@ public:
 	Vertex Vertices[VERTEX_NUM];
 	ID3D11Buffer* VertexBuffer = nullptr;
 
-public:
 	Triangle();
 	~Triangle();
 	bool CreateVertexBuffer(Renderer& renderer);

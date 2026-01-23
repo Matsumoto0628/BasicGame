@@ -25,7 +25,6 @@ private:
 	bool createMaterialBuffer();
     void setMaterial();
 
-private:
     Renderer* m_pRenderer;
 
     // データの解釈ワーク

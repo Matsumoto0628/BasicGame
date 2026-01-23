@@ -19,6 +19,12 @@
     <Filter Include="actor">
       <UniqueIdentifier>{c49c9438-2231-4c58-9573-d80efd15c3c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model">
+      <UniqueIdentifier>{0e28475d-9455-4b07-8d36-bffa3a94b46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{0b3433c1-7c31-4dda-887d-bbf968a01904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -50,11 +56,32 @@
     <ClCompile Include="scripts\renderer\mesh.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\renderer\model.cpp">
+    <ClCompile Include="scripts\actor\player.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\utility\string_converter.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\utility\euler_converter.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\model\model.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\model\stage_model.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\model\weapon_model.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\weapon.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\renderer\sphere.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\actor\stage.cpp">
-      <Filter>actor</Filter>
+    <ClCompile Include="scripts\component\collider.cpp">
+      <Filter>component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,14 +131,38 @@
     <ClInclude Include="scripts\renderer\mesh.h">
       <Filter>renderer</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\renderer\model.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\actor\stage.h">
+    <ClInclude Include="scripts\actor\player.h">
       <Filter>actor</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\renderer\shader.h">
+    <ClInclude Include="scripts\shader\shader.h">
       <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\utility\euler_converter.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\utility\string_converter.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\actor.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\model\model.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\model\stage_model.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\model\weapon_model.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\weapon.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\sphere.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\component\collider.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +176,12 @@
       <Filter>shader</Filter>
     </FxCompile>
     <FxCompile Include="scripts\shader\texture_ps.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\simple_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\simple_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>
