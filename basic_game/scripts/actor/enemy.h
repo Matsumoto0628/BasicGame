@@ -15,7 +15,8 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Terminate() override;
-	const Collider& const GetCollider() { return m_collider; }
+	const Collider& GetCollider() const { return m_collider; }
+	void TakeDamage(int amount);
 
 private:
 	void move();
@@ -23,12 +24,15 @@ private:
 	void calcMoveAxis();
 	void calcBoxPos();
 	void calcBoxRot();
+	float lerpAngle(float a, float b, float t);
+	void knockback();
 
 	BoxModel m_boxBody;
 	BoxModel m_boxRight;
 	BoxModel m_boxLeft;
 	Player* m_pPlayer = nullptr;
 	Collider m_collider;
+	Renderer* m_pRenderer = nullptr;
 
 	DirectX::XMFLOAT3 m_position = { 0, 0, -5.f };
 	DirectX::XMFLOAT4 m_rotation = { 0, 0, 0, 0 };
@@ -38,4 +42,13 @@ private:
 
 	float m_yaw;
 	float m_pitch;
+
+	int m_health = 100;
+
+	bool m_isHit = false;
+	bool m_isKnockback = false;
+	float m_hitTimer = 0.f;
+	float m_knockbackTimer = 0.f;
+	static constexpr float HIT_DURATION = 0.25f;
+	static constexpr float KNOCKBACK_DURATION = 0.5f;
 };

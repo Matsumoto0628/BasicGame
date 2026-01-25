@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "euler_converter.h"
+#include "renderer.h"
 
 Enemy::Enemy()
 {
@@ -12,6 +13,7 @@ Enemy::~Enemy()
 
 void Enemy::Initialize(Renderer& renderer, Player* pPlayer)
 {
+	m_pRenderer = &renderer;
     m_pPlayer = pPlayer;
 
     const char* BOX_PATH = "models/box.fbx";
@@ -38,27 +40,70 @@ void Enemy::Setup()
     m_boxRight.SetPivot({ -0.2f, 0, 0 });
     m_boxLeft.SetPivot({ 0.2f, 0, 0 });
 
-	m_boxBody.ChangeColor({ 1, 1, 0, 1 });
-	m_boxRight.ChangeColor({ 1, 1, 0, 0.5f });
-	m_boxLeft.ChangeColor({ 1, 1, 0, 0.5f });
+    m_boxBody.ChangeColor({ 1, 1, 0, 1 });
+    m_boxRight.ChangeColor({ 1, 1, 0, 0.5f });
+    m_boxLeft.ChangeColor({ 1, 1, 0, 0.5f });
 
 	m_boxBody.ChangeMaterial();
 	m_boxRight.ChangeMaterial();
 	m_boxLeft.ChangeMaterial();
 
-    m_collider.SetRadius(0.1f);
+    m_collider.SetRadius(0.2f);
+	m_collider.SetActive(true);
 }
 
 void Enemy::Update()
 {
-    move();
-    look();
+    if (!m_isKnockback) 
+    {
+        move();
+        look();
+    }
+    
     calcMoveAxis();
 	calcBoxPos();
     calcBoxRot();
 
     m_collider.Update();
 	m_collider.SetPosition(m_position);
+
+    if (m_isHit) 
+    {
+		m_hitTimer += 0.017f;
+        if (m_hitTimer > HIT_DURATION) 
+        {
+            m_isHit = false;
+			m_hitTimer = 0.f;
+			
+            m_boxBody.ChangeColor({ 1, 1, 0, 1 });
+            m_boxRight.ChangeColor({ 1, 1, 0, 0.5f });
+            m_boxLeft.ChangeColor({ 1, 1, 0, 0.5f });
+
+            m_boxBody.ChangeShader(&m_pRenderer->SpecularShader);
+            m_boxRight.ChangeShader(&m_pRenderer->SpecularShader);
+            m_boxLeft.ChangeShader(&m_pRenderer->SpecularShader);
+
+            m_boxBody.ChangeMaterial();
+            m_boxRight.ChangeMaterial();
+            m_boxLeft.ChangeMaterial();
+        }
+    }
+
+    if (m_isKnockback)
+    {
+        m_knockbackTimer += 0.017f;
+        if (m_knockbackTimer > KNOCKBACK_DURATION)
+        {
+			m_collider.SetActive(true);
+            m_isKnockback = false;
+            m_knockbackTimer = 0.f;
+        }
+
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_forward.x * -0.01f,
+            m_position.y + m_forward.y * -0.01f,
+            m_position.z + m_forward.z * -0.01f);
+    }
 }
 
 void Enemy::Draw()
@@ -79,12 +124,12 @@ void Enemy::Terminate()
 void Enemy::move()
 {
     m_position = DirectX::XMFLOAT3(
-        m_position.x + m_forward.x * 0.003f,
-        m_position.y + m_forward.y * 0.003f,
-        m_position.z + m_forward.z * 0.003f);
+        m_position.x + m_forward.x * 0.01f,
+        m_position.y + m_forward.y * 0.01f,
+        m_position.z + m_forward.z * 0.01f);
 }
 
-float LerpAngle(float a, float b, float t)
+float Enemy::lerpAngle(float a, float b, float t)
 {
     float diff = fmodf(b - a + 540.f, 360.f) - 180.f;
     return a + diff * t;
@@ -146,8 +191,8 @@ void Enemy::look()
     
     float turnSpeed = 0.1f; // è¨Ç≥Ç¢ÇŸÇ«ëÂâÒÇË
 
-    m_yaw = LerpAngle(m_yaw, targetYaw * DirectX::XMConvertToDegrees(1), turnSpeed);
-    m_pitch = LerpAngle(m_pitch, targetPitch * DirectX::XMConvertToDegrees(1), turnSpeed);
+    m_yaw = lerpAngle(m_yaw, targetYaw * DirectX::XMConvertToDegrees(1), turnSpeed);
+    m_pitch = lerpAngle(m_pitch, targetPitch * DirectX::XMConvertToDegrees(1), turnSpeed);
 
     m_rotation = EulerToQuaternion({ m_pitch, m_yaw, 0.f });
 #endif
@@ -225,4 +270,31 @@ void Enemy::calcBoxRot()
     DirectX::XMFLOAT4 pivotLeft = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, -15 * cos(t)));
     m_boxRight.SetPivotRotation(pivotRight);
     m_boxLeft.SetPivotRotation(pivotLeft);
+}
+
+void Enemy::TakeDamage(int amount)
+{
+	m_health -= amount;
+	if (m_health < 0) m_health = 0;
+	knockback();
+
+	m_collider.SetActive(false);
+	m_isHit = true;
+
+    m_boxBody.ChangeColor({ 1.f, 0.f, 0.f, 1 });
+    m_boxRight.ChangeColor({ 1.f, 0.f, 0.f, 1 });
+    m_boxLeft.ChangeColor({ 1.f, 0.f, 0.f, 1 });
+
+    m_boxBody.ChangeShader(&m_pRenderer->SimpleShader);
+    m_boxRight.ChangeShader(&m_pRenderer->SimpleShader);
+    m_boxLeft.ChangeShader(&m_pRenderer->SimpleShader);
+
+    m_boxBody.ChangeMaterial();
+    m_boxRight.ChangeMaterial();
+    m_boxLeft.ChangeMaterial();
+}
+
+void Enemy::knockback() 
+{
+    m_isKnockback = true;
 }

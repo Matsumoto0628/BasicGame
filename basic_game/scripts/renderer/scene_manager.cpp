@@ -50,7 +50,7 @@ void SceneManager::Update()
 
 	if (m_weapon.GetCollider().Intersects(m_enemy.GetCollider())) 
 	{
-		
+		m_enemy.TakeDamage(10);
 	}
 }
 
