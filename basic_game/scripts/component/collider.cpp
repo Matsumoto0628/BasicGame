@@ -39,4 +39,13 @@ void Collider::Update()
 {
 	m_pSphere->SetPosition(m_position);
 	m_pSphere->SetRadius(m_radius);
+
+    if (m_isActive) 
+	{
+		m_pSphere->ChangeColor({ 0.f, 1.f, 0.f, 1.f });
+	}
+	else 
+	{
+		m_pSphere->ChangeColor({ 1.f, 0.f, 0.f, 1.f });
+	}
 }
