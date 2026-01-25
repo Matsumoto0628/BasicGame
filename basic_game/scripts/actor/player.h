@@ -14,6 +14,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Terminate() override;
+	DirectX::XMFLOAT3 GetPosition() { return m_position; }
 
 private:
 	void move();

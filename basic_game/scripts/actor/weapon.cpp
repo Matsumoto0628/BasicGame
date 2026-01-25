@@ -16,20 +16,21 @@ void Weapon::Initialize(Renderer &renderer)
 
 	const char* WEAPON_PATH = "models/weapon/weapon.obj";
 	m_weaponModel.Setup(renderer, WEAPON_PATH);
-	SetPivot({ 0, -0.1f, 0 });
-	SetScale({ 0.1f, 0.1f, 0.1f });
 	
 	m_collider.Initialize(renderer);
-	m_collider.SetRadius(0.1f);
 }
 
 void Weapon::Setup()
 {
+	SetPivot({ 0, -0.1f, 0 });
+	SetScale({ 0.1f, 0.1f, 0.1f });
+	m_collider.SetRadius(0.1f);
 }
 
 void Weapon::Update()
 {
 	m_collider.Update();
+	m_collider.SetPosition(m_attackPos);
 
 	if (m_isAnimation)
 	{
@@ -38,8 +39,10 @@ void Weapon::Update()
 			m_isAnimation = false;
 			m_animationTime = 0.f;
 			SetPivotRotation(EulerToQuaternion(DirectX::XMFLOAT3(0, 0, 0)));
+			m_collider.SetActive(false);
 			return;
 		}
+
 		m_animationTime += 0.017f;
 		float timeDecay = 1 - m_animationTime / ANIMATION_DURATION;
 		SetPivotRotation(EulerToQuaternion(DirectX::XMFLOAT3(400.f * m_animationTime * timeDecay, 0, 0.f)));
@@ -57,10 +60,15 @@ void Weapon::Terminate()
 	m_weaponModel.Terminate();
 }
 
-void Weapon::Slash(const DirectX::XMFLOAT3& pos)
+void Weapon::Slash()
 {
 	m_isAnimation = true;
-	m_collider.SetPosition(pos);
+	m_collider.SetActive(true);
+}
+
+void Weapon::SetAttackPos(const DirectX::XMFLOAT3& pos)
+{
+	m_attackPos = pos;
 }
 
 void Weapon::SetPosition(const DirectX::XMFLOAT3& pos) 

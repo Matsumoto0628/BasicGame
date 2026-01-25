@@ -35,6 +35,14 @@ void Player::Update()
 
 	calcWeaponPos();
     calcWeaponRot();
+
+    if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
+    {
+        m_pWeapon->SetAttackPos({ m_position.x + m_pCamera->GetForward().x,
+            m_position.y + m_pCamera->GetForward().y,
+            m_position.z + m_pCamera->GetForward().z });
+        m_pWeapon->Slash();
+    }
 }
 
 void Player::Draw() 
@@ -75,12 +83,6 @@ void Player::move()
             m_position.y + m_right.y * 0.025f,
             m_position.z + m_right.z * 0.025f);
     }
-	if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
-	{
-		m_pWeapon->Slash({ m_position.x + m_pCamera->GetForward().x,
-            m_position.y + m_pCamera->GetForward().y,
-            m_position.z + m_pCamera->GetForward().z });
-	}
 }
 
 void Player::look()
