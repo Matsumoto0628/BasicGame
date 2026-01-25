@@ -39,3 +39,9 @@ void BoxModel::ChangeColor(DirectX::XMFLOAT4 color)
 	MaterialSet* pMaterialSet = &m_materialSets[0];
 	pMaterialSet->Data.Diffuse = color;
 }
+
+void BoxModel::ChangeShader(Shader* shader)
+{
+	MaterialSet* pMaterialSet = &m_materialSets[0];
+	pMaterialSet->pShader = shader;
+}
