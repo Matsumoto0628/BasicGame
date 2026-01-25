@@ -423,6 +423,7 @@ void Renderer::compileShaders()
     CompileShader(L"scripts/shader/texture_specular_vs.hlsl", L"scripts/shader/texture_specular_ps.hlsl", TextureSpecularShader);
     CompileShader(L"scripts/shader/texture_vs.hlsl", L"scripts/shader/texture_ps.hlsl", TextureShader);
     CompileShader(L"scripts/shader/simple_vs.hlsl", L"scripts/shader/simple_ps.hlsl", SimpleShader);
+    CompileShader(L"scripts/shader/specular_vs.hlsl", L"scripts/shader/specular_ps.hlsl", SpecularShader);
 }
 
 void Renderer::SetEyePosLight(DirectX::XMFLOAT4 eyePos)

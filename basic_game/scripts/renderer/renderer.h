@@ -24,6 +24,7 @@ public:
     Shader TextureSpecularShader;
     Shader TextureShader;
     Shader SimpleShader;
+	Shader SpecularShader;
 
 private:
     bool initDeviceAndSwapChain(HWND hWindow);
