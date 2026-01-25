@@ -32,6 +32,7 @@ float4 main(PS_INPUT input) : SV_TARGET
 
     // Lambert
     float diff = saturate(dot(N, L));
+    diff = max(diff, 0.5f);
 
     // Phong Specular
     float3 R = reflect(-L, N);
