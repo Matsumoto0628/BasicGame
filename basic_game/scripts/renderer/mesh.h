@@ -16,6 +16,7 @@ public:
     void Draw();
     void SetLocalTransform(const DirectX::XMMATRIX& mtx);
     const DirectX::XMFLOAT4X4& GetLocalTransform() const { return m_localTransform; }
+    void ChangeMaterial(MaterialSet& mat);
 
 private:
     bool createVertexBuffer();

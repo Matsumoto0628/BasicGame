@@ -1,5 +1,4 @@
 #pragma once
-#include <assimp/Importer.hpp>
 #include "material.h"
 
 class Renderer;
@@ -21,6 +20,7 @@ public:
     void SetScale(const DirectX::XMFLOAT3& scale);
     void SetPivot(const DirectX::XMFLOAT3& pivot);
 	void SetPivotRotation(const DirectX::XMFLOAT4& rot);
+    void ChangeMaterial();
 
 private:
     DirectX::XMMATRIX getModelTransform() const;
@@ -40,5 +40,4 @@ protected:
 
     Renderer* m_pRenderer = nullptr;
 	MaterialSet m_materialSets[10];
-	const aiScene* m_pScene = nullptr;
 };

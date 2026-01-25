@@ -175,3 +175,10 @@ void Mesh::setMaterial()
 	CopyMemory(mapped.pData, &m_pMaterialSet->Data, sizeof(Material));
 	pDeviceContext->Unmap(m_pMaterialSet->pBuffer, 0);
 }
+
+void Mesh::ChangeMaterial(MaterialSet& mat)
+{
+	m_pMaterialSet = &mat;
+	
+	setMaterial();
+}
