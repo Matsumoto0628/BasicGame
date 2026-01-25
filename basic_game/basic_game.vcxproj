@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scripts\actor\enemy.cpp" />
     <ClCompile Include="scripts\actor\player.cpp" />
     <ClCompile Include="scripts\actor\weapon.cpp" />
     <ClCompile Include="scripts\application\application.cpp" />
     <ClCompile Include="scripts\component\collider.cpp" />
+    <ClCompile Include="scripts\model\box_model.cpp" />
     <ClCompile Include="scripts\model\model.cpp" />
     <ClCompile Include="scripts\model\stage_model.cpp" />
     <ClCompile Include="scripts\model\weapon_model.cpp" />
@@ -47,10 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\actor\actor.h" />
+    <ClInclude Include="scripts\actor\enemy.h" />
     <ClInclude Include="scripts\actor\player.h" />
     <ClInclude Include="scripts\actor\weapon.h" />
     <ClInclude Include="scripts\application\application.h" />
     <ClInclude Include="scripts\component\collider.h" />
+    <ClInclude Include="scripts\model\box_model.h" />
     <ClInclude Include="scripts\model\model.h" />
     <ClInclude Include="scripts\model\stage_model.h" />
     <ClInclude Include="scripts\model\weapon_model.h" />
@@ -82,6 +86,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="scripts\shader\simple_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\specular_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\specular_vs.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

@@ -15,13 +15,19 @@ void SceneManager::Initialize(Renderer& renderer)
 	m_pRenderer = &renderer;
 
 	m_player.Initialize(&m_camera, &m_weapon);
-	m_player.Setup();
-
 	m_weapon.Initialize(renderer);
-	m_weapon.Setup();
+	m_enemy.Initialize(renderer, &m_player);
 
 	const char* STAGE_PATH = "models/field/field.obj";
 	m_stage.Setup(renderer, STAGE_PATH);
+}
+
+void SceneManager::Setup()
+{
+	m_player.Setup();
+	m_weapon.Setup();
+	m_enemy.Setup();
+
 	m_stage.SetPosition({ 0.f, 0.f, 0.f });
 	m_stage.SetScale({ 0.05f, 0.05f, 0.05f });
 }
@@ -31,6 +37,7 @@ void SceneManager::Terminate()
 	m_stage.Terminate();
 	m_weapon.Terminate();
 	m_player.Terminate();
+	m_enemy.Terminate();
 }
 
 void SceneManager::Update()
@@ -39,6 +46,12 @@ void SceneManager::Update()
 	m_player.Update();
     m_camera.Update();
 	m_weapon.Update();
+	m_enemy.Update();
+
+	if (m_weapon.GetCollider().Intersects(m_enemy.GetCollider())) 
+	{
+		
+	}
 }
 
 void SceneManager::Draw()
@@ -48,4 +61,5 @@ void SceneManager::Draw()
 	m_player.Draw();
 	m_stage.Draw();
 	m_weapon.Draw();
+	m_enemy.Draw();
 }

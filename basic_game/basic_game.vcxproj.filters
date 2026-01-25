@@ -83,6 +83,12 @@
     <ClCompile Include="scripts\component\collider.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\actor\enemy.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\model\box_model.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -164,6 +170,12 @@
     <ClInclude Include="scripts\component\collider.h">
       <Filter>component</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\actor\enemy.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\model\box_model.h">
+      <Filter>model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="scripts\shader\texture_specular_ps.hlsl">
@@ -182,6 +194,12 @@
       <Filter>shader</Filter>
     </FxCompile>
     <FxCompile Include="scripts\shader\simple_ps.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\specular_vs.hlsl">
+      <Filter>shader</Filter>
+    </FxCompile>
+    <FxCompile Include="scripts\shader\specular_ps.hlsl">
       <Filter>shader</Filter>
     </FxCompile>
   </ItemGroup>

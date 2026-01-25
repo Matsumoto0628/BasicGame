@@ -3,6 +3,7 @@
 #include "stage_model.h"
 #include "weapon.h"
 #include "player.h"
+#include "enemy.h"
 
 class Renderer;
 
@@ -13,6 +14,7 @@ public:
     ~SceneManager();
 
     void Initialize(Renderer& renderer);
+    void Setup();
     void Terminate();
 
     void Update();
@@ -24,4 +26,5 @@ private:
     StageModel m_stage;
     Weapon m_weapon;
 	Player m_player;
+	Enemy m_enemy;
 };
