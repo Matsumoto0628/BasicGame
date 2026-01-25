@@ -6,8 +6,14 @@ void Application::Initialize(HINSTANCE hInst)
     m_window.Initialize(hInst);
     m_renderer.Initialize(m_window.GetWindowHandle());
     m_sceneManager.Initialize(m_renderer);
-	InputManager::Instance().SetHwnd(m_window.GetWindowHandle());
-	InputManager::Instance().SetCursorLock(true);
+}
+
+void Application::Setup()
+{
+    InputManager::Instance().SetHwnd(m_window.GetWindowHandle());
+    InputManager::Instance().SetCursorLock(true);
+
+	m_sceneManager.Setup();
 }
 
 void Application::Loop()
