@@ -15,6 +15,7 @@ public:
     void Draw();
     void Update();
 	void SetActive(bool isActive) { m_isActive = isActive; }
+	const bool GetActive() const { return m_isActive; }
 
 private:
     DirectX::XMFLOAT3 m_position{ 0,0,0 };
