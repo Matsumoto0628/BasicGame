@@ -1,4 +1,4 @@
-#include "enemy.h"
+Ôªø#include "enemy.h"
 #include "player.h"
 #include "euler_converter.h"
 #include "renderer.h"
@@ -9,6 +9,7 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
+	Terminate();
 }
 
 void Enemy::Initialize(Renderer& renderer, Player* pPlayer)
@@ -26,13 +27,6 @@ void Enemy::Initialize(Renderer& renderer, Player* pPlayer)
 
 void Enemy::Setup()
 {
-    m_position = { 0.f, 0.5f, 3.f };
-    m_rotation = { 0.f, 0.f, 0.f, 0.f };
-
-    m_boxBody.SetPosition(m_position);
-    m_boxLeft.SetPosition(m_position);
-    m_boxRight.SetPosition(m_position);
-
     m_boxBody.SetScale({ 0.001f, 0.0005f, 0.002f });
     m_boxRight.SetScale({ 0.002f, 0.0001f, 0.001f });
     m_boxLeft.SetScale({ 0.002f, 0.0001f, 0.001f });
@@ -50,10 +44,15 @@ void Enemy::Setup()
 
     m_collider.SetRadius(0.2f);
 	m_collider.SetActive(true);
+    
+	m_targetDuration = ((float)rand() / RAND_MAX) * 5.f;
+
+	setTargetPosRandom();
 }
 
 void Enemy::Update()
 {
+    if (m_isDead) return;
     if (!m_isKnockback) 
     {
         move();
@@ -104,10 +103,42 @@ void Enemy::Update()
             m_position.y + m_forward.y * -0.01f,
             m_position.z + m_forward.z * -0.01f);
     }
+
+    if (m_isAttack) 
+    {
+        m_targetPos = m_pPlayer->GetPosition();
+        m_attackTimer += 0.017f;
+        if (m_attackTimer > 10.f)
+        {
+			m_isAttack = false;
+            m_attackTimer = 0.f;
+            setTargetPosRandom();
+        }
+    }
+    else 
+    {
+        m_targetTimer += 0.017f;
+        if (m_targetTimer > m_targetDuration)
+        {
+            m_targetTimer = 0.f;
+            m_targetDuration = ((float)rand() / RAND_MAX) * 5.f;
+            setTargetPosRandom();
+        }
+    }
+
+    if (m_health <= 0)
+    {
+		m_deadTimer += 0.017f;
+        if (m_deadTimer > 0.5f) 
+        {
+			m_isDead = true;
+        }
+    }
 }
 
 void Enemy::Draw()
 {
+	if (m_isDead) return;
     m_boxBody.Draw();
     m_boxRight.Draw();
     m_boxLeft.Draw();
@@ -123,10 +154,20 @@ void Enemy::Terminate()
 
 void Enemy::move()
 {
+    float speed = 0.01f;
+	if (m_moveType == Curve)
+	{
+		speed = 0.02f;
+	}
+	if (m_isAttack)
+	{
+		speed = 0.03f;
+	}
+
     m_position = DirectX::XMFLOAT3(
-        m_position.x + m_forward.x * 0.01f,
-        m_position.y + m_forward.y * 0.01f,
-        m_position.z + m_forward.z * 0.01f);
+        m_position.x + m_forward.x * speed,
+        m_position.y + m_forward.y * speed,
+        m_position.z + m_forward.z * speed);
 }
 
 float Enemy::lerpAngle(float a, float b, float t)
@@ -137,87 +178,108 @@ float Enemy::lerpAngle(float a, float b, float t)
 
 void Enemy::look()
 {
-#if 1
-    static float time = 0.0f;
-    time += 0.01f;
+    switch (m_moveType)
+    {
+    case Curve:
+		curveLook();
+        break;
+    case Basic:
+		basicLook();
+        break;
+    default:
+        break;
+    }
+}
+
+void Enemy::basicLook() 
+{
+    m_waveTimer += 0.01f;
 
     DirectX::XMFLOAT3 enemyPos = m_position;
-    DirectX::XMFLOAT3 playerPos = m_pPlayer->GetPosition();
 
     DirectX::XMFLOAT3 dir{
-        playerPos.x - enemyPos.x,
-        playerPos.y - enemyPos.y,
-        playerPos.z - enemyPos.z
+        m_targetPos.x - enemyPos.x,
+        m_targetPos.y - enemyPos.y,
+        m_targetPos.z - enemyPos.z
     };
 
     float lenXZ = sqrtf(dir.x * dir.x + dir.z * dir.z);
     if (lenXZ < 0.0001f) return;
 
-    // í èÌÇÃå¸Ç´åvéZ
+    // ÈÄöÂ∏∏„ÅÆÂêë„ÅçË®àÁÆó
     float baseYaw = atan2f(dir.x, dir.z) * DirectX::XMConvertToDegrees(1.0f);
     float basePitch = atan2f(dir.y, lenXZ) * DirectX::XMConvertToDegrees(1.0f);
-    
-    float amplitude = 20.0f;   // è„â∫ÇÃç≈ëÂäpìx
-    float speed = 2.0f;    // óhÇÍÇÈë¨Ç≥
-    float wavePitch = sinf(time * speed) * amplitude;
+
+    float amplitude = 20.0f;   // ‰∏ä‰∏ã„ÅÆÊúÄÂ§ßËßíÂ∫¶
+    float speed = 2.0f;    // Êè∫„Çå„ÇãÈÄü„Åï
+    float wavePitch = sinf(m_waveTimer * speed) * amplitude;
 
     m_yaw = baseYaw;
     m_pitch = basePitch + wavePitch;
 
-    // êßå¿
+    // Âà∂Èôê
     const float maxPitch = 89.f;
     const float minPitch = -89.f;
     if (m_pitch > maxPitch) m_pitch = maxPitch;
     if (m_pitch < minPitch) m_pitch = minPitch;
 
     m_rotation = EulerToQuaternion(
-        DirectX::XMFLOAT3(m_pitch, m_yaw, 0.f)
+        DirectX::XMFLOAT3(-m_pitch, m_yaw, 0.f)
     );
-#else
+}
+
+void Enemy::curveLook() 
+{
     DirectX::XMFLOAT3 enemyPos = m_position;
-    DirectX::XMFLOAT3 playerPos = m_pPlayer->GetPosition();
 
     DirectX::XMFLOAT3 dir{
-        playerPos.x - enemyPos.x,
-        playerPos.y - enemyPos.y,
-        playerPos.z - enemyPos.z
+        m_targetPos.x - enemyPos.x,
+        m_targetPos.y - enemyPos.y,
+        m_targetPos.z - enemyPos.z
     };
 
-    DirectX::XMVECTOR vDir = DirectX::XMVector3Normalize(DirectX::XMLoadFloat3(&dir));
-
-    float targetYaw = atan2f(dir.x, dir.z);
     float lenXZ = sqrtf(dir.x * dir.x + dir.z * dir.z);
-    float targetPitch = atan2f(dir.y, lenXZ);
-    
-    float turnSpeed = 0.1f; // è¨Ç≥Ç¢ÇŸÇ«ëÂâÒÇË
+    if (lenXZ < 0.001f) return;
 
-    m_yaw = lerpAngle(m_yaw, targetYaw * DirectX::XMConvertToDegrees(1), turnSpeed);
-    m_pitch = lerpAngle(m_pitch, targetPitch * DirectX::XMConvertToDegrees(1), turnSpeed);
+    // „Éó„É¨„Ç§„É§„ÉºÊñπÂêë
+    float baseYaw = atan2f(dir.x, dir.z) * DirectX::XMConvertToDegrees(1.0f);
+    float basePitch = atan2f(dir.y, lenXZ) * DirectX::XMConvertToDegrees(1.0f);
 
-    m_rotation = EulerToQuaternion({ m_pitch, m_yaw, 0.f });
-#endif
+    // ‰∏ÄÂÆöÊôÇÈñì„Åî„Å®„Å´Â∑¶Âè≥„É©„É≥„ÉÄ„É†Â§âÊõ¥
+    m_dirChangeTimer += 0.016f;
+    if (m_dirChangeTimer > 1.5f) // 1.5Áßí„Åî„Å®„Å´ÈÄ≤Ë∑ØÂ§âÊõ¥
+    {
+        m_dirChangeTimer = 0.f;
+
+        // -30¬∞„Äú30¬∞ „ÅÆ„É©„É≥„ÉÄ„É†„Ç™„Éï„Çª„ÉÉ„Éà
+        float r = (float)rand() / RAND_MAX;   // 0„Äú1
+        m_sideYawOffset = (r * 60.f) - 60.f;  // -30„Äú+30
+    }
+
+    float targetYaw = baseYaw + m_sideYawOffset;
+
+    float turnSpeed = 0.05f;
+    m_yaw = lerpAngle(m_yaw, targetYaw, turnSpeed);
+    m_pitch = lerpAngle(m_pitch, basePitch, turnSpeed);
+
+    m_rotation = EulerToQuaternion({ -m_pitch, m_yaw, 0.f });
 }
 
 void Enemy::calcMoveAxis()
 {
-    // à⁄ìÆópâÒì]çsóÒÅiYawÇÃÇ›Åj
-    DirectX::XMFLOAT4 rot = EulerToQuaternion(DirectX::XMFLOAT3(0.f, m_yaw, 0.f));
-    DirectX::XMMATRIX yawMat =
-        DirectX::XMMatrixRotationQuaternion(
-            DirectX::XMLoadFloat4(&rot)
-        );
+    DirectX::XMVECTOR q = DirectX::XMLoadFloat4(&m_rotation);
+    DirectX::XMMATRIX mat = DirectX::XMMatrixRotationQuaternion(q);
 
-    DirectX::XMVECTOR moveForward = DirectX::XMVectorSet(0, 0, 1, 0);
-    DirectX::XMVECTOR moveRight = DirectX::XMVectorSet(1, 0, 0, 0);
+    DirectX::XMVECTOR forward = DirectX::XMVectorSet(0, 0, 1, 0);
+    forward = DirectX::XMVector3TransformNormal(forward, mat);
+    forward = DirectX::XMVector3Normalize(forward);
 
-    moveForward = DirectX::XMVector3TransformNormal(moveForward, yawMat);
-    moveRight = DirectX::XMVector3TransformNormal(moveRight, yawMat);
+    DirectX::XMVECTOR right = DirectX::XMVectorSet(1, 0, 0, 0);
+    right = DirectX::XMVector3TransformNormal(right, mat);
+    right = DirectX::XMVector3Normalize(right);
 
-    moveForward = DirectX::XMVector3Normalize(moveForward);
-    moveRight = DirectX::XMVector3Normalize(moveRight);
-
-    DirectX::XMStoreFloat3(&m_forward, moveForward);
-    DirectX::XMStoreFloat3(&m_right, moveRight);
+    DirectX::XMStoreFloat3(&m_forward, forward);
+    DirectX::XMStoreFloat3(&m_right, right);
 }
 
 void Enemy::calcBoxPos()
@@ -242,16 +304,16 @@ void Enemy::calcBoxPos()
 
 void Enemy::calcBoxRot()
 {
-    // ñ{ëÃÇÃâÒì]
+    // Êú¨‰Ωì„ÅÆÂõûËª¢
     DirectX::XMVECTOR q = DirectX::XMLoadFloat4(&m_rotation);
 
-    // ÉçÅ[ÉJÉãâÒì]
+    // „É≠„Éº„Ç´„É´ÂõûËª¢
     DirectX::XMFLOAT4 right = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, 0.f));
     DirectX::XMFLOAT4 left = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, 0.f));
     DirectX::XMVECTOR qRight = DirectX::XMLoadFloat4(&right);
     DirectX::XMVECTOR qLeft = DirectX::XMLoadFloat4(&left);
 
-    // çáê¨
+    // ÂêàÊàê
     qRight = DirectX::XMQuaternionMultiply(qRight, q);
     qLeft = DirectX::XMQuaternionMultiply(qLeft, q);
 
@@ -263,11 +325,10 @@ void Enemy::calcBoxRot()
     m_boxBody.SetRotation(m_rotation);
     m_boxRight.SetRotation(rotRight);
     m_boxLeft.SetRotation(rotLeft);
-
-    static float t = 0.f;
-    t += 0.15f;
-    DirectX::XMFLOAT4 pivotRight = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, 15 * cos(t)));
-    DirectX::XMFLOAT4 pivotLeft = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, -15 * cos(t)));
+    
+    m_wingTimer += 0.15f;
+    DirectX::XMFLOAT4 pivotRight = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, 15 * cos(m_wingTimer)));
+    DirectX::XMFLOAT4 pivotLeft = EulerToQuaternion(DirectX::XMFLOAT3(0.f, 0.f, -15 * cos(m_wingTimer)));
     m_boxRight.SetPivotRotation(pivotRight);
     m_boxLeft.SetPivotRotation(pivotLeft);
 }
@@ -275,7 +336,10 @@ void Enemy::calcBoxRot()
 void Enemy::TakeDamage(int amount)
 {
 	m_health -= amount;
-	if (m_health < 0) m_health = 0;
+    if (m_health < 0)
+    {
+        m_health = 0;
+    }
 	knockback();
 
 	m_collider.SetActive(false);
@@ -297,4 +361,28 @@ void Enemy::TakeDamage(int amount)
 void Enemy::knockback() 
 {
     m_isKnockback = true;
+}
+
+void Enemy::setTargetPosRandom() 
+{
+    float r = (float)rand() / RAND_MAX;
+    float minX = -5.f;
+    float maxX = 5.f;
+    float x = minX + r * (maxX - minX);
+
+    r = (float)rand() / RAND_MAX;
+    float minY = 0.75f;
+    float maxY = 1.5f;
+    float y = minY + r * (maxY - minY);
+
+    r = (float)rand() / RAND_MAX;
+    float minZ = -5.f;
+    float maxZ = 5.f;
+    float z = minZ + r * (maxZ - minZ);
+    m_targetPos = { x,y,z };
+}
+
+void Enemy::Attack() 
+{
+    m_isAttack = true;
 }
