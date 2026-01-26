@@ -6,6 +6,8 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int)
     // アプリ初期化
     application->Initialize(hInst);
 
+	application->Setup();
+
     // ループ : アプリメインの実装を書くところ
     application->Loop();
 

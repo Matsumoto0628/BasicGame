@@ -12,22 +12,36 @@ Player::~Player()
 {
 }
 
-void Player::Initialize(Camera* pCamera, Weapon* pWeapon)
+void Player::Initialize(Renderer& renderer, Camera* pCamera, Weapon* pWeapon)
 {
 	m_pCamera = pCamera;
 	m_pWeapon = pWeapon;
+    m_collider.Initialize(renderer);
 }
 
 void Player::Setup() 
 {
 	m_position = { 0.f, 0.5f, 0.f };
 	m_rotation = { 0.f, 0.f, 0.f, 0.f };
+    m_collider.SetRadius(0.2f);
+    m_collider.SetActive(true);
 }
 
 void Player::Update()
 {
-    move();
-    look();
+    if (!m_isKnockback)
+    {
+        move();
+        look();
+        if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
+        {
+            m_pWeapon->SetAttackPos({ m_position.x + m_pCamera->GetForward().x * 0.5f,
+                m_position.y + m_pCamera->GetForward().y * 0.5f,
+                m_position.z + m_pCamera->GetForward().z * 0.5f });
+            m_pWeapon->Slash();
+        }
+    }
+    
     calcMoveAxis();
 
 	m_pCamera->SetPosition(m_position);
@@ -35,10 +49,39 @@ void Player::Update()
 
 	calcWeaponPos();
     calcWeaponRot();
+
+    m_collider.Update();
+    m_collider.SetPosition(m_position);
+
+    if (m_isKnockback)
+    {
+        m_knockbackTimer += 0.017f;
+        if (m_knockbackTimer > KNOCKBACK_DURATION)
+        {
+            m_isKnockback = false;
+            m_knockbackTimer = 0.f;
+        }
+
+        m_position = DirectX::XMFLOAT3(
+            m_position.x + m_forward.x * -0.02f,
+            m_position.y + m_forward.y * -0.02f,
+            m_position.z + m_forward.z * -0.02f);
+    }
+
+    if (m_isHit) 
+    {
+		m_hitTimer += 0.017f;
+		if (m_hitTimer > HIT_DURATION) {
+			m_isHit = false;
+			m_hitTimer = 0.f;
+			m_collider.SetActive(true);
+		}
+    }
 }
 
 void Player::Draw() 
 {
+    m_collider.Draw();
 }
 
 void Player::Terminate()
@@ -75,12 +118,20 @@ void Player::move()
             m_position.y + m_right.y * 0.025f,
             m_position.z + m_right.z * 0.025f);
     }
-	if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
-	{
-		m_pWeapon->Slash({ m_position.x + m_pCamera->GetForward().x,
-            m_position.y + m_pCamera->GetForward().y,
-            m_position.z + m_pCamera->GetForward().z });
-	}
+
+    const float radius = 9.0f;
+
+    float distSq = m_position.x * m_position.x +
+        m_position.z * m_position.z;  // XZ•½–Ê‚¾‚¯
+
+    if (distSq > radius * radius)
+    {
+        float dist = sqrtf(distSq);
+        float scale = radius / dist;
+
+        m_position.x *= scale;
+        m_position.z *= scale;
+    }
 }
 
 void Player::look()
@@ -156,4 +207,21 @@ void Player::calcWeaponRot()
     DirectX::XMStoreFloat4(&rot, qFinal);
 
     m_pWeapon->SetRotation(rot);
+}
+
+void Player::TakeDamage(int amount)
+{
+	m_health -= amount;
+	if (m_health < 0)
+	{
+		m_health = 0;
+	}
+	knockback();
+    m_collider.SetActive(false);
+    m_isHit = true;
+}
+
+void Player::knockback()
+{
+	m_isKnockback = true;
 }

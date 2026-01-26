@@ -4,9 +4,6 @@
 Sphere::Sphere(float radius, int slice, int stack)
     : m_radius(radius), m_slice(slice), m_stack(stack)
 {
-    constexpr float ALPHA = 1.f;
-    DirectX::XMFLOAT4 color = { 1.f, 1.f, 0.f, ALPHA }; // 黄色（デバッグ用）
-
     for (int i = 0; i <= m_stack; ++i)
     {
         float v = float(i) / m_stack;
@@ -23,7 +20,6 @@ Sphere::Sphere(float radius, int slice, int stack)
 
             Vertex vtx;
             vtx.Position = { x, y, z };
-            vtx.Color = color;
             m_vertices.push_back(vtx);
         }
     }
@@ -36,6 +32,7 @@ Sphere::~Sphere()
 
 void Sphere::Initialize(Renderer& renderer)
 {
+	m_pRenderer = &renderer;
 	createVertexBuffer(renderer);
 	createMaterialBuffer(renderer);
 	setupMaterial(renderer);
@@ -110,20 +107,6 @@ void Sphere::setupTransform(Renderer& renderer)
     }
 
     ctx->VSSetConstantBuffers(0, 1, &cb.pBuffer);
-
-    m_materialSet.Data.Diffuse = { 1.f, 1.f, 0.f, 1.f };
-
-    if (SUCCEEDED(ctx->Map(
-        m_materialSet.pBuffer, 0,
-        D3D11_MAP_WRITE_DISCARD, 0, &mapped)))
-    {
-        CopyMemory(mapped.pData,
-            &m_materialSet.Data,
-            sizeof(Material));
-        ctx->Unmap(m_materialSet.pBuffer, 0);
-    }
-
-    ctx->PSSetConstantBuffers(0, 1, &m_materialSet.pBuffer);
 }
 
 void Sphere::setupMaterial(Renderer& renderer)
@@ -132,7 +115,7 @@ void Sphere::setupMaterial(Renderer& renderer)
     auto cb = renderer.GetRenderParam().CbTransformSet;
     D3D11_MAPPED_SUBRESOURCE mapped{};
 
-    m_materialSet.Data.Diffuse = { 1.f, 1.f, 0.f, 1.f };
+    m_materialSet.Data.Diffuse = m_color;
 
     if (SUCCEEDED(ctx->Map(
         m_materialSet.pBuffer, 0,
@@ -158,4 +141,10 @@ bool Sphere::createMaterialBuffer(Renderer &renderer)
     return SUCCEEDED(
         renderer.GetDevice()->CreateBuffer(&desc, nullptr, &m_materialSet.pBuffer)
     );
+}
+
+void Sphere::ChangeColor(DirectX::XMFLOAT4 color)
+{
+	m_color = color;
+	setupMaterial(*m_pRenderer);
 }

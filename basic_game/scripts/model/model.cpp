@@ -1,6 +1,7 @@
 #include "model.h"
 #include "mesh.h"
 #include "renderer.h"
+#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
@@ -23,19 +24,19 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
     unsigned int flag = 
         aiProcess_Triangulate |
         aiProcess_FlipUVs;
-    m_pScene = importer.ReadFile(filePath, flag);
+    const aiScene* pScene = importer.ReadFile(filePath, flag);
 
-    if (m_pScene == nullptr) return false;
+    if (pScene == nullptr) return false;
 
-    m_meshNum = m_pScene->mNumMeshes;
+    m_meshNum = pScene->mNumMeshes;
     if (m_meshNum > 0) {
         m_meshes = new Mesh[m_meshNum];
-        for (unsigned int meshIdx = 0; meshIdx < m_pScene->mNumMeshes; ++meshIdx) {
+        for (unsigned int meshIdx = 0; meshIdx < pScene->mNumMeshes; ++meshIdx) {
 
-            auto pMeshData = m_pScene->mMeshes[meshIdx];
+            auto pMeshData = pScene->mMeshes[meshIdx];
 
             // ‚±‚±‚Å Material ‚ðŽæ“¾
-            auto mat = m_pScene->mMaterials[pMeshData->mMaterialIndex];
+            auto mat = pScene->mMaterials[pMeshData->mMaterialIndex];
             initializeMaterialSet(meshIdx, mat);
 
             // Mesh ‚É Mesh + Material ‚ð“n‚·
@@ -45,7 +46,7 @@ bool Model::Setup(Renderer& renderer, const char* filePath)
         }
     }
 
-    ProcessNode(m_pScene->mRootNode, DirectX::XMMatrixIdentity());
+    ProcessNode(pScene->mRootNode, DirectX::XMMatrixIdentity());
 
     return true;
 }
@@ -151,4 +152,13 @@ void Model::SetPivot(const DirectX::XMFLOAT3& pivot)
 void Model::SetPivotRotation(const DirectX::XMFLOAT4& rot)
 {
     m_pivotRotation = rot;
+}
+
+void Model::ChangeMaterial() 
+{
+    if (m_meshNum > 0) {
+        for (unsigned int meshIdx = 0; meshIdx < m_meshNum; ++meshIdx) {
+            m_meshes[meshIdx].ChangeMaterial(m_materialSets[meshIdx]);
+        }
+    }
 }

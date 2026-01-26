@@ -15,6 +15,7 @@ public:
     void SetPosition(const DirectX::XMFLOAT3& pos) { m_position = pos; }
     void SetRadius(float r) { m_radius = r; }
 	void Initialize(Renderer& renderer);
+    void ChangeColor(DirectX::XMFLOAT4 color);
 
 private:
     void setupTransform(Renderer& renderer);
@@ -32,4 +33,7 @@ private:
 
     DirectX::XMFLOAT3 m_position = { 0.f, 0.f, 0.f };
 	MaterialSet m_materialSet;
+    DirectX::XMFLOAT4 m_color{ 1.f, 1.f, 0.f, 1.f };
+
+	Renderer* m_pRenderer = nullptr;
 };

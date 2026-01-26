@@ -11,6 +11,8 @@ Collider::~Collider()
 
 bool Collider::Intersects(const Collider& other) const
 {
+	if (!m_isActive || !other.GetActive()) return false;
+
     DirectX::XMVECTOR a = DirectX::XMLoadFloat3(&m_position);
     DirectX::XMVECTOR b = DirectX::XMLoadFloat3(&other.m_position);
 
@@ -32,11 +34,20 @@ void Collider::Initialize(Renderer& renderer)
 
 void Collider::Draw() 
 {
-    m_pSphere->Draw(*m_pRenderer);
+    //m_pSphere->Draw(*m_pRenderer);
 }
 
 void Collider::Update()
 {
 	m_pSphere->SetPosition(m_position);
 	m_pSphere->SetRadius(m_radius);
+
+    if (m_isActive) 
+	{
+		m_pSphere->ChangeColor({ 0.f, 1.f, 0.f, 1.f });
+	}
+	else 
+	{
+		m_pSphere->ChangeColor({ 1.f, 0.f, 0.f, 1.f });
+	}
 }

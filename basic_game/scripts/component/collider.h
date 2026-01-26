@@ -14,10 +14,13 @@ public:
     void Initialize(Renderer& renderer);
     void Draw();
     void Update();
+	void SetActive(bool isActive) { m_isActive = isActive; }
+	const bool GetActive() const { return m_isActive; }
 
 private:
     DirectX::XMFLOAT3 m_position{ 0,0,0 };
     float m_radius = 1.0f;
 	Sphere* m_pSphere = nullptr;
 	Renderer* m_pRenderer = nullptr;
+    bool m_isActive = false;
 };
