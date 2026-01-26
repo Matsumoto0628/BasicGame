@@ -55,7 +55,7 @@ bool Renderer::initDeviceAndSwapChain(HWND hWindow)
     sd.BufferCount = m_backBufferNum;        // バックバッファの数
     sd.BufferDesc.Width = m_screenWidth;    // バックバッファの幅
     sd.BufferDesc.Height = m_screenHeight;    // バックバッファの高さ
-    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;    // フォーマット
+    sd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;    // フォーマット
     sd.BufferDesc.RefreshRate.Numerator = 60;    // リフレッシュレート（分母）
     sd.BufferDesc.RefreshRate.Denominator = 1;    // リフレッシュレート（分子）
     sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE;
@@ -67,10 +67,12 @@ bool Renderer::initDeviceAndSwapChain(HWND hWindow)
     sd.Windowed = TRUE;        // ウィンドウモード（TRUEがウィンドウモード）
     sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;        // モード自動切り替え
 
-#if defined(DEBUG) || defined(_DEBUG)
+#if 1
+    UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+#elif defined(DEBUG) || defined(_DEBUG)
     UINT createDeviceFlags = D3D11_CREATE_DEVICE_DEBUG;
 #else
-    UINT createDeviceFlags = 0;
+    UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 #endif
 
     const D3D_DRIVER_TYPE DriverTypes[] = {

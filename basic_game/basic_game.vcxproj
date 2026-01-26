@@ -38,10 +38,12 @@
     <ClCompile Include="scripts\renderer\camera.cpp" />
     <ClCompile Include="scripts\renderer\mesh.cpp" />
     <ClCompile Include="scripts\renderer\renderer.cpp" />
+    <ClCompile Include="scripts\renderer\renderer_2d.cpp" />
     <ClCompile Include="scripts\renderer\render_param.cpp" />
     <ClCompile Include="scripts\renderer\scene_manager.cpp" />
     <ClCompile Include="scripts\renderer\sphere.cpp" />
     <ClCompile Include="scripts\renderer\triangle.cpp" />
+    <ClCompile Include="scripts\scene\game_scene.cpp" />
     <ClCompile Include="scripts\utility\euler_converter.cpp" />
     <ClCompile Include="scripts\utility\input_manager.cpp" />
     <ClCompile Include="scripts\utility\string_converter.cpp" />
@@ -63,15 +65,23 @@
     <ClInclude Include="scripts\renderer\cb_projection.h" />
     <ClInclude Include="scripts\renderer\cb_transform.h" />
     <ClInclude Include="scripts\renderer\cb_view.h" />
+    <ClInclude Include="scripts\renderer\game_image.h" />
+    <ClInclude Include="scripts\renderer\game_text.h" />
     <ClInclude Include="scripts\renderer\light.h" />
     <ClInclude Include="scripts\renderer\material.h" />
     <ClInclude Include="scripts\renderer\mesh.h" />
     <ClInclude Include="scripts\renderer\renderer.h" />
+    <ClInclude Include="scripts\renderer\renderer_2d.h" />
     <ClInclude Include="scripts\renderer\render_param.h" />
     <ClInclude Include="scripts\renderer\scene_manager.h" />
     <ClInclude Include="scripts\renderer\sphere.h" />
     <ClInclude Include="scripts\renderer\triangle.h" />
     <ClInclude Include="scripts\renderer\vertex.h" />
+    <ClInclude Include="scripts\scene\game_clear_scene.h" />
+    <ClInclude Include="scripts\scene\game_over_scene.h" />
+    <ClInclude Include="scripts\scene\game_scene.h" />
+    <ClInclude Include="scripts\scene\scene.h" />
+    <ClInclude Include="scripts\scene\title_scene.h" />
     <ClInclude Include="scripts\shader\shader.h" />
     <ClInclude Include="scripts\utility\euler_converter.h" />
     <ClInclude Include="scripts\utility\input_manager.h" />
@@ -189,7 +199,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;$(ProjectDir)\scripts\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -208,7 +218,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;$(ProjectDir)\scripts\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -227,7 +237,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;$(ProjectDir)\scripts\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -246,7 +256,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\scripts\application;$(ProjectDir)\scripts\window;$(ProjectDir)\scripts\renderer;$(ProjectDir)\scripts\utility;$(ProjectDir)\scripts\actor;$(ProjectDir)\scripts\shader;$(ProjectDir)\scripts\model;$(ProjectDir)\scripts\component;$(ProjectDir)\scripts\scene;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>

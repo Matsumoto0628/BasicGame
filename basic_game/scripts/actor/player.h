@@ -5,13 +5,14 @@
 class Camera;
 class Weapon;
 class Renderer;
+class Renderer2D;
 
 class Player : public Actor 
 {
 public:
 	Player();
 	~Player();
-	void Initialize(Renderer& renderer, Camera* pCamera, Weapon* pWeapon);
+	void Initialize(Renderer& renderer, Renderer2D& renderer2d, Camera* pCamera, Weapon* pWeapon);
 	void Setup() override;
 	void Update() override;
 	void Draw() override;
@@ -31,6 +32,7 @@ private:
 	Camera* m_pCamera = nullptr;
 	Weapon* m_pWeapon = nullptr;
 	Collider m_collider;
+	Renderer2D* m_pRenderer2d = nullptr;
 
 	DirectX::XMFLOAT3 m_position = { 0, 0, -5.f };
 	DirectX::XMFLOAT4 m_rotation = { 0, 0, 0, 0 };
@@ -41,7 +43,7 @@ private:
 	float m_yaw;
 	float m_pitch;
 
-	float m_health = 100;
+	float m_health = 50;
 	
 	bool m_isKnockback = false;
 	float m_knockbackTimer = 0.f;

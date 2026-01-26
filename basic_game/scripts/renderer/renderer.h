@@ -3,6 +3,7 @@
 #include "shader.h"
 #include "render_param.h"
 #include "light.h"
+#include "renderer_2d.h"
 
 class Renderer
 {
@@ -20,6 +21,7 @@ public:
 	bool SetupViewTransform(const DirectX::XMMATRIX& viewMat);
     const LightSet& GetLightSet() const { return m_lightSet; }
     void SetEyePosLight(DirectX::XMFLOAT4 eyePos);
+	IDXGISwapChain* GetSwapChain() { return m_pSwapChain; }
 
     Shader TextureSpecularShader;
     Shader TextureShader;

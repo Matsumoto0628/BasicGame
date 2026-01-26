@@ -5,7 +5,8 @@ void Application::Initialize(HINSTANCE hInst)
 {
     m_window.Initialize(hInst);
     m_renderer.Initialize(m_window.GetWindowHandle());
-    m_sceneManager.Initialize(m_renderer);
+    m_renderer2d.Initialize(m_renderer.GetDevice(), m_renderer.GetSwapChain());
+    m_sceneManager.Initialize(m_renderer, m_renderer2d);
 }
 
 void Application::Setup()
@@ -39,6 +40,7 @@ bool Application::gameLoop()
     m_sceneManager.Update();
     m_renderer.Draw();
     m_sceneManager.Draw();
+    m_renderer2d.Draw();
     m_renderer.Swap();
 	InputManager::Instance().Update();
 

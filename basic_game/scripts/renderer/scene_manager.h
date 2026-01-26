@@ -6,6 +6,7 @@
 #include "enemy.h"
 
 class Renderer;
+class Renderer2D;
 
 class SceneManager
 {
@@ -13,7 +14,7 @@ public:
     SceneManager();
     ~SceneManager();
 
-    void Initialize(Renderer& renderer);
+    void Initialize(Renderer& renderer, Renderer2D& renderer2d);
     void Setup();
     void Terminate();
 
@@ -22,6 +23,7 @@ public:
 
 private:
     Renderer* m_pRenderer = nullptr;
+	Renderer2D* m_pRenderer2d = nullptr;
     Camera m_camera;
     StageModel m_stage;
     Weapon m_weapon;

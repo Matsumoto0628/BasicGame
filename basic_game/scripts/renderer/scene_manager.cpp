@@ -1,6 +1,11 @@
 ﻿#include "scene_manager.h"
 #include "renderer.h"
+#include "renderer_2d.h"
 #include "euler_converter.h"
+#include "game_text.h"
+#include "game_image.h"
+
+class ID2DI1Bitmap;
 
 SceneManager::SceneManager()
 {
@@ -10,11 +15,12 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Initialize(Renderer& renderer)
+void SceneManager::Initialize(Renderer& renderer, Renderer2D& renderer2d)
 {
 	m_pRenderer = &renderer;
+	m_pRenderer2d = &renderer2d;
 
-	m_player.Initialize(renderer, &m_camera, &m_weapon);
+	m_player.Initialize(renderer, renderer2d, &m_camera, &m_weapon);
 	m_weapon.Initialize(renderer);
 	for (int i = 0; i < ENEMY_MAX; ++i) 
 	{
@@ -54,6 +60,20 @@ void SceneManager::Setup()
 
 	m_stage.SetPosition({ 0.f, 0.f, 0.f });
 	m_stage.SetScale({ 0.05f, 0.05f, 0.05f });
+
+	m_pRenderer2d->AddText(new GameText(L"Escでカーソル表示、ゲームに戻る", 10.f, 10.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddText(new GameText(L"左クリックで攻撃", 10.f, 30.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddText(new GameText(L"WASDで移動", 10.f, 50.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddImage(new GameImage(m_pRenderer2d->LoadBitmapFromFile(L"images/red.png"), 0.f, 0.f, 960.f, 540.0f));
+	ID2D1Bitmap* heart = m_pRenderer2d->LoadBitmapFromFile(L"images/heart.png");
+	float scale = 50.f;
+	float ofstX = 20.f;
+	float ofstY = 475.f;
+	for (int i = 0; i < 5; ++i)
+	{
+		m_pRenderer2d->AddImage(new GameImage(heart, ofstX + i * scale, ofstY, scale, scale));
+	}
+	m_pRenderer2d->SwitchImage(0, false);
 }
 
 void SceneManager::Terminate()
