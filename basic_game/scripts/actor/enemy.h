@@ -27,6 +27,7 @@ public:
 	void SetMoveType(MoveType type) { m_moveType = type; }
 	void Attack();
 	bool IsDead() const { return m_isDead; }
+	void CancelAttack();
 
 private:
 	void move();

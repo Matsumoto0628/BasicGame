@@ -110,9 +110,7 @@ void Enemy::Update()
         m_attackTimer += 0.017f;
         if (m_attackTimer > 10.f)
         {
-			m_isAttack = false;
-            m_attackTimer = 0.f;
-            setTargetPosRandom();
+            CancelAttack();
         }
     }
     else 
@@ -385,4 +383,11 @@ void Enemy::setTargetPosRandom()
 void Enemy::Attack() 
 {
     m_isAttack = true;
+}
+
+void Enemy::CancelAttack() 
+{
+    m_isAttack = false;
+    m_attackTimer = 0.f;
+    setTargetPosRandom();
 }
