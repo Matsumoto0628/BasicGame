@@ -26,5 +26,7 @@ private:
     StageModel m_stage;
     Weapon m_weapon;
 	Player m_player;
-	Enemy m_enemy;
+
+	static constexpr int ENEMY_MAX = 12;
+	Enemy m_enemies[ENEMY_MAX];
 };
