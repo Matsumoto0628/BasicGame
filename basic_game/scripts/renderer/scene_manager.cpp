@@ -14,7 +14,7 @@ void SceneManager::Initialize(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
 
-	m_player.Initialize(&m_camera, &m_weapon);
+	m_player.Initialize(renderer, &m_camera, &m_weapon);
 	m_weapon.Initialize(renderer);
 	for (int i = 0; i < ENEMY_MAX; ++i) 
 	{
@@ -81,6 +81,13 @@ void SceneManager::Update()
 		if (m_weapon.GetCollider().Intersects(m_enemies[i].GetCollider()))
 		{
 			m_enemies[i].TakeDamage(10);
+			m_enemies[i].CancelAttack();
+		}
+
+		if (m_player.GetCollider().Intersects(m_enemies[i].GetCollider()))
+		{
+			m_player.TakeDamage(10);
+			m_enemies[i].CancelAttack();
 		}
 	}
 
