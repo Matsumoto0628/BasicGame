@@ -24,7 +24,7 @@ void Weapon::Setup()
 {
 	SetPivot({ 0, -0.1f, 0 });
 	SetScale({ 0.1f, 0.1f, 0.1f });
-	m_collider.SetRadius(0.1f);
+	m_collider.SetRadius(0.2f);
 }
 
 void Weapon::Update()
