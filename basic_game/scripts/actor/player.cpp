@@ -38,9 +38,9 @@ void Player::Update()
 
     if (InputManager::Instance().GetKeyDown(VK_LBUTTON))
     {
-        m_pWeapon->SetAttackPos({ m_position.x + m_pCamera->GetForward().x,
-            m_position.y + m_pCamera->GetForward().y,
-            m_position.z + m_pCamera->GetForward().z });
+        m_pWeapon->SetAttackPos({ m_position.x + m_pCamera->GetForward().x * 0.5f,
+            m_position.y + m_pCamera->GetForward().y * 0.5f,
+            m_position.z + m_pCamera->GetForward().z * 0.5f });
         m_pWeapon->Slash();
     }
 }
@@ -82,6 +82,20 @@ void Player::move()
             m_position.x + m_right.x * 0.025f,
             m_position.y + m_right.y * 0.025f,
             m_position.z + m_right.z * 0.025f);
+    }
+
+    const float radius = 9.0f;
+
+    float distSq = m_position.x * m_position.x +
+        m_position.z * m_position.z;  // XZ•½–Ê‚¾‚¯
+
+    if (distSq > radius * radius)
+    {
+        float dist = sqrtf(distSq);
+        float scale = radius / dist;
+
+        m_position.x *= scale;
+        m_position.z *= scale;
     }
 }
 
