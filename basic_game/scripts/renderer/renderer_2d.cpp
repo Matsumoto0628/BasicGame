@@ -130,6 +130,15 @@ void Renderer2D::AddImage(GameImage* pGameImage)
     m_pImages.push_back(pGameImage);
 }
 
+void Renderer2D::ClearImages()
+{
+    for (auto p : m_pImages)
+    {
+        delete p;
+    }
+    m_pImages.clear();
+}
+
 ID2D1Bitmap* Renderer2D::LoadBitmapFromFile(const wchar_t* uri)
 {
     IWICImagingFactory* pWICFactory = nullptr;

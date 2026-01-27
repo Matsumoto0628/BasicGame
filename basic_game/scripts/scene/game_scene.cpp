@@ -4,6 +4,7 @@
 #include "euler_converter.h"
 #include "game_text.h"
 #include "game_image.h"
+#include "scene_manager.h"
 
 class ID2DI1Bitmap;
 
@@ -85,6 +86,8 @@ void GameScene::Terminate()
 	{
 		m_enemies[i].Terminate();
 	}
+	m_pRenderer2d->ClearTexts();
+	m_pRenderer2d->ClearImages();
 }
 
 void GameScene::Update()
@@ -94,6 +97,7 @@ void GameScene::Update()
 	m_camera.Update();
 	m_weapon.Update();
 
+	int deadCnt = 0;
 	for (int i = 0; i < ENEMY_MAX; ++i)
 	{
 		m_enemies[i].Update();
@@ -109,6 +113,15 @@ void GameScene::Update()
 			m_player.TakeDamage(10);
 			m_enemies[i].CancelAttack();
 		}
+
+		if (m_enemies[i].IsDead()) 
+		{
+			deadCnt++;
+		}
+	}
+	if (deadCnt == ENEMY_MAX) 
+	{
+		SceneManager::Instance().Transit(SceneManager::SceneType::GameClear);
 	}
 
 	static float timer = 0.f;

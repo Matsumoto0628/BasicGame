@@ -23,6 +23,7 @@ public:
     void Draw();
     void AddText(GameText* gameText);
     void ClearTexts();
+    void ClearImages();
     ID2D1Bitmap* LoadBitmapFromFile(const wchar_t* uri);
     void AddImage(GameImage* gameImage);
     void SwitchText(int idx, bool which);

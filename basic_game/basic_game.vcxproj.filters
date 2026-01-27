@@ -50,9 +50,6 @@
     <ClCompile Include="scripts\renderer\camera.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\renderer\scene_manager.cpp">
-      <Filter>renderer</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\utility\input_manager.cpp">
       <Filter>utility</Filter>
     </ClCompile>
@@ -98,6 +95,24 @@
     <ClCompile Include="scripts\scene\game_scene.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\utility\scene_manager.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\title_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\title.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\result.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\game_over_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\game_clear_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -129,9 +144,6 @@
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\cb_view.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\renderer\scene_manager.h">
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\utility\input_manager.h">
@@ -208,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="scripts\scene\game_scene.h">
       <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\utility\scene_manager.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\title.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\result.h">
+      <Filter>actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

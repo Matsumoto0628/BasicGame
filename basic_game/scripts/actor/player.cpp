@@ -4,6 +4,7 @@
 #include "weapon.h"
 #include "euler_converter.h"
 #include "renderer_2d.h"
+#include "scene_manager.h"
 
 Player::Player()
 {
@@ -78,6 +79,7 @@ void Player::Update()
 			m_hitTimer = 0.f;
 			m_collider.SetActive(true);
             m_pRenderer2d->SwitchImage(0, false);
+            if (m_health <= 0) SceneManager::Instance().Transit(SceneManager::SceneType::GameOver);
 		}
     }
 }
