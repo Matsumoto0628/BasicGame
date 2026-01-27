@@ -50,6 +50,7 @@
     <ClCompile Include="scripts\utility\euler_converter.cpp" />
     <ClCompile Include="scripts\utility\input_manager.cpp" />
     <ClCompile Include="scripts\utility\scene_manager.cpp" />
+    <ClCompile Include="scripts\utility\sound_manager.cpp" />
     <ClCompile Include="scripts\utility\string_converter.cpp" />
     <ClCompile Include="scripts\window\window.cpp" />
   </ItemGroup>
@@ -92,6 +93,7 @@
     <ClInclude Include="scripts\utility\euler_converter.h" />
     <ClInclude Include="scripts\utility\input_manager.h" />
     <ClInclude Include="scripts\utility\scene_manager.h" />
+    <ClInclude Include="scripts\utility\sound_manager.h" />
     <ClInclude Include="scripts\utility\string_converter.h" />
     <ClInclude Include="scripts\window\window.h" />
   </ItemGroup>

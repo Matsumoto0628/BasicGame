@@ -5,6 +5,7 @@
 #include "game_text.h"
 #include "game_image.h"
 #include "scene_manager.h"
+#include "sound_manager.h"
 
 class ID2DI1Bitmap;
 
@@ -75,6 +76,11 @@ void GameScene::Setup()
 		m_pRenderer2d->AddImage(new GameImage(heart, ofstX + i * scale, ofstY, scale, scale));
 	}
 	m_pRenderer2d->SwitchImage(0, false);
+
+	m_bgm = SoundManager::Instance().LoadSound(L"sounds/uchiagehanabi.wav");
+	m_slash = SoundManager::Instance().LoadSound(L"sounds/slash.wav");
+	m_hit = SoundManager::Instance().LoadSound(L"sounds/hit.wav");
+	SoundManager::Instance().PlaySoundW(m_bgm, true);
 }
 
 void GameScene::Terminate()
@@ -88,6 +94,7 @@ void GameScene::Terminate()
 	}
 	m_pRenderer2d->ClearTexts();
 	m_pRenderer2d->ClearImages();
+	SoundManager::Instance().StopSound(m_bgm);
 }
 
 void GameScene::Update()
@@ -106,12 +113,14 @@ void GameScene::Update()
 		{
 			m_enemies[i].TakeDamage(10);
 			m_enemies[i].CancelAttack();
+			SoundManager::Instance().PlaySoundW(m_slash, false);
 		}
 
 		if (m_player.GetCollider().Intersects(m_enemies[i].GetCollider()))
 		{
 			m_player.TakeDamage(10);
 			m_enemies[i].CancelAttack();
+			SoundManager::Instance().PlaySoundW(m_hit, false);
 		}
 
 		if (m_enemies[i].IsDead()) 

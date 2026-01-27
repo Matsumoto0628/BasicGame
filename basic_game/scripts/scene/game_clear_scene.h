@@ -20,4 +20,5 @@ private:
 	Camera m_camera;
 	StageModel m_stage;
 	Result m_result;
+	int m_bgm;
 };

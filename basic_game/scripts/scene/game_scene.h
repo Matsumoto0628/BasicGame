@@ -26,4 +26,8 @@ private:
 
 	static constexpr int ENEMY_MAX = 12;
 	Enemy m_enemies[ENEMY_MAX];
+
+	int m_bgm;
+	int m_slash;
+	int m_hit;
 };
