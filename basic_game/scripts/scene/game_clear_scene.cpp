@@ -4,6 +4,7 @@
 #include "game_text.h"
 #include "game_image.h"
 #include "euler_converter.h"
+#include "sound_manager.h"
 
 class ID2DI1Bitmap;
 
@@ -32,6 +33,9 @@ void GameClearScene::Setup()
 	m_pRenderer2d->AddText(new GameText(L"Escでカーソル表示、ゲームに戻る", 0.f, 10.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
 	m_pRenderer2d->AddText(new GameText(L"Spaceでタイトルへ", 400.f, 400.f, DirectX::XMFLOAT4(1.f, 1.f, 1.f, 1.f)));
 	m_pRenderer2d->AddImage(new GameImage(m_pRenderer2d->LoadBitmapFromFile(L"images/game_clear.png"), 0.f, 0.f, 960.f, 540.0f));
+
+	m_bgm = SoundManager::Instance().LoadSound(L"sounds/ouun.wav");
+	SoundManager::Instance().PlaySoundW(m_bgm, true);
 }
 
 void GameClearScene::Terminate()
@@ -39,6 +43,7 @@ void GameClearScene::Terminate()
 	m_stage.Terminate();
 	m_pRenderer2d->ClearTexts();
 	m_pRenderer2d->ClearImages();
+	SoundManager::Instance().StopSound(m_bgm);
 }
 
 void GameClearScene::Update()
