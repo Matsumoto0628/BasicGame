@@ -25,6 +25,9 @@
     <Filter Include="component">
       <UniqueIdentifier>{0b3433c1-7c31-4dda-887d-bbf968a01904}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{6aa433e9-0e45-44a4-aa62-2d55fd123074}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="scripts\application\application.cpp">
@@ -45,9 +48,6 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="scripts\renderer\camera.cpp">
-      <Filter>renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\renderer\scene_manager.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="scripts\utility\input_manager.cpp">
@@ -89,6 +89,30 @@
     <ClCompile Include="scripts\model\box_model.cpp">
       <Filter>model</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\renderer\renderer_2d.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\game_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\utility\scene_manager.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\title_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\title.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\actor\result.cpp">
+      <Filter>actor</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\game_over_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\scene\game_clear_scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\application\application.h">
@@ -120,9 +144,6 @@
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\renderer\cb_view.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\renderer\scene_manager.h">
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="scripts\utility\input_manager.h">
@@ -175,6 +196,39 @@
     </ClInclude>
     <ClInclude Include="scripts\model\box_model.h">
       <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\renderer_2d.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\game_text.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\renderer\game_image.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\scene\scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\scene\title_scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\scene\game_over_scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\scene\game_clear_scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\scene\game_scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\utility\scene_manager.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\title.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\actor\result.h">
+      <Filter>actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

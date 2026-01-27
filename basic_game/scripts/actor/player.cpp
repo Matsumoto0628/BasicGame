@@ -3,6 +3,8 @@
 #include "camera.h"
 #include "weapon.h"
 #include "euler_converter.h"
+#include "renderer_2d.h"
+#include "scene_manager.h"
 
 Player::Player()
 {
@@ -12,8 +14,9 @@ Player::~Player()
 {
 }
 
-void Player::Initialize(Renderer& renderer, Camera* pCamera, Weapon* pWeapon)
+void Player::Initialize(Renderer& renderer, Renderer2D& renderer2D, Camera* pCamera, Weapon* pWeapon)
 {
+	m_pRenderer2d = &renderer2D;
 	m_pCamera = pCamera;
 	m_pWeapon = pWeapon;
     m_collider.Initialize(renderer);
@@ -75,6 +78,8 @@ void Player::Update()
 			m_isHit = false;
 			m_hitTimer = 0.f;
 			m_collider.SetActive(true);
+            m_pRenderer2d->SwitchImage(0, false);
+            if (m_health <= 0) SceneManager::Instance().Transit(SceneManager::SceneType::GameOver);
 		}
     }
 }
@@ -211,6 +216,7 @@ void Player::calcWeaponRot()
 
 void Player::TakeDamage(int amount)
 {
+    m_pRenderer2d->SwitchImage(m_health / 10, false);
 	m_health -= amount;
 	if (m_health < 0)
 	{
@@ -218,7 +224,9 @@ void Player::TakeDamage(int amount)
 	}
 	knockback();
     m_collider.SetActive(false);
+
     m_isHit = true;
+	m_pRenderer2d->SwitchImage(0, true);
 }
 
 void Player::knockback()

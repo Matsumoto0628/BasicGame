@@ -1,22 +1,29 @@
-﻿#include "scene_manager.h"
+﻿#include "game_scene.h"
 #include "renderer.h"
+#include "renderer_2d.h"
 #include "euler_converter.h"
+#include "game_text.h"
+#include "game_image.h"
+#include "scene_manager.h"
 
-SceneManager::SceneManager()
+class ID2DI1Bitmap;
+
+GameScene::GameScene()
 {
 }
 
-SceneManager::~SceneManager()
+GameScene::~GameScene()
 {
 }
 
-void SceneManager::Initialize(Renderer& renderer)
+void GameScene::Initialize(Renderer& renderer, Renderer2D& renderer2d)
 {
 	m_pRenderer = &renderer;
+	m_pRenderer2d = &renderer2d;
 
-	m_player.Initialize(renderer, &m_camera, &m_weapon);
+	m_player.Initialize(renderer, renderer2d, &m_camera, &m_weapon);
 	m_weapon.Initialize(renderer);
-	for (int i = 0; i < ENEMY_MAX; ++i) 
+	for (int i = 0; i < ENEMY_MAX; ++i)
 	{
 		m_enemies[i].Initialize(renderer, &m_player);
 	}
@@ -25,7 +32,7 @@ void SceneManager::Initialize(Renderer& renderer)
 	m_stage.Setup(renderer, STAGE_PATH);
 }
 
-void SceneManager::Setup()
+void GameScene::Setup()
 {
 	m_player.Setup();
 	m_weapon.Setup();
@@ -54,9 +61,23 @@ void SceneManager::Setup()
 
 	m_stage.SetPosition({ 0.f, 0.f, 0.f });
 	m_stage.SetScale({ 0.05f, 0.05f, 0.05f });
+
+	m_pRenderer2d->AddText(new GameText(L"Escでカーソル表示、ゲームに戻る", 10.f, 10.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddText(new GameText(L"左クリックで攻撃", 10.f, 30.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddText(new GameText(L"WASDで移動", 10.f, 50.f, DirectX::XMFLOAT4(1.f, 1.f, 0.f, 1.f)));
+	m_pRenderer2d->AddImage(new GameImage(m_pRenderer2d->LoadBitmapFromFile(L"images/red.png"), 0.f, 0.f, 960.f, 540.0f));
+	ID2D1Bitmap* heart = m_pRenderer2d->LoadBitmapFromFile(L"images/heart.png");
+	float scale = 50.f;
+	float ofstX = 20.f;
+	float ofstY = 475.f;
+	for (int i = 0; i < 5; ++i)
+	{
+		m_pRenderer2d->AddImage(new GameImage(heart, ofstX + i * scale, ofstY, scale, scale));
+	}
+	m_pRenderer2d->SwitchImage(0, false);
 }
 
-void SceneManager::Terminate()
+void GameScene::Terminate()
 {
 	m_stage.Terminate();
 	m_weapon.Terminate();
@@ -65,15 +86,18 @@ void SceneManager::Terminate()
 	{
 		m_enemies[i].Terminate();
 	}
+	m_pRenderer2d->ClearTexts();
+	m_pRenderer2d->ClearImages();
 }
 
-void SceneManager::Update()
+void GameScene::Update()
 {
 	m_pRenderer->SetEyePosLight(m_camera.GetEyePos());
 	m_player.Update();
-    m_camera.Update();
+	m_camera.Update();
 	m_weapon.Update();
 
+	int deadCnt = 0;
 	for (int i = 0; i < ENEMY_MAX; ++i)
 	{
 		m_enemies[i].Update();
@@ -89,6 +113,15 @@ void SceneManager::Update()
 			m_player.TakeDamage(10);
 			m_enemies[i].CancelAttack();
 		}
+
+		if (m_enemies[i].IsDead()) 
+		{
+			deadCnt++;
+		}
+	}
+	if (deadCnt == ENEMY_MAX) 
+	{
+		SceneManager::Instance().Transit(SceneManager::SceneType::GameClear);
 	}
 
 	static float timer = 0.f;
@@ -114,10 +147,10 @@ void SceneManager::Update()
 	}
 }
 
-void SceneManager::Draw()
+void GameScene::Draw()
 {
-    auto viewMatrix = m_camera.GetViewMatrix();
-    m_pRenderer->SetupViewTransform(viewMatrix);
+	auto viewMatrix = m_camera.GetViewMatrix();
+	m_pRenderer->SetupViewTransform(viewMatrix);
 	m_player.Draw();
 	m_stage.Draw();
 	m_weapon.Draw();
