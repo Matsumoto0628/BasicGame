@@ -2,6 +2,8 @@
 
 DirectXによる3Dモデルの描画を用いたゲーム
 
+https://github.com/user-attachments/assets/9d92df41-2ce0-4c88-abee-f5d1291ffe24
+
 - **開発期間** : 1ヶ月
 - **制作人数** : 1人
 - **リリース先** : GitHub Releases
