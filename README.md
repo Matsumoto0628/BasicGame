@@ -84,6 +84,8 @@ https://github.com/Matsumoto0628/BasicGame/blob/b8dd20d6de180a8a27b2ad0d5ea35cf0
 > **Note:** 起動時にWindowsのセキュリティ警告が表示される場合があります。「詳細情報」>「実行」をクリックして続行してください。
 >
 
+<img width="1015" height="647" alt="スクリーンショット 2026-03-12 033401" src="https://github.com/user-attachments/assets/be843468-5450-48d9-b481-0ae81ccd3fff" />
+
 <br>
 <br>
 
