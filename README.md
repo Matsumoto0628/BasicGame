@@ -70,6 +70,8 @@ https://github.com/Matsumoto0628/BasicGame/blob/0af0fff9a7d150f7238ef265998790d5
 
 SceneとActorをそれぞれ純粋仮想関数を持つ基底クラスとして定義し、各シーン・オブジェクトに`Setup / Update / Draw / Terminate`の統一インターフェースを持たせた。SceneManagerは`Scene*`のポインタで現在シーンを保持するため、シーンの切り替えはポインタの差し替えだけで完結し、呼び出し側のコードを変更せずに新しいシーンを追加できる。
 
+https://github.com/Matsumoto0628/BasicGame/blob/1034142f0c76c9580ca5beb180c26efccd52350d/basic_game/scripts/scene/scene.h#L6-L15
+
 <br>
 <br>
 
