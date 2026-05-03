@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Scene クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_scene.html','','class_scene-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Scene クラス<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>ゲームシーンの共通インターフェース  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="scene_8h_source.html">scene.h</a>&gt;</code></p>
+<div class="dynheader">
+Scene の継承関係図</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_scene.png" usemap="#Scene_map" alt=""/>
+  <map id="Scene_map" name="Scene_map">
+<area href="class_game_clear_scene.html" title="ゲームクリア画面を管理するシーンクラス" alt="GameClearScene" shape="rect" coords="0,56,111,80"/>
+<area href="class_game_over_scene.html" title="ゲームオーバー画面を管理するシーンクラス" alt="GameOverScene" shape="rect" coords="121,56,232,80"/>
+<area href="class_game_scene.html" title="ゲームのメインプレイを管理するシーンクラス" alt="GameScene" shape="rect" coords="242,56,353,80"/>
+<area href="class_title_scene.html" title="タイトル画面を管理するシーンクラス" alt="TitleScene" shape="rect" coords="363,56,474,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:af6e09d91ebd10ae9cc7c12c39d06386c" id="r_af6e09d91ebd10ae9cc7c12c39d06386c"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#af6e09d91ebd10ae9cc7c12c39d06386c">~Scene</a> ()=default</td></tr>
+<tr class="memitem:a863cbf9ce8e67d7f70c09b77731b0fae" id="r_a863cbf9ce8e67d7f70c09b77731b0fae"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a863cbf9ce8e67d7f70c09b77731b0fae">Initialize</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer, <a class="el" href="class_renderer2_d.html">Renderer2D</a> &amp;renderer2d)=0</td></tr>
+<tr class="memdesc:a863cbf9ce8e67d7f70c09b77731b0fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">レンダラーを受け取ってシーンを初期化する  <br /></td></tr>
+<tr class="memitem:a0329ea984ee28d11dc3cd225359d0240" id="r_a0329ea984ee28d11dc3cd225359d0240"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a0329ea984ee28d11dc3cd225359d0240">Setup</a> ()=0</td></tr>
+<tr class="memdesc:a0329ea984ee28d11dc3cd225359d0240"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーン開始時の初期化処理  <br /></td></tr>
+<tr class="memitem:ab99ec7aff3ed995985ddb764ffb78f8e" id="r_ab99ec7aff3ed995985ddb764ffb78f8e"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ab99ec7aff3ed995985ddb764ffb78f8e">Update</a> ()=0</td></tr>
+<tr class="memdesc:ab99ec7aff3ed995985ddb764ffb78f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">毎フレームの更新処理  <br /></td></tr>
+<tr class="memitem:a8680672fd30bb4b345e6fab918e31ecd" id="r_a8680672fd30bb4b345e6fab918e31ecd"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a8680672fd30bb4b345e6fab918e31ecd">Draw</a> ()=0</td></tr>
+<tr class="memdesc:a8680672fd30bb4b345e6fab918e31ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">毎フレームの描画処理  <br /></td></tr>
+<tr class="memitem:adc7413de9c8fb8701f785a80cd8b9d48" id="r_adc7413de9c8fb8701f785a80cd8b9d48"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#adc7413de9c8fb8701f785a80cd8b9d48">Terminate</a> ()=0</td></tr>
+<tr class="memdesc:adc7413de9c8fb8701f785a80cd8b9d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">終了処理・リソース解放  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>ゲームシーンの共通インターフェース </p>
+<p>タイトル・ゲーム・ゲームオーバー・ゲームクリアなど 各シーンはこのクラスを継承して実装する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="af6e09d91ebd10ae9cc7c12c39d06386c" name="af6e09d91ebd10ae9cc7c12c39d06386c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e09d91ebd10ae9cc7c12c39d06386c">&#9670;&#160;</a></span>~Scene()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Scene::~Scene </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a8680672fd30bb4b345e6fab918e31ecd" name="a8680672fd30bb4b345e6fab918e31ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8680672fd30bb4b345e6fab918e31ecd">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Scene::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>毎フレームの描画処理 </p>
+
+<p><a class="el" href="class_game_clear_scene.html#ad40a5c9aa6f0558e16b98d0ac1bfdee1">GameClearScene</a>, <a class="el" href="class_game_over_scene.html#a0ca4f157ce8f5f8e2ccbef58ce93aa46">GameOverScene</a>, <a class="el" href="class_game_scene.html#ab41573e98b833b0e922f88a0fd226eb1">GameScene</a>, <a class="el" href="class_title_scene.html#af233ba17c8482c6bec262b8f73c1efed">TitleScene</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="a863cbf9ce8e67d7f70c09b77731b0fae" name="a863cbf9ce8e67d7f70c09b77731b0fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a863cbf9ce8e67d7f70c09b77731b0fae">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Scene::Initialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_renderer2_d.html">Renderer2D</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer2d</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>レンダラーを受け取ってシーンを初期化する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+    <tr><td class="paramname">renderer2d</td><td>2Dレンダラーの参照 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="class_game_clear_scene.html#aee1d4c0b186ad6f79968e9738fb5aee6">GameClearScene</a>, <a class="el" href="class_game_over_scene.html#a0206a81414603ee965a0891b694cc948">GameOverScene</a>, <a class="el" href="class_game_scene.html#a16e0a2a87c8e0486ba2325317dbd012d">GameScene</a>, <a class="el" href="class_title_scene.html#a977b7bbf8bb95f4bc0469b6eb88308f1">TitleScene</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="a0329ea984ee28d11dc3cd225359d0240" name="a0329ea984ee28d11dc3cd225359d0240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0329ea984ee28d11dc3cd225359d0240">&#9670;&#160;</a></span>Setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Scene::Setup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>シーン開始時の初期化処理 </p>
+
+<p><a class="el" href="class_game_clear_scene.html#a853da5d8514e8f3f15deef6a4236b0bf">GameClearScene</a>, <a class="el" href="class_game_over_scene.html#a93263cd56c80ef6d25324b9969e972bf">GameOverScene</a>, <a class="el" href="class_game_scene.html#a00037d95525863e7d0bdb9ea09b5ca6b">GameScene</a>, <a class="el" href="class_title_scene.html#a6bbc4df67aebc7ef31778af3506fd4c4">TitleScene</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="adc7413de9c8fb8701f785a80cd8b9d48" name="adc7413de9c8fb8701f785a80cd8b9d48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7413de9c8fb8701f785a80cd8b9d48">&#9670;&#160;</a></span>Terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Scene::Terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>終了処理・リソース解放 </p>
+
+<p><a class="el" href="class_game_clear_scene.html#afedf6208c839b408563ab134bfd27798">GameClearScene</a>, <a class="el" href="class_game_over_scene.html#adb28f91a75d6a414763eb70e4a6decd1">GameOverScene</a>, <a class="el" href="class_game_scene.html#a2f1aee8ae3f61a4de9c11db208a3caac">GameScene</a>, <a class="el" href="class_title_scene.html#af1d6c31ef909a50e253f9b6bf757e114">TitleScene</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="ab99ec7aff3ed995985ddb764ffb78f8e" name="ab99ec7aff3ed995985ddb764ffb78f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99ec7aff3ed995985ddb764ffb78f8e">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Scene::Update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>毎フレームの更新処理 </p>
+
+<p><a class="el" href="class_game_clear_scene.html#a4de0c16e12189f4afb8da8ed2cb20420">GameClearScene</a>, <a class="el" href="class_game_over_scene.html#a662c002f6938500c1ce04ba8760191bc">GameOverScene</a>, <a class="el" href="class_game_scene.html#abcecddeb12cf3cd8e927235c5217f8a3">GameScene</a>, <a class="el" href="class_title_scene.html#a4d4e98579e09afbff30399ce4bc6036f">TitleScene</a>で実装されています。</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/scene/<a class="el" href="scene_8h_source.html">scene.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_scene.html">Scene</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

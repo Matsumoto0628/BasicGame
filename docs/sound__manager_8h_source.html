@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: scripts/utility/sound_manager.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('sound__manager_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sound_manager.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sound__manager_8h.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="sound__manager_8h.html#a5903348ead0e963961468f1f57de4ca7">    8</a></span><span class="preprocessor">#define _WIN32_DCOM</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;mmsystem.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;xaudio2.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="sound__manager_8h.html#ad22530ab28cb2ed71d20dee559a59f5e">   14</a></span><span class="preprocessor">#define MAX_WAV 100</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_sound_manager.html">   19</a></span><span class="keyword">class </span><a class="code hl_function" href="class_sound_manager.html#abcc1fbf3488be5788a42c9a4fe56df35">SoundManager</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">static</span> <a class="code hl_function" href="class_sound_manager.html#abcc1fbf3488be5788a42c9a4fe56df35">SoundManager</a>&amp; <a class="code hl_function" href="class_sound_manager.html#a756dae50accc665907306e7a916b3ea5">Instance</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a35d84726a1bec093708297b3cc64b51b">   28</a></span>    IXAudio2*              <a class="code hl_variable" href="class_sound_manager.html#a35d84726a1bec093708297b3cc64b51b">m_pXAudio2</a>;                  </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a3ca54461fc38514e0fd5e7ee3fb816ca">   29</a></span>    IXAudio2MasteringVoice* <a class="code hl_variable" href="class_sound_manager.html#a3ca54461fc38514e0fd5e7ee3fb816ca">m_pMasteringVoice</a>;          </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_sound_manager.html#ad07ae9cbab337b6748ef1f050b3fd107">   30</a></span>    IXAudio2SourceVoice*   <a class="code hl_variable" href="class_sound_manager.html#ad07ae9cbab337b6748ef1f050b3fd107">m_pSourceVoice</a>[<a class="code hl_define" href="sound__manager_8h.html#ad22530ab28cb2ed71d20dee559a59f5e">MAX_WAV</a>];     </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a3a2eb16602c7512f9f63390e5f8403ab">   31</a></span>    BYTE*  <a class="code hl_variable" href="class_sound_manager.html#a3a2eb16602c7512f9f63390e5f8403ab">m_pWavBuffer</a>[<a class="code hl_define" href="sound__manager_8h.html#ad22530ab28cb2ed71d20dee559a59f5e">MAX_WAV</a>];                        </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a372cdcec91acd1c829358f0843633035">   32</a></span>    DWORD  <a class="code hl_variable" href="class_sound_manager.html#a372cdcec91acd1c829358f0843633035">m_dwWavSize</a>[<a class="code hl_define" href="sound__manager_8h.html#ad22530ab28cb2ed71d20dee559a59f5e">MAX_WAV</a>];                         </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a9b6591dd11542e5e95be7c8ac49bf0b5">   33</a></span>    <span class="keywordtype">int</span>    <a class="code hl_variable" href="class_sound_manager.html#a9b6591dd11542e5e95be7c8ac49bf0b5">m_iSoundIndex</a>[10];                            </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_sound_manager.html#a682ccedd3eaa0044733b09d635046823">   34</a></span>    <span class="keywordtype">int</span>    <a class="code hl_variable" href="class_sound_manager.html#a682ccedd3eaa0044733b09d635046823">m_iSoundCurrentIndex</a>;                         </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_function" href="class_sound_manager.html#abcc1fbf3488be5788a42c9a4fe56df35">SoundManager</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_function" href="class_sound_manager.html#ad5dbf8eab22db48ff8f3db51b02f8938">~SoundManager</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    HRESULT <a class="code hl_function" href="class_sound_manager.html#a28ec3a5207ed29cd2872ecd1a9e4b8e1">Initialize</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_sound_manager.html#a2a4ffba8061512f193f917cf4fe1e2d6">LoadSound</a>(<span class="keyword">const</span> std::wstring&amp; szFileName);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sound_manager.html#a8c8697b8f5551ddb1e018f3dc8286468">PlaySound</a>(<span class="keywordtype">int</span> iSoundIndex, <span class="keywordtype">bool</span> boLoop);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_sound_manager.html#aa82445f7f597974fec54fc4e629d7dff">StopSound</a>(<span class="keywordtype">int</span> iSoundIndex);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
+</div>
+<div class="ttc" id="aclass_sound_manager_html_a28ec3a5207ed29cd2872ecd1a9e4b8e1"><div class="ttname"><a href="class_sound_manager.html#a28ec3a5207ed29cd2872ecd1a9e4b8e1">SoundManager::Initialize</a></div><div class="ttdeci">HRESULT Initialize()</div><div class="ttdoc">XAudio2 エンジンとマスタリングボイスを初期化する</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:29</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a2a4ffba8061512f193f917cf4fe1e2d6"><div class="ttname"><a href="class_sound_manager.html#a2a4ffba8061512f193f917cf4fe1e2d6">SoundManager::LoadSound</a></div><div class="ttdeci">int LoadSound(const std::wstring &amp;szFileName)</div><div class="ttdoc">WAV ファイルを読み込んでソースボイスを生成する</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:46</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a35d84726a1bec093708297b3cc64b51b"><div class="ttname"><a href="class_sound_manager.html#a35d84726a1bec093708297b3cc64b51b">SoundManager::m_pXAudio2</a></div><div class="ttdeci">IXAudio2 * m_pXAudio2</div><div class="ttdoc">XAudio2 エンジン</div><div class="ttdef"><b>Definition</b> sound_manager.h:28</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a372cdcec91acd1c829358f0843633035"><div class="ttname"><a href="class_sound_manager.html#a372cdcec91acd1c829358f0843633035">SoundManager::m_dwWavSize</a></div><div class="ttdeci">DWORD m_dwWavSize[MAX_WAV]</div><div class="ttdoc">各 WAV バッファのサイズ（バイト）</div><div class="ttdef"><b>Definition</b> sound_manager.h:32</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a3a2eb16602c7512f9f63390e5f8403ab"><div class="ttname"><a href="class_sound_manager.html#a3a2eb16602c7512f9f63390e5f8403ab">SoundManager::m_pWavBuffer</a></div><div class="ttdeci">BYTE * m_pWavBuffer[MAX_WAV]</div><div class="ttdoc">WAV 波形データバッファ（フォーマット情報を含まない生波形）</div><div class="ttdef"><b>Definition</b> sound_manager.h:31</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a3ca54461fc38514e0fd5e7ee3fb816ca"><div class="ttname"><a href="class_sound_manager.html#a3ca54461fc38514e0fd5e7ee3fb816ca">SoundManager::m_pMasteringVoice</a></div><div class="ttdeci">IXAudio2MasteringVoice * m_pMasteringVoice</div><div class="ttdoc">マスタリングボイス</div><div class="ttdef"><b>Definition</b> sound_manager.h:29</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a682ccedd3eaa0044733b09d635046823"><div class="ttname"><a href="class_sound_manager.html#a682ccedd3eaa0044733b09d635046823">SoundManager::m_iSoundCurrentIndex</a></div><div class="ttdeci">int m_iSoundCurrentIndex</div><div class="ttdoc">現在の再生インデックス</div><div class="ttdef"><b>Definition</b> sound_manager.h:34</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a756dae50accc665907306e7a916b3ea5"><div class="ttname"><a href="class_sound_manager.html#a756dae50accc665907306e7a916b3ea5">SoundManager::Instance</a></div><div class="ttdeci">static SoundManager &amp; Instance()</div><div class="ttdoc">シングルトンインスタンスを取得する</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:3</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a8c8697b8f5551ddb1e018f3dc8286468"><div class="ttname"><a href="class_sound_manager.html#a8c8697b8f5551ddb1e018f3dc8286468">SoundManager::PlaySound</a></div><div class="ttdeci">void PlaySound(int iSoundIndex, bool boLoop)</div><div class="ttdoc">指定インデックスのサウンドを再生する</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:89</div></div>
+<div class="ttc" id="aclass_sound_manager_html_a9b6591dd11542e5e95be7c8ac49bf0b5"><div class="ttname"><a href="class_sound_manager.html#a9b6591dd11542e5e95be7c8ac49bf0b5">SoundManager::m_iSoundIndex</a></div><div class="ttdeci">int m_iSoundIndex[10]</div><div class="ttdoc">読み込み済みサウンドの番号一覧</div><div class="ttdef"><b>Definition</b> sound_manager.h:33</div></div>
+<div class="ttc" id="aclass_sound_manager_html_aa82445f7f597974fec54fc4e629d7dff"><div class="ttname"><a href="class_sound_manager.html#aa82445f7f597974fec54fc4e629d7dff">SoundManager::StopSound</a></div><div class="ttdeci">void StopSound(int iSoundIndex)</div><div class="ttdoc">指定インデックスのサウンドを停止する</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:107</div></div>
+<div class="ttc" id="aclass_sound_manager_html_abcc1fbf3488be5788a42c9a4fe56df35"><div class="ttname"><a href="class_sound_manager.html#abcc1fbf3488be5788a42c9a4fe56df35">SoundManager::SoundManager</a></div><div class="ttdeci">SoundManager()</div><div class="ttdoc">コンストラクタ</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:9</div></div>
+<div class="ttc" id="aclass_sound_manager_html_ad07ae9cbab337b6748ef1f050b3fd107"><div class="ttname"><a href="class_sound_manager.html#ad07ae9cbab337b6748ef1f050b3fd107">SoundManager::m_pSourceVoice</a></div><div class="ttdeci">IXAudio2SourceVoice * m_pSourceVoice[MAX_WAV]</div><div class="ttdoc">サウンドごとのソースボイス</div><div class="ttdef"><b>Definition</b> sound_manager.h:30</div></div>
+<div class="ttc" id="aclass_sound_manager_html_ad5dbf8eab22db48ff8f3db51b02f8938"><div class="ttname"><a href="class_sound_manager.html#ad5dbf8eab22db48ff8f3db51b02f8938">SoundManager::~SoundManager</a></div><div class="ttdeci">~SoundManager()</div><div class="ttdoc">デストラクタ</div><div class="ttdef"><b>Definition</b> sound_manager.cpp:17</div></div>
+<div class="ttc" id="asound__manager_8h_html_ad22530ab28cb2ed71d20dee559a59f5e"><div class="ttname"><a href="sound__manager_8h.html#ad22530ab28cb2ed71d20dee559a59f5e">MAX_WAV</a></div><div class="ttdeci">#define MAX_WAV</div><div class="ttdoc">管理できる WAV サウンドの最大数</div><div class="ttdef"><b>Definition</b> sound_manager.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_53e6fa9553ac22a5646d2a2b2d7b97a1.html">scripts</a></li><li class="navelem"><a href="dir_629961469b066a177f20ae47d1d36b1d.html">utility</a></li><li class="navelem"><a href="sound__manager_8h.html">sound_manager.h</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

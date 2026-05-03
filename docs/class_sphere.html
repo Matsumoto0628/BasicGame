@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Sphere クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_sphere.html','','class_sphere-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Sphere クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>スライス・スタック分割による球体ポリゴンを生成・描画するクラス  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="sphere_8h_source.html">sphere.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a2b278db68b714c643d1948f8a1c0426f" id="r_a2b278db68b714c643d1948f8a1c0426f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2b278db68b714c643d1948f8a1c0426f">Sphere</a> (float radius, int slice, int stack)</td></tr>
+<tr class="memdesc:a2b278db68b714c643d1948f8a1c0426f"><td class="mdescLeft">&#160;</td><td class="mdescRight">球体パラメータを指定するコンストラクタ  <br /></td></tr>
+<tr class="memitem:a569c071e50a3e11f678630ee1a17737e" id="r_a569c071e50a3e11f678630ee1a17737e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a569c071e50a3e11f678630ee1a17737e">~Sphere</a> ()</td></tr>
+<tr class="memdesc:a569c071e50a3e11f678630ee1a17737e"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:a8323d9a7b69c353c3772dabcc36c2f90" id="r_a8323d9a7b69c353c3772dabcc36c2f90"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8323d9a7b69c353c3772dabcc36c2f90">DestroyVertexBuffer</a> ()</td></tr>
+<tr class="memdesc:a8323d9a7b69c353c3772dabcc36c2f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファを解放する  <br /></td></tr>
+<tr class="memitem:a14db32f4cd1d9ebfd7ad9d41571e05fe" id="r_a14db32f4cd1d9ebfd7ad9d41571e05fe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a14db32f4cd1d9ebfd7ad9d41571e05fe">Draw</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer)</td></tr>
+<tr class="memdesc:a14db32f4cd1d9ebfd7ad9d41571e05fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">球体を描画する  <br /></td></tr>
+<tr class="memitem:a45fb1769b5b5406276547c3dafc51b24" id="r_a45fb1769b5b5406276547c3dafc51b24"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a45fb1769b5b5406276547c3dafc51b24">SetPosition</a> (const DirectX::XMFLOAT3 &amp;pos)</td></tr>
+<tr class="memdesc:a45fb1769b5b5406276547c3dafc51b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">球体の中心座標を設定する  <br /></td></tr>
+<tr class="memitem:abe097cfb347ad82140a1fba182832605" id="r_abe097cfb347ad82140a1fba182832605"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abe097cfb347ad82140a1fba182832605">SetRadius</a> (float r)</td></tr>
+<tr class="memdesc:abe097cfb347ad82140a1fba182832605"><td class="mdescLeft">&#160;</td><td class="mdescRight">球体の半径を設定する  <br /></td></tr>
+<tr class="memitem:a495ac5b71091c6f2383b2d8de9aa7230" id="r_a495ac5b71091c6f2383b2d8de9aa7230"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a495ac5b71091c6f2383b2d8de9aa7230">Initialize</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer)</td></tr>
+<tr class="memdesc:a495ac5b71091c6f2383b2d8de9aa7230"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファと初期マテリアルを生成する  <br /></td></tr>
+<tr class="memitem:ab4634e1fa072326dfd6cb7e6a75e57c2" id="r_ab4634e1fa072326dfd6cb7e6a75e57c2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab4634e1fa072326dfd6cb7e6a75e57c2">ChangeColor</a> (DirectX::XMFLOAT4 color)</td></tr>
+<tr class="memdesc:ab4634e1fa072326dfd6cb7e6a75e57c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">球体の表示色を変更する  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>スライス・スタック分割による球体ポリゴンを生成・描画するクラス </p>
+<p>主にコライダーのデバッグ描画に使用する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a2b278db68b714c643d1948f8a1c0426f" name="a2b278db68b714c643d1948f8a1c0426f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b278db68b714c643d1948f8a1c0426f">&#9670;&#160;</a></span>Sphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sphere::Sphere </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>radius</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>slice</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>stack</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>球体パラメータを指定するコンストラクタ </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">radius</td><td>球の半径 </td></tr>
+    <tr><td class="paramname">slice</td><td>経度方向の分割数 </td></tr>
+    <tr><td class="paramname">stack</td><td>緯度方向の分割数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a569c071e50a3e11f678630ee1a17737e" name="a569c071e50a3e11f678630ee1a17737e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a569c071e50a3e11f678630ee1a17737e">&#9670;&#160;</a></span>~Sphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sphere::~Sphere </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="ab4634e1fa072326dfd6cb7e6a75e57c2" name="ab4634e1fa072326dfd6cb7e6a75e57c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4634e1fa072326dfd6cb7e6a75e57c2">&#9670;&#160;</a></span>ChangeColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::ChangeColor </td>
+          <td>(</td>
+          <td class="paramtype">DirectX::XMFLOAT4</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>球体の表示色を変更する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>新しい色（RGBA） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8323d9a7b69c353c3772dabcc36c2f90" name="a8323d9a7b69c353c3772dabcc36c2f90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8323d9a7b69c353c3772dabcc36c2f90">&#9670;&#160;</a></span>DestroyVertexBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::DestroyVertexBuffer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファを解放する </p>
+
+</div>
+</div>
+<a id="a14db32f4cd1d9ebfd7ad9d41571e05fe" name="a14db32f4cd1d9ebfd7ad9d41571e05fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14db32f4cd1d9ebfd7ad9d41571e05fe">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::Draw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>球体を描画する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a495ac5b71091c6f2383b2d8de9aa7230" name="a495ac5b71091c6f2383b2d8de9aa7230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a495ac5b71091c6f2383b2d8de9aa7230">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::Initialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファと初期マテリアルを生成する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a45fb1769b5b5406276547c3dafc51b24" name="a45fb1769b5b5406276547c3dafc51b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45fb1769b5b5406276547c3dafc51b24">&#9670;&#160;</a></span>SetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::SetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT3 &amp;</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>球体の中心座標を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>ワールド座標 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe097cfb347ad82140a1fba182832605" name="abe097cfb347ad82140a1fba182832605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe097cfb347ad82140a1fba182832605">&#9670;&#160;</a></span>SetRadius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sphere::SetRadius </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>r</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>球体の半径を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>半径 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/renderer/<a class="el" href="sphere_8h_source.html">sphere.h</a></li>
+<li>scripts/renderer/<a class="el" href="sphere_8cpp.html">sphere.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_sphere.html">Sphere</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

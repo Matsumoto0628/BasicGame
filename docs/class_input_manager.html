@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: InputManager クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_input_manager.html','','class_input_manager-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">InputManager クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>キーボードとマウスの入力状態を管理するシングルトンクラス  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="input__manager_8h_source.html">input_manager.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a8be46886da639b26d67181c29dab6d6c" id="r_a8be46886da639b26d67181c29dab6d6c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8be46886da639b26d67181c29dab6d6c">InputManager</a> ()</td></tr>
+<tr class="memdesc:a8be46886da639b26d67181c29dab6d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <br /></td></tr>
+<tr class="memitem:af518290877dd183606709d5852db5491" id="r_af518290877dd183606709d5852db5491"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af518290877dd183606709d5852db5491">~InputManager</a> ()</td></tr>
+<tr class="memdesc:af518290877dd183606709d5852db5491"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:a710bea9ff903edcad117d22bac678895" id="r_a710bea9ff903edcad117d22bac678895"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a710bea9ff903edcad117d22bac678895">GetKeyDown</a> (int key)</td></tr>
+<tr class="memdesc:a710bea9ff903edcad117d22bac678895"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーが押下された瞬間かどうかを返す  <br /></td></tr>
+<tr class="memitem:a927277dfef252264015336083731109f" id="r_a927277dfef252264015336083731109f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a927277dfef252264015336083731109f">GetKeyUp</a> (int key)</td></tr>
+<tr class="memdesc:a927277dfef252264015336083731109f"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーが離された瞬間かどうかを返す  <br /></td></tr>
+<tr class="memitem:a4511d620af48d4b55a0baa30db164f95" id="r_a4511d620af48d4b55a0baa30db164f95"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4511d620af48d4b55a0baa30db164f95">GetKey</a> (int key)</td></tr>
+<tr class="memdesc:a4511d620af48d4b55a0baa30db164f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーが押し続けられているかどうかを返す  <br /></td></tr>
+<tr class="memitem:aa5480931dba2720e7d80dd00a53adae0" id="r_aa5480931dba2720e7d80dd00a53adae0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa5480931dba2720e7d80dd00a53adae0">Update</a> ()</td></tr>
+<tr class="memdesc:aa5480931dba2720e7d80dd00a53adae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">毎フレームの入力状態を更新する  <br /></td></tr>
+<tr class="memitem:ab36ad9b70154ecebb8f63dcb7b00f81d" id="r_ab36ad9b70154ecebb8f63dcb7b00f81d"><td class="memItemLeft">POINT&#160;</td><td class="memItemRight"><a class="el" href="#ab36ad9b70154ecebb8f63dcb7b00f81d">GetMouseDelta</a> () const</td></tr>
+<tr class="memdesc:ab36ad9b70154ecebb8f63dcb7b00f81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">前フレームからのマウス移動量を取得する  <br /></td></tr>
+<tr class="memitem:a261889c39d5f40047dbc3cf08fccb9f7" id="r_a261889c39d5f40047dbc3cf08fccb9f7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a261889c39d5f40047dbc3cf08fccb9f7">SetHwnd</a> (HWND hwnd)</td></tr>
+<tr class="memdesc:a261889c39d5f40047dbc3cf08fccb9f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウハンドルを設定する（マウスロック時に使用）  <br /></td></tr>
+<tr class="memitem:a40bf65ec453791d143317c1ef73d3d30" id="r_a40bf65ec453791d143317c1ef73d3d30"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a40bf65ec453791d143317c1ef73d3d30">SetCursorLock</a> (bool lock)</td></tr>
+<tr class="memdesc:a40bf65ec453791d143317c1ef73d3d30"><td class="mdescLeft">&#160;</td><td class="mdescRight">マウスカーソルのロック状態を切り替える  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:ab49fdfb504847dc0695523837122d49d" id="r_ab49fdfb504847dc0695523837122d49d"><td class="memItemLeft">static <a class="el" href="class_input_manager.html">InputManager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab49fdfb504847dc0695523837122d49d">Instance</a> ()</td></tr>
+<tr class="memdesc:ab49fdfb504847dc0695523837122d49d"><td class="mdescLeft">&#160;</td><td class="mdescRight">シングルトンインスタンスを取得する  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>キーボードとマウスの入力状態を管理するシングルトンクラス </p>
+<p>毎フレーム <a class="el" href="#aa5480931dba2720e7d80dd00a53adae0" title="毎フレームの入力状態を更新する">Update()</a> を呼ぶことで押下・離し・押し続けの状態を更新する。 マウスカーソルのロック機能も提供する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a8be46886da639b26d67181c29dab6d6c" name="a8be46886da639b26d67181c29dab6d6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be46886da639b26d67181c29dab6d6c">&#9670;&#160;</a></span>InputManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">InputManager::InputManager </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+
+</div>
+</div>
+<a id="af518290877dd183606709d5852db5491" name="af518290877dd183606709d5852db5491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af518290877dd183606709d5852db5491">&#9670;&#160;</a></span>~InputManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">InputManager::~InputManager </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a4511d620af48d4b55a0baa30db164f95" name="a4511d620af48d4b55a0baa30db164f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4511d620af48d4b55a0baa30db164f95">&#9670;&#160;</a></span>GetKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InputManager::GetKey </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>キーが押し続けられているかどうかを返す </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>仮想キーコード </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>押下中であれば true </dd></dl>
+
+</div>
+</div>
+<a id="a710bea9ff903edcad117d22bac678895" name="a710bea9ff903edcad117d22bac678895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710bea9ff903edcad117d22bac678895">&#9670;&#160;</a></span>GetKeyDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InputManager::GetKeyDown </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>キーが押下された瞬間かどうかを返す </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>仮想キーコード </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>押下された瞬間であれば true </dd></dl>
+
+</div>
+</div>
+<a id="a927277dfef252264015336083731109f" name="a927277dfef252264015336083731109f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a927277dfef252264015336083731109f">&#9670;&#160;</a></span>GetKeyUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InputManager::GetKeyUp </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>キーが離された瞬間かどうかを返す </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>仮想キーコード </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>離された瞬間であれば true </dd></dl>
+
+</div>
+</div>
+<a id="ab36ad9b70154ecebb8f63dcb7b00f81d" name="ab36ad9b70154ecebb8f63dcb7b00f81d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36ad9b70154ecebb8f63dcb7b00f81d">&#9670;&#160;</a></span>GetMouseDelta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">POINT InputManager::GetMouseDelta </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前フレームからのマウス移動量を取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>マウスの移動量（POINT 型） </dd></dl>
+
+</div>
+</div>
+<a id="ab49fdfb504847dc0695523837122d49d" name="ab49fdfb504847dc0695523837122d49d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab49fdfb504847dc0695523837122d49d">&#9670;&#160;</a></span>Instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_input_manager.html">InputManager</a> &amp; InputManager::Instance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>シングルトンインスタンスを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd><a class="el" href="class_input_manager.html" title="キーボードとマウスの入力状態を管理するシングルトンクラス">InputManager</a> の唯一のインスタンス </dd></dl>
+
+</div>
+</div>
+<a id="a40bf65ec453791d143317c1ef73d3d30" name="a40bf65ec453791d143317c1ef73d3d30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40bf65ec453791d143317c1ef73d3d30">&#9670;&#160;</a></span>SetCursorLock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputManager::SetCursorLock </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>lock</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>マウスカーソルのロック状態を切り替える </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lock</td><td>true でロック（カーソルを中心に固定）、false で解除 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a261889c39d5f40047dbc3cf08fccb9f7" name="a261889c39d5f40047dbc3cf08fccb9f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a261889c39d5f40047dbc3cf08fccb9f7">&#9670;&#160;</a></span>SetHwnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputManager::SetHwnd </td>
+          <td>(</td>
+          <td class="paramtype">HWND</td>          <td class="paramname"><span class="paramname"><em>hwnd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ウィンドウハンドルを設定する（マウスロック時に使用） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hwnd</td><td>ウィンドウハンドル </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5480931dba2720e7d80dd00a53adae0" name="aa5480931dba2720e7d80dd00a53adae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5480931dba2720e7d80dd00a53adae0">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputManager::Update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>毎フレームの入力状態を更新する </p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/utility/<a class="el" href="input__manager_8h_source.html">input_manager.h</a></li>
+<li>scripts/utility/<a class="el" href="input__manager_8cpp.html">input_manager.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_input_manager.html">InputManager</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>
