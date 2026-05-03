@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: GameImage 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struct_game_image.html','','struct_game_image-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">GameImage 構造体</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>2D ビットマップの描画位置・サイズ・表示状態を保持する構造体  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="game__image_8h_source.html">game_image.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a72a561590538ee96c9a5cdd3d56a6503" id="r_a72a561590538ee96c9a5cdd3d56a6503"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a72a561590538ee96c9a5cdd3d56a6503">GameImage</a> (ID2D1Bitmap *b, float px, float py, float pw, float ph)</td></tr>
+<tr class="memdesc:a72a561590538ee96c9a5cdd3d56a6503"><td class="mdescLeft">&#160;</td><td class="mdescRight">全パラメータを指定するコンストラクタ  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a7aac4cebeffee7f8fb46fa99133cf9f5" id="r_a7aac4cebeffee7f8fb46fa99133cf9f5"><td class="memItemLeft">ID2D1Bitmap *&#160;</td><td class="memItemRight"><a class="el" href="#a7aac4cebeffee7f8fb46fa99133cf9f5">pBmp</a></td></tr>
+<tr class="memdesc:a7aac4cebeffee7f8fb46fa99133cf9f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画するビットマップ  <br /></td></tr>
+<tr class="memitem:a3a5fcbbc628732267d1cf84c936621eb" id="r_a3a5fcbbc628732267d1cf84c936621eb"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a3a5fcbbc628732267d1cf84c936621eb">x</a></td></tr>
+<tr class="memdesc:a3a5fcbbc628732267d1cf84c936621eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画 X 座標（スクリーン空間）  <br /></td></tr>
+<tr class="memitem:a184e0555719166b1b0bb69173ce70c75" id="r_a184e0555719166b1b0bb69173ce70c75"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a184e0555719166b1b0bb69173ce70c75">y</a></td></tr>
+<tr class="memdesc:a184e0555719166b1b0bb69173ce70c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画 Y 座標（スクリーン空間）  <br /></td></tr>
+<tr class="memitem:aef1ec70e0d2282bdb5289b57aeeab78e" id="r_aef1ec70e0d2282bdb5289b57aeeab78e"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#aef1ec70e0d2282bdb5289b57aeeab78e">w</a></td></tr>
+<tr class="memdesc:aef1ec70e0d2282bdb5289b57aeeab78e"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画幅  <br /></td></tr>
+<tr class="memitem:a74f3dbc8d22449c3460944182df05ae2" id="r_a74f3dbc8d22449c3460944182df05ae2"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a74f3dbc8d22449c3460944182df05ae2">h</a></td></tr>
+<tr class="memdesc:a74f3dbc8d22449c3460944182df05ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画高さ  <br /></td></tr>
+<tr class="memitem:af74ba5bf82ab02300b89fc26e64e406c" id="r_af74ba5bf82ab02300b89fc26e64e406c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af74ba5bf82ab02300b89fc26e64e406c">visible</a> = true</td></tr>
+<tr class="memdesc:af74ba5bf82ab02300b89fc26e64e406c"><td class="mdescLeft">&#160;</td><td class="mdescRight">表示フラグ  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>2D ビットマップの描画位置・サイズ・表示状態を保持する構造体 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a72a561590538ee96c9a5cdd3d56a6503" name="a72a561590538ee96c9a5cdd3d56a6503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a561590538ee96c9a5cdd3d56a6503">&#9670;&#160;</a></span>GameImage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameImage::GameImage </td>
+          <td>(</td>
+          <td class="paramtype">ID2D1Bitmap *</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>px</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>py</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>pw</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>ph</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>全パラメータを指定するコンストラクタ </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>ビットマップポインタ </td></tr>
+    <tr><td class="paramname">px</td><td>X 座標 </td></tr>
+    <tr><td class="paramname">py</td><td>Y 座標 </td></tr>
+    <tr><td class="paramname">pw</td><td>幅 </td></tr>
+    <tr><td class="paramname">ph</td><td>高さ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">メンバ詳解</h2>
+<a id="a74f3dbc8d22449c3460944182df05ae2" name="a74f3dbc8d22449c3460944182df05ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f3dbc8d22449c3460944182df05ae2">&#9670;&#160;</a></span>h</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameImage::h</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画高さ </p>
+
+</div>
+</div>
+<a id="a7aac4cebeffee7f8fb46fa99133cf9f5" name="a7aac4cebeffee7f8fb46fa99133cf9f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aac4cebeffee7f8fb46fa99133cf9f5">&#9670;&#160;</a></span>pBmp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID2D1Bitmap* GameImage::pBmp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画するビットマップ </p>
+
+</div>
+</div>
+<a id="af74ba5bf82ab02300b89fc26e64e406c" name="af74ba5bf82ab02300b89fc26e64e406c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74ba5bf82ab02300b89fc26e64e406c">&#9670;&#160;</a></span>visible</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameImage::visible = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>表示フラグ </p>
+
+</div>
+</div>
+<a id="aef1ec70e0d2282bdb5289b57aeeab78e" name="aef1ec70e0d2282bdb5289b57aeeab78e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef1ec70e0d2282bdb5289b57aeeab78e">&#9670;&#160;</a></span>w</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameImage::w</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画幅 </p>
+
+</div>
+</div>
+<a id="a3a5fcbbc628732267d1cf84c936621eb" name="a3a5fcbbc628732267d1cf84c936621eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a5fcbbc628732267d1cf84c936621eb">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameImage::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画 X 座標（スクリーン空間） </p>
+
+</div>
+</div>
+<a id="a184e0555719166b1b0bb69173ce70c75" name="a184e0555719166b1b0bb69173ce70c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a184e0555719166b1b0bb69173ce70c75">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameImage::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画 Y 座標（スクリーン空間） </p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li>scripts/renderer/<a class="el" href="game__image_8h_source.html">game_image.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="struct_game_image.html">GameImage</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Window クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_window.html','','class_window-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Window クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Win32 ウィンドウの生成・メッセージループ・リサイズを管理するクラス  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="window_8h_source.html">window.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a74e6087da23d3c24e9fac0245e5ec92c" id="r_a74e6087da23d3c24e9fac0245e5ec92c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a74e6087da23d3c24e9fac0245e5ec92c">Window</a> ()</td></tr>
+<tr class="memdesc:a74e6087da23d3c24e9fac0245e5ec92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <br /></td></tr>
+<tr class="memitem:a245d821e6016fa1f6970ccbbedd635f6" id="r_a245d821e6016fa1f6970ccbbedd635f6"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a245d821e6016fa1f6970ccbbedd635f6">~Window</a> ()</td></tr>
+<tr class="memdesc:a245d821e6016fa1f6970ccbbedd635f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:ae282e760076a61f8eabc00b578464b2f" id="r_ae282e760076a61f8eabc00b578464b2f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae282e760076a61f8eabc00b578464b2f">Initialize</a> (HINSTANCE hInst)</td></tr>
+<tr class="memdesc:ae282e760076a61f8eabc00b578464b2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウクラスを登録してウィンドウを生成する  <br /></td></tr>
+<tr class="memitem:a523367cbf9035877f234a8cfdb9b3427" id="r_a523367cbf9035877f234a8cfdb9b3427"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a523367cbf9035877f234a8cfdb9b3427">Terminate</a> ()</td></tr>
+<tr class="memdesc:a523367cbf9035877f234a8cfdb9b3427"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウを破棄してリソースを解放する  <br /></td></tr>
+<tr class="memitem:adc0083e42c2a904032f86290133c6069" id="r_adc0083e42c2a904032f86290133c6069"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#adc0083e42c2a904032f86290133c6069">MessageLoop</a> ()</td></tr>
+<tr class="memdesc:adc0083e42c2a904032f86290133c6069"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウメッセージを処理する  <br /></td></tr>
+<tr class="memitem:a8fb125143b6e8a8c8ce28022d4da1bb8" id="r_a8fb125143b6e8a8c8ce28022d4da1bb8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8fb125143b6e8a8c8ce28022d4da1bb8">OnResize</a> (UINT width, UINT height)</td></tr>
+<tr class="memdesc:a8fb125143b6e8a8c8ce28022d4da1bb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウサイズ変更時の処理  <br /></td></tr>
+<tr class="memitem:a2653e855346ce97c6b8ca6b78f47792c" id="r_a2653e855346ce97c6b8ca6b78f47792c"><td class="memItemLeft">HWND&#160;</td><td class="memItemRight"><a class="el" href="#a2653e855346ce97c6b8ca6b78f47792c">GetWindowHandle</a> ()</td></tr>
+<tr class="memdesc:a2653e855346ce97c6b8ca6b78f47792c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウハンドルを取得する  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:a1e780f9ea5acb6db8fdafd96eaae74e8" id="r_a1e780f9ea5acb6db8fdafd96eaae74e8"><td class="memItemLeft">static LRESULT CALLBACK&#160;</td><td class="memItemRight"><a class="el" href="#a1e780f9ea5acb6db8fdafd96eaae74e8">MainWndProc</a> (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)</td></tr>
+<tr class="memdesc:a1e780f9ea5acb6db8fdafd96eaae74e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウプロシージャ（Win32 コールバック）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>Win32 ウィンドウの生成・メッセージループ・リサイズを管理するクラス </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a74e6087da23d3c24e9fac0245e5ec92c" name="a74e6087da23d3c24e9fac0245e5ec92c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74e6087da23d3c24e9fac0245e5ec92c">&#9670;&#160;</a></span>Window()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Window::Window </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+
+</div>
+</div>
+<a id="a245d821e6016fa1f6970ccbbedd635f6" name="a245d821e6016fa1f6970ccbbedd635f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245d821e6016fa1f6970ccbbedd635f6">&#9670;&#160;</a></span>~Window()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Window::~Window </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a2653e855346ce97c6b8ca6b78f47792c" name="a2653e855346ce97c6b8ca6b78f47792c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2653e855346ce97c6b8ca6b78f47792c">&#9670;&#160;</a></span>GetWindowHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HWND Window::GetWindowHandle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ウィンドウハンドルを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>HWND </dd></dl>
+
+</div>
+</div>
+<a id="ae282e760076a61f8eabc00b578464b2f" name="ae282e760076a61f8eabc00b578464b2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae282e760076a61f8eabc00b578464b2f">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Window::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">HINSTANCE</td>          <td class="paramname"><span class="paramname"><em>hInst</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ウィンドウクラスを登録してウィンドウを生成する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hInst</td><td>アプリケーションのインスタンスハンドル </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="a1e780f9ea5acb6db8fdafd96eaae74e8" name="a1e780f9ea5acb6db8fdafd96eaae74e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e780f9ea5acb6db8fdafd96eaae74e8">&#9670;&#160;</a></span>MainWndProc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LRESULT CALLBACK Window::MainWndProc </td>
+          <td>(</td>
+          <td class="paramtype">HWND</td>          <td class="paramname"><span class="paramname"><em>hWnd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT</td>          <td class="paramname"><span class="paramname"><em>msg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WPARAM</td>          <td class="paramname"><span class="paramname"><em>wParam</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LPARAM</td>          <td class="paramname"><span class="paramname"><em>lParam</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ウィンドウプロシージャ（Win32 コールバック） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hWnd</td><td>対象ウィンドウハンドル </td></tr>
+    <tr><td class="paramname">msg</td><td>メッセージID </td></tr>
+    <tr><td class="paramname">wParam</td><td>追加パラメータ W </td></tr>
+    <tr><td class="paramname">lParam</td><td>追加パラメータ L </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メッセージ処理結果 </dd></dl>
+
+</div>
+</div>
+<a id="adc0083e42c2a904032f86290133c6069" name="adc0083e42c2a904032f86290133c6069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc0083e42c2a904032f86290133c6069">&#9670;&#160;</a></span>MessageLoop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Window::MessageLoop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ウィンドウメッセージを処理する </p>
+<dl class="section return"><dt>戻り値</dt><dd>WM_QUIT を受信したら false、継続中は true </dd></dl>
+
+</div>
+</div>
+<a id="a8fb125143b6e8a8c8ce28022d4da1bb8" name="a8fb125143b6e8a8c8ce28022d4da1bb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb125143b6e8a8c8ce28022d4da1bb8">&#9670;&#160;</a></span>OnResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Window::OnResize </td>
+          <td>(</td>
+          <td class="paramtype">UINT</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ウィンドウサイズ変更時の処理 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>新しいクライアント幅 </td></tr>
+    <tr><td class="paramname">height</td><td>新しいクライアント高さ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a523367cbf9035877f234a8cfdb9b3427" name="a523367cbf9035877f234a8cfdb9b3427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a523367cbf9035877f234a8cfdb9b3427">&#9670;&#160;</a></span>Terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Window::Terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ウィンドウを破棄してリソースを解放する </p>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/window/<a class="el" href="window_8h_source.html">window.h</a></li>
+<li>scripts/window/<a class="el" href="window_8cpp.html">window.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_window.html">Window</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

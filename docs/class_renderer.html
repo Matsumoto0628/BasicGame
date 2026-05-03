@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Renderer クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_renderer.html','','class_renderer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Renderer クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Direct3D 11 デバイスとスワップチェーンを管理するレンダラークラス  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="renderer_8h_source.html">renderer.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a7ebf46f54dab9905f79b80f7fddb76a6" id="r_a7ebf46f54dab9905f79b80f7fddb76a6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7ebf46f54dab9905f79b80f7fddb76a6">Renderer</a> ()</td></tr>
+<tr class="memdesc:a7ebf46f54dab9905f79b80f7fddb76a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <br /></td></tr>
+<tr class="memitem:afeee408862d5bd6255a6882d47e6d5cd" id="r_afeee408862d5bd6255a6882d47e6d5cd"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afeee408862d5bd6255a6882d47e6d5cd">~Renderer</a> ()</td></tr>
+<tr class="memdesc:afeee408862d5bd6255a6882d47e6d5cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:a161b74942ebc3e447f3f79d655dea56b" id="r_a161b74942ebc3e447f3f79d655dea56b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a161b74942ebc3e447f3f79d655dea56b">Initialize</a> (HWND hWindow)</td></tr>
+<tr class="memdesc:a161b74942ebc3e447f3f79d655dea56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct3D デバイス・スワップチェーン・バックバッファを初期化する  <br /></td></tr>
+<tr class="memitem:abc992cf5ddbfb68ea82d4ebc10b1cc8e" id="r_abc992cf5ddbfb68ea82d4ebc10b1cc8e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abc992cf5ddbfb68ea82d4ebc10b1cc8e">Terminate</a> ()</td></tr>
+<tr class="memdesc:abc992cf5ddbfb68ea82d4ebc10b1cc8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">全 Direct3D リソースを解放する  <br /></td></tr>
+<tr class="memitem:a7ee1958f92e9e88379336297ae4cbc3f" id="r_a7ee1958f92e9e88379336297ae4cbc3f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7ee1958f92e9e88379336297ae4cbc3f">Draw</a> ()</td></tr>
+<tr class="memdesc:a7ee1958f92e9e88379336297ae4cbc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">バックバッファをクリアして描画を開始する  <br /></td></tr>
+<tr class="memitem:a7c94753418122720a8b18affa217a14f" id="r_a7c94753418122720a8b18affa217a14f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7c94753418122720a8b18affa217a14f">Swap</a> ()</td></tr>
+<tr class="memdesc:a7c94753418122720a8b18affa217a14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">バックバッファを画面に表示する  <br /></td></tr>
+<tr class="memitem:aac2c1380a3b6f02cffb4bc68f1512bd8" id="r_aac2c1380a3b6f02cffb4bc68f1512bd8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aac2c1380a3b6f02cffb4bc68f1512bd8">CompileShader</a> (const WCHAR *vsPath, const WCHAR *psPath, <a class="el" href="struct_shader.html">Shader</a> &amp;outShader)</td></tr>
+<tr class="memdesc:aac2c1380a3b6f02cffb4bc68f1512bd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点シェーダーとピクセルシェーダーをコンパイルする  <br /></td></tr>
+<tr class="memitem:a2dfd0c3f8e6a002294d1d0bb36679cad" id="r_a2dfd0c3f8e6a002294d1d0bb36679cad"><td class="memItemLeft">ID3D11Device *&#160;</td><td class="memItemRight"><a class="el" href="#a2dfd0c3f8e6a002294d1d0bb36679cad">GetDevice</a> ()</td></tr>
+<tr class="memdesc:a2dfd0c3f8e6a002294d1d0bb36679cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">D3D デバイスポインタを取得する  <br /></td></tr>
+<tr class="memitem:a6e7a496c5d7c45d5d172ef3df522723b" id="r_a6e7a496c5d7c45d5d172ef3df522723b"><td class="memItemLeft">ID3D11DeviceContext *&#160;</td><td class="memItemRight"><a class="el" href="#a6e7a496c5d7c45d5d172ef3df522723b">GetDeviceContext</a> ()</td></tr>
+<tr class="memdesc:a6e7a496c5d7c45d5d172ef3df522723b"><td class="mdescLeft">&#160;</td><td class="mdescRight">D3D デバイスコンテキストポインタを取得する  <br /></td></tr>
+<tr class="memitem:a205696c097d2d16619f5eea789e50ec9" id="r_a205696c097d2d16619f5eea789e50ec9"><td class="memItemLeft"><a class="el" href="struct_render_param.html">RenderParam</a>&#160;</td><td class="memItemRight"><a class="el" href="#a205696c097d2d16619f5eea789e50ec9">GetRenderParam</a> ()</td></tr>
+<tr class="memdesc:a205696c097d2d16619f5eea789e50ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">定数バッファセットを取得する  <br /></td></tr>
+<tr class="memitem:a8e3ab3c3d672ceb384a47919147db85b" id="r_a8e3ab3c3d672ceb384a47919147db85b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8e3ab3c3d672ceb384a47919147db85b">SetupViewTransform</a> (const DirectX::XMMATRIX &amp;viewMat)</td></tr>
+<tr class="memdesc:a8e3ab3c3d672ceb384a47919147db85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ビュー変換行列を定数バッファに設定する  <br /></td></tr>
+<tr class="memitem:af1b73e9c55940dfab25cad65a902855c" id="r_af1b73e9c55940dfab25cad65a902855c"><td class="memItemLeft">const <a class="el" href="struct_light_set.html">LightSet</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af1b73e9c55940dfab25cad65a902855c">GetLightSet</a> () const</td></tr>
+<tr class="memdesc:af1b73e9c55940dfab25cad65a902855c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ライトセットを取得する  <br /></td></tr>
+<tr class="memitem:ac7db074b0e3716b1be0f47a2d64c8368" id="r_ac7db074b0e3716b1be0f47a2d64c8368"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac7db074b0e3716b1be0f47a2d64c8368">SetEyePosLight</a> (DirectX::XMFLOAT4 eyePos)</td></tr>
+<tr class="memdesc:ac7db074b0e3716b1be0f47a2d64c8368"><td class="mdescLeft">&#160;</td><td class="mdescRight">ライトの視点座標を更新する  <br /></td></tr>
+<tr class="memitem:af26ddc6a1dd3418aaca296eefb357967" id="r_af26ddc6a1dd3418aaca296eefb357967"><td class="memItemLeft">IDXGISwapChain *&#160;</td><td class="memItemRight"><a class="el" href="#af26ddc6a1dd3418aaca296eefb357967">GetSwapChain</a> ()</td></tr>
+<tr class="memdesc:af26ddc6a1dd3418aaca296eefb357967"><td class="mdescLeft">&#160;</td><td class="mdescRight">スワップチェーンポインタを取得する  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a15b70dc797aa9d4eac256f72283bd1b1" id="r_a15b70dc797aa9d4eac256f72283bd1b1"><td class="memItemLeft"><a class="el" href="struct_shader.html">Shader</a>&#160;</td><td class="memItemRight"><a class="el" href="#a15b70dc797aa9d4eac256f72283bd1b1">TextureSpecularShader</a></td></tr>
+<tr class="memdesc:a15b70dc797aa9d4eac256f72283bd1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャ＋スペキュラシェーダー  <br /></td></tr>
+<tr class="memitem:a367db66cf6866ebaadb0dca55fcb87f1" id="r_a367db66cf6866ebaadb0dca55fcb87f1"><td class="memItemLeft"><a class="el" href="struct_shader.html">Shader</a>&#160;</td><td class="memItemRight"><a class="el" href="#a367db66cf6866ebaadb0dca55fcb87f1">TextureShader</a></td></tr>
+<tr class="memdesc:a367db66cf6866ebaadb0dca55fcb87f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャのみシェーダー  <br /></td></tr>
+<tr class="memitem:a2fb13b104d94da4678aae33d2845c522" id="r_a2fb13b104d94da4678aae33d2845c522"><td class="memItemLeft"><a class="el" href="struct_shader.html">Shader</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2fb13b104d94da4678aae33d2845c522">SimpleShader</a></td></tr>
+<tr class="memdesc:a2fb13b104d94da4678aae33d2845c522"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点カラーのみシェーダー  <br /></td></tr>
+<tr class="memitem:ad09f40663ed67b54e212d4c21dbf2245" id="r_ad09f40663ed67b54e212d4c21dbf2245"><td class="memItemLeft"><a class="el" href="struct_shader.html">Shader</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad09f40663ed67b54e212d4c21dbf2245">SpecularShader</a></td></tr>
+<tr class="memdesc:ad09f40663ed67b54e212d4c21dbf2245"><td class="mdescLeft">&#160;</td><td class="mdescRight">スペキュラのみシェーダー  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>Direct3D 11 デバイスとスワップチェーンを管理するレンダラークラス </p>
+<p>デバイスの初期化・シェーダーコンパイル・ビュー変換設定・ライト管理を行い、 各メッシュが参照する <a class="el" href="struct_render_param.html" title="ワールド・プロジェクション・ビューの各定数バッファセットを集約する構造体">RenderParam</a> を提供する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a7ebf46f54dab9905f79b80f7fddb76a6" name="a7ebf46f54dab9905f79b80f7fddb76a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ebf46f54dab9905f79b80f7fddb76a6">&#9670;&#160;</a></span>Renderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Renderer::Renderer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+
+</div>
+</div>
+<a id="afeee408862d5bd6255a6882d47e6d5cd" name="afeee408862d5bd6255a6882d47e6d5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeee408862d5bd6255a6882d47e6d5cd">&#9670;&#160;</a></span>~Renderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Renderer::~Renderer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="aac2c1380a3b6f02cffb4bc68f1512bd8" name="aac2c1380a3b6f02cffb4bc68f1512bd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2c1380a3b6f02cffb4bc68f1512bd8">&#9670;&#160;</a></span>CompileShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Renderer::CompileShader </td>
+          <td>(</td>
+          <td class="paramtype">const WCHAR *</td>          <td class="paramname"><span class="paramname"><em>vsPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const WCHAR *</td>          <td class="paramname"><span class="paramname"><em>psPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_shader.html">Shader</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>outShader</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点シェーダーとピクセルシェーダーをコンパイルする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vsPath</td><td>頂点シェーダーファイルのパス </td></tr>
+    <tr><td class="paramname">psPath</td><td>ピクセルシェーダーファイルのパス </td></tr>
+    <tr><td class="paramname">outShader</td><td>コンパイル結果を受け取る <a class="el" href="struct_shader.html" title="頂点シェーダー・ピクセルシェーダー・入力レイアウトを保持する構造体">Shader</a> 構造体 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="a7ee1958f92e9e88379336297ae4cbc3f" name="a7ee1958f92e9e88379336297ae4cbc3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee1958f92e9e88379336297ae4cbc3f">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Renderer::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>バックバッファをクリアして描画を開始する </p>
+
+</div>
+</div>
+<a id="a2dfd0c3f8e6a002294d1d0bb36679cad" name="a2dfd0c3f8e6a002294d1d0bb36679cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfd0c3f8e6a002294d1d0bb36679cad">&#9670;&#160;</a></span>GetDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID3D11Device * Renderer::GetDevice </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>D3D デバイスポインタを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>ID3D11Device ポインタ </dd></dl>
+
+</div>
+</div>
+<a id="a6e7a496c5d7c45d5d172ef3df522723b" name="a6e7a496c5d7c45d5d172ef3df522723b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e7a496c5d7c45d5d172ef3df522723b">&#9670;&#160;</a></span>GetDeviceContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID3D11DeviceContext * Renderer::GetDeviceContext </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>D3D デバイスコンテキストポインタを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>ID3D11DeviceContext ポインタ </dd></dl>
+
+</div>
+</div>
+<a id="af1b73e9c55940dfab25cad65a902855c" name="af1b73e9c55940dfab25cad65a902855c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b73e9c55940dfab25cad65a902855c">&#9670;&#160;</a></span>GetLightSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_light_set.html">LightSet</a> &amp; Renderer::GetLightSet </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ライトセットを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd><a class="el" href="struct_light_set.html" title="ライト定数バッファのデータと GPU バッファをまとめた構造体">LightSet</a> への定数参照 </dd></dl>
+
+</div>
+</div>
+<a id="a205696c097d2d16619f5eea789e50ec9" name="a205696c097d2d16619f5eea789e50ec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a205696c097d2d16619f5eea789e50ec9">&#9670;&#160;</a></span>GetRenderParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_render_param.html">RenderParam</a> Renderer::GetRenderParam </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>定数バッファセットを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd><a class="el" href="struct_render_param.html" title="ワールド・プロジェクション・ビューの各定数バッファセットを集約する構造体">RenderParam</a> の値コピー </dd></dl>
+
+</div>
+</div>
+<a id="af26ddc6a1dd3418aaca296eefb357967" name="af26ddc6a1dd3418aaca296eefb357967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af26ddc6a1dd3418aaca296eefb357967">&#9670;&#160;</a></span>GetSwapChain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IDXGISwapChain * Renderer::GetSwapChain </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>スワップチェーンポインタを取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>IDXGISwapChain ポインタ </dd></dl>
+
+</div>
+</div>
+<a id="a161b74942ebc3e447f3f79d655dea56b" name="a161b74942ebc3e447f3f79d655dea56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161b74942ebc3e447f3f79d655dea56b">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Renderer::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">HWND</td>          <td class="paramname"><span class="paramname"><em>hWindow</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Direct3D デバイス・スワップチェーン・バックバッファを初期化する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hWindow</td><td>描画先ウィンドウハンドル </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="ac7db074b0e3716b1be0f47a2d64c8368" name="ac7db074b0e3716b1be0f47a2d64c8368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7db074b0e3716b1be0f47a2d64c8368">&#9670;&#160;</a></span>SetEyePosLight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Renderer::SetEyePosLight </td>
+          <td>(</td>
+          <td class="paramtype">DirectX::XMFLOAT4</td>          <td class="paramname"><span class="paramname"><em>eyePos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ライトの視点座標を更新する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eyePos</td><td>視点座標（XMFLOAT4） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8e3ab3c3d672ceb384a47919147db85b" name="a8e3ab3c3d672ceb384a47919147db85b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3ab3c3d672ceb384a47919147db85b">&#9670;&#160;</a></span>SetupViewTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Renderer::SetupViewTransform </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMMATRIX &amp;</td>          <td class="paramname"><span class="paramname"><em>viewMat</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ビュー変換行列を定数バッファに設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">viewMat</td><td>ビュー変換行列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="a7c94753418122720a8b18affa217a14f" name="a7c94753418122720a8b18affa217a14f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c94753418122720a8b18affa217a14f">&#9670;&#160;</a></span>Swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Renderer::Swap </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>バックバッファを画面に表示する </p>
+
+</div>
+</div>
+<a id="abc992cf5ddbfb68ea82d4ebc10b1cc8e" name="abc992cf5ddbfb68ea82d4ebc10b1cc8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc992cf5ddbfb68ea82d4ebc10b1cc8e">&#9670;&#160;</a></span>Terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Renderer::Terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>全 Direct3D リソースを解放する </p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">メンバ詳解</h2>
+<a id="a2fb13b104d94da4678aae33d2845c522" name="a2fb13b104d94da4678aae33d2845c522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb13b104d94da4678aae33d2845c522">&#9670;&#160;</a></span>SimpleShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_shader.html">Shader</a> Renderer::SimpleShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点カラーのみシェーダー </p>
+
+</div>
+</div>
+<a id="ad09f40663ed67b54e212d4c21dbf2245" name="ad09f40663ed67b54e212d4c21dbf2245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad09f40663ed67b54e212d4c21dbf2245">&#9670;&#160;</a></span>SpecularShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_shader.html">Shader</a> Renderer::SpecularShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スペキュラのみシェーダー </p>
+
+</div>
+</div>
+<a id="a367db66cf6866ebaadb0dca55fcb87f1" name="a367db66cf6866ebaadb0dca55fcb87f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a367db66cf6866ebaadb0dca55fcb87f1">&#9670;&#160;</a></span>TextureShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_shader.html">Shader</a> Renderer::TextureShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャのみシェーダー </p>
+
+</div>
+</div>
+<a id="a15b70dc797aa9d4eac256f72283bd1b1" name="a15b70dc797aa9d4eac256f72283bd1b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15b70dc797aa9d4eac256f72283bd1b1">&#9670;&#160;</a></span>TextureSpecularShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_shader.html">Shader</a> Renderer::TextureSpecularShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャ＋スペキュラシェーダー </p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/renderer/<a class="el" href="renderer_8h_source.html">renderer.h</a></li>
+<li>scripts/renderer/<a class="el" href="renderer_8cpp.html">renderer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_renderer.html">Renderer</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

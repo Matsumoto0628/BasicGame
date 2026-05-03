@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Triangle 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struct_triangle.html','','struct_triangle-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Triangle 構造体</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>3 頂点の三角形ポリゴンを管理する構造体  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="triangle_8h_source.html">triangle.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:aaefe4ed500c07918d30c6f0e286332c5" id="r_aaefe4ed500c07918d30c6f0e286332c5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aaefe4ed500c07918d30c6f0e286332c5">Triangle</a> ()</td></tr>
+<tr class="memdesc:aaefe4ed500c07918d30c6f0e286332c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <br /></td></tr>
+<tr class="memitem:a5199760a17454f4dc94c855a57e3a152" id="r_a5199760a17454f4dc94c855a57e3a152"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5199760a17454f4dc94c855a57e3a152">~Triangle</a> ()</td></tr>
+<tr class="memdesc:a5199760a17454f4dc94c855a57e3a152"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:a7c5a2c79a204c835cdaf39249bafe34e" id="r_a7c5a2c79a204c835cdaf39249bafe34e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c5a2c79a204c835cdaf39249bafe34e">CreateVertexBuffer</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer)</td></tr>
+<tr class="memdesc:a7c5a2c79a204c835cdaf39249bafe34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファを GPU 上に生成する  <br /></td></tr>
+<tr class="memitem:af268f7a4f4f54ad991fad86669d8e6e5" id="r_af268f7a4f4f54ad991fad86669d8e6e5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af268f7a4f4f54ad991fad86669d8e6e5">DestroyVertexBuffer</a> ()</td></tr>
+<tr class="memdesc:af268f7a4f4f54ad991fad86669d8e6e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファを解放する  <br /></td></tr>
+<tr class="memitem:a4d175c5f615390454a2af36db220e8cc" id="r_a4d175c5f615390454a2af36db220e8cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4d175c5f615390454a2af36db220e8cc">Draw</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer)</td></tr>
+<tr class="memdesc:a4d175c5f615390454a2af36db220e8cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">三角形を描画する  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:aa0c47aa4f04ce8968addf986e4e09014" id="r_aa0c47aa4f04ce8968addf986e4e09014"><td class="memItemLeft"><a class="el" href="struct_vertex.html">Vertex</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa0c47aa4f04ce8968addf986e4e09014">Vertices</a> [<a class="el" href="#a2568ea4758d4ac2cb612ee282b24d15e">VERTEX_NUM</a>]</td></tr>
+<tr class="memdesc:aa0c47aa4f04ce8968addf986e4e09014"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点データ配列  <br /></td></tr>
+<tr class="memitem:ab8b6af6d0742dcec7571759e2d74085f" id="r_ab8b6af6d0742dcec7571759e2d74085f"><td class="memItemLeft">ID3D11Buffer *&#160;</td><td class="memItemRight"><a class="el" href="#ab8b6af6d0742dcec7571759e2d74085f">VertexBuffer</a> = nullptr</td></tr>
+<tr class="memdesc:ab8b6af6d0742dcec7571759e2d74085f"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファ  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静的公開変数類</h2></td></tr>
+<tr class="memitem:a2568ea4758d4ac2cb612ee282b24d15e" id="r_a2568ea4758d4ac2cb612ee282b24d15e"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a2568ea4758d4ac2cb612ee282b24d15e">VERTEX_NUM</a> = 3</td></tr>
+<tr class="memdesc:a2568ea4758d4ac2cb612ee282b24d15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点数（常に 3）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>3 頂点の三角形ポリゴンを管理する構造体 </p>
+<p>主にレンダラーの動作確認・デバッグ用途に使用する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="aaefe4ed500c07918d30c6f0e286332c5" name="aaefe4ed500c07918d30c6f0e286332c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaefe4ed500c07918d30c6f0e286332c5">&#9670;&#160;</a></span>Triangle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Triangle::Triangle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+
+</div>
+</div>
+<a id="a5199760a17454f4dc94c855a57e3a152" name="a5199760a17454f4dc94c855a57e3a152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5199760a17454f4dc94c855a57e3a152">&#9670;&#160;</a></span>~Triangle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Triangle::~Triangle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a7c5a2c79a204c835cdaf39249bafe34e" name="a7c5a2c79a204c835cdaf39249bafe34e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c5a2c79a204c835cdaf39249bafe34e">&#9670;&#160;</a></span>CreateVertexBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Triangle::CreateVertexBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファを GPU 上に生成する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="af268f7a4f4f54ad991fad86669d8e6e5" name="af268f7a4f4f54ad991fad86669d8e6e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af268f7a4f4f54ad991fad86669d8e6e5">&#9670;&#160;</a></span>DestroyVertexBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Triangle::DestroyVertexBuffer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファを解放する </p>
+
+</div>
+</div>
+<a id="a4d175c5f615390454a2af36db220e8cc" name="a4d175c5f615390454a2af36db220e8cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d175c5f615390454a2af36db220e8cc">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Triangle::Draw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>三角形を描画する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">メンバ詳解</h2>
+<a id="a2568ea4758d4ac2cb612ee282b24d15e" name="a2568ea4758d4ac2cb612ee282b24d15e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2568ea4758d4ac2cb612ee282b24d15e">&#9670;&#160;</a></span>VERTEX_NUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Triangle::VERTEX_NUM = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>頂点数（常に 3） </p>
+
+</div>
+</div>
+<a id="ab8b6af6d0742dcec7571759e2d74085f" name="ab8b6af6d0742dcec7571759e2d74085f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b6af6d0742dcec7571759e2d74085f">&#9670;&#160;</a></span>VertexBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID3D11Buffer* Triangle::VertexBuffer = nullptr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファ </p>
+
+</div>
+</div>
+<a id="aa0c47aa4f04ce8968addf986e4e09014" name="aa0c47aa4f04ce8968addf986e4e09014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c47aa4f04ce8968addf986e4e09014">&#9670;&#160;</a></span>Vertices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_vertex.html">Vertex</a> Triangle::Vertices[<a class="el" href="#a2568ea4758d4ac2cb612ee282b24d15e">VERTEX_NUM</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点データ配列 </p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li>scripts/renderer/<a class="el" href="triangle_8h_source.html">triangle.h</a></li>
+<li>scripts/renderer/<a class="el" href="triangle_8cpp.html">triangle.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="struct_triangle.html">Triangle</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: Model クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('class_model.html','','class_model-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Model クラス<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Assimp で読み込んだ 3D モデルを管理する基底クラス  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="model_8h_source.html">model.h</a>&gt;</code></p>
+<div class="dynheader">
+Model の継承関係図</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_model.png" usemap="#Model_map" alt=""/>
+  <map id="Model_map" name="Model_map">
+<area href="class_box_model.html" title="ボックス（直方体）形状の 3D モデルクラス" alt="BoxModel" shape="rect" coords="0,56,93,80"/>
+<area href="class_stage_model.html" title="ゲームステージ（背景・地形）の 3D モデルクラス" alt="StageModel" shape="rect" coords="103,56,196,80"/>
+<area href="class_weapon_model.html" title="武器の 3D モデルクラス" alt="WeaponModel" shape="rect" coords="206,56,299,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ae3b375de5f6df4faf74a95d64748e048" id="r_ae3b375de5f6df4faf74a95d64748e048"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae3b375de5f6df4faf74a95d64748e048">Model</a> ()</td></tr>
+<tr class="memdesc:ae3b375de5f6df4faf74a95d64748e048"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <br /></td></tr>
+<tr class="memitem:ad6ebd2062a0b823db841a0b88baac4c0" id="r_ad6ebd2062a0b823db841a0b88baac4c0"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad6ebd2062a0b823db841a0b88baac4c0">~Model</a> ()</td></tr>
+<tr class="memdesc:ad6ebd2062a0b823db841a0b88baac4c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <br /></td></tr>
+<tr class="memitem:a13d79a29c0dc4eb38dce8ec225043b24" id="r_a13d79a29c0dc4eb38dce8ec225043b24"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a13d79a29c0dc4eb38dce8ec225043b24">Setup</a> (<a class="el" href="class_renderer.html">Renderer</a> &amp;renderer, const char *filePath)</td></tr>
+<tr class="memdesc:a13d79a29c0dc4eb38dce8ec225043b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルファイルを読み込んでメッシュを構築する  <br /></td></tr>
+<tr class="memitem:a55c16a2311996973ff05976927c8ee2c" id="r_a55c16a2311996973ff05976927c8ee2c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a55c16a2311996973ff05976927c8ee2c">Terminate</a> ()</td></tr>
+<tr class="memdesc:a55c16a2311996973ff05976927c8ee2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュリソースを解放する  <br /></td></tr>
+<tr class="memitem:a0c668c13fc79a86326f75ea231f3886f" id="r_a0c668c13fc79a86326f75ea231f3886f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0c668c13fc79a86326f75ea231f3886f">Draw</a> ()</td></tr>
+<tr class="memdesc:a0c668c13fc79a86326f75ea231f3886f"><td class="mdescLeft">&#160;</td><td class="mdescRight">全メッシュを描画する  <br /></td></tr>
+<tr class="memitem:a057e12e7222247b26286ae2d2c32df2f" id="r_a057e12e7222247b26286ae2d2c32df2f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a057e12e7222247b26286ae2d2c32df2f">ProcessNode</a> (aiNode *node, const DirectX::XMMATRIX &amp;parentTransform)</td></tr>
+<tr class="memdesc:a057e12e7222247b26286ae2d2c32df2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assimp のノード階層を再帰的に処理してメッシュを構築する  <br /></td></tr>
+<tr class="memitem:aad465ba03d1c753232c59a6c6747b18f" id="r_aad465ba03d1c753232c59a6c6747b18f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aad465ba03d1c753232c59a6c6747b18f">SetPosition</a> (const DirectX::XMFLOAT3 &amp;pos)</td></tr>
+<tr class="memdesc:aad465ba03d1c753232c59a6c6747b18f"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルのワールド座標を設定する  <br /></td></tr>
+<tr class="memitem:abb1af764eeb0d7c0036c87a495cbe0ba" id="r_abb1af764eeb0d7c0036c87a495cbe0ba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abb1af764eeb0d7c0036c87a495cbe0ba">SetRotation</a> (const DirectX::XMFLOAT4 &amp;rot)</td></tr>
+<tr class="memdesc:abb1af764eeb0d7c0036c87a495cbe0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルの回転を設定する  <br /></td></tr>
+<tr class="memitem:ac59be8f41742e9f068caa47615f35dc3" id="r_ac59be8f41742e9f068caa47615f35dc3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac59be8f41742e9f068caa47615f35dc3">SetScale</a> (const DirectX::XMFLOAT3 &amp;scale)</td></tr>
+<tr class="memdesc:ac59be8f41742e9f068caa47615f35dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルのスケールを設定する  <br /></td></tr>
+<tr class="memitem:ac9c4111c797437eafcde5a2df447f2db" id="r_ac9c4111c797437eafcde5a2df447f2db"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac9c4111c797437eafcde5a2df447f2db">SetPivot</a> (const DirectX::XMFLOAT3 &amp;pivot)</td></tr>
+<tr class="memdesc:ac9c4111c797437eafcde5a2df447f2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転のピボット座標を設定する  <br /></td></tr>
+<tr class="memitem:a3137f0af289a4511f7279d5fa00e3e57" id="r_a3137f0af289a4511f7279d5fa00e3e57"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3137f0af289a4511f7279d5fa00e3e57">SetPivotRotation</a> (const DirectX::XMFLOAT4 &amp;rot)</td></tr>
+<tr class="memdesc:a3137f0af289a4511f7279d5fa00e3e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">ピボットを中心とした追加回転を設定する  <br /></td></tr>
+<tr class="memitem:a9734156d09643ff15009d9501d05a3ee" id="r_a9734156d09643ff15009d9501d05a3ee"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9734156d09643ff15009d9501d05a3ee">ChangeMaterial</a> ()</td></tr>
+<tr class="memdesc:a9734156d09643ff15009d9501d05a3ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">マテリアルを全メッシュに再適用する  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+限定公開メンバ関数</h2></td></tr>
+<tr class="memitem:a6221131d19309d56f6b8fa2551109f8e" id="r_a6221131d19309d56f6b8fa2551109f8e"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a6221131d19309d56f6b8fa2551109f8e">initializeMaterialSet</a> (int idx, aiMaterial *mat)=0</td></tr>
+<tr class="memdesc:a6221131d19309d56f6b8fa2551109f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">インデックス idx のメッシュにマテリアルを設定する（サブクラスで実装）  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+限定公開変数類</h2></td></tr>
+<tr class="memitem:ac49141278ea5cd79ad0a8592ab37f97a" id="r_ac49141278ea5cd79ad0a8592ab37f97a"><td class="memItemLeft"><a class="el" href="class_renderer.html">Renderer</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ac49141278ea5cd79ad0a8592ab37f97a">m_pRenderer</a> = nullptr</td></tr>
+<tr class="memdesc:ac49141278ea5cd79ad0a8592ab37f97a"><td class="mdescLeft">&#160;</td><td class="mdescRight">レンダラーへのポインタ  <br /></td></tr>
+<tr class="memitem:ad55b2a99d6fbbacd6dd40ef68299c6bb" id="r_ad55b2a99d6fbbacd6dd40ef68299c6bb"><td class="memItemLeft"><a class="el" href="struct_material_set.html">MaterialSet</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad55b2a99d6fbbacd6dd40ef68299c6bb">m_materialSets</a> [10]</td></tr>
+<tr class="memdesc:ad55b2a99d6fbbacd6dd40ef68299c6bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">マテリアルセット配列（最大10）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>Assimp で読み込んだ 3D モデルを管理する基底クラス </p>
+<p>ノード階層をトラバースしてメッシュを構築し、 ワールドトランスフォーム（位置・回転・スケール・ピボット）を提供する。 マテリアルの初期化はサブクラスが実装する。 </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="ae3b375de5f6df4faf74a95d64748e048" name="ae3b375de5f6df4faf74a95d64748e048"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3b375de5f6df4faf74a95d64748e048">&#9670;&#160;</a></span>Model()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Model::Model </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+
+</div>
+</div>
+<a id="ad6ebd2062a0b823db841a0b88baac4c0" name="ad6ebd2062a0b823db841a0b88baac4c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ebd2062a0b823db841a0b88baac4c0">&#9670;&#160;</a></span>~Model()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Model::~Model </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a9734156d09643ff15009d9501d05a3ee" name="a9734156d09643ff15009d9501d05a3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9734156d09643ff15009d9501d05a3ee">&#9670;&#160;</a></span>ChangeMaterial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::ChangeMaterial </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>マテリアルを全メッシュに再適用する </p>
+
+</div>
+</div>
+<a id="a0c668c13fc79a86326f75ea231f3886f" name="a0c668c13fc79a86326f75ea231f3886f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c668c13fc79a86326f75ea231f3886f">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>全メッシュを描画する </p>
+
+</div>
+</div>
+<a id="a6221131d19309d56f6b8fa2551109f8e" name="a6221131d19309d56f6b8fa2551109f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6221131d19309d56f6b8fa2551109f8e">&#9670;&#160;</a></span>initializeMaterialSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Model::initializeMaterialSet </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">aiMaterial *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>インデックス idx のメッシュにマテリアルを設定する（サブクラスで実装） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>メッシュインデックス </td></tr>
+    <tr><td class="paramname">mat</td><td>Assimp のマテリアルデータ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="class_box_model.html#a7329308ff542e8a295ed0594a490a972">BoxModel</a>, <a class="el" href="class_stage_model.html#a94cb84cc73b1a8a3209942d9099d85cd">StageModel</a>, <a class="el" href="class_weapon_model.html#a052fd476f4d875d4ae7a5ceeaa0d4d13">WeaponModel</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="a057e12e7222247b26286ae2d2c32df2f" name="a057e12e7222247b26286ae2d2c32df2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a057e12e7222247b26286ae2d2c32df2f">&#9670;&#160;</a></span>ProcessNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::ProcessNode </td>
+          <td>(</td>
+          <td class="paramtype">aiNode *</td>          <td class="paramname"><span class="paramname"><em>node</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const DirectX::XMMATRIX &amp;</td>          <td class="paramname"><span class="paramname"><em>parentTransform</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assimp のノード階層を再帰的に処理してメッシュを構築する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>処理対象のノード </td></tr>
+    <tr><td class="paramname">parentTransform</td><td>親ノードのワールド変換行列 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9c4111c797437eafcde5a2df447f2db" name="ac9c4111c797437eafcde5a2df447f2db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c4111c797437eafcde5a2df447f2db">&#9670;&#160;</a></span>SetPivot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::SetPivot </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT3 &amp;</td>          <td class="paramname"><span class="paramname"><em>pivot</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転のピボット座標を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pivot</td><td>ピボット座標 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3137f0af289a4511f7279d5fa00e3e57" name="a3137f0af289a4511f7279d5fa00e3e57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3137f0af289a4511f7279d5fa00e3e57">&#9670;&#160;</a></span>SetPivotRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::SetPivotRotation </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT4 &amp;</td>          <td class="paramname"><span class="paramname"><em>rot</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ピボットを中心とした追加回転を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rot</td><td>回転クォータニオン </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aad465ba03d1c753232c59a6c6747b18f" name="aad465ba03d1c753232c59a6c6747b18f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad465ba03d1c753232c59a6c6747b18f">&#9670;&#160;</a></span>SetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::SetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT3 &amp;</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルのワールド座標を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>座標 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abb1af764eeb0d7c0036c87a495cbe0ba" name="abb1af764eeb0d7c0036c87a495cbe0ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb1af764eeb0d7c0036c87a495cbe0ba">&#9670;&#160;</a></span>SetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::SetRotation </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT4 &amp;</td>          <td class="paramname"><span class="paramname"><em>rot</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルの回転を設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rot</td><td>回転クォータニオン </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac59be8f41742e9f068caa47615f35dc3" name="ac59be8f41742e9f068caa47615f35dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac59be8f41742e9f068caa47615f35dc3">&#9670;&#160;</a></span>SetScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::SetScale </td>
+          <td>(</td>
+          <td class="paramtype">const DirectX::XMFLOAT3 &amp;</td>          <td class="paramname"><span class="paramname"><em>scale</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルのスケールを設定する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scale</td><td>スケール値 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a13d79a29c0dc4eb38dce8ec225043b24" name="a13d79a29c0dc4eb38dce8ec225043b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13d79a29c0dc4eb38dce8ec225043b24">&#9670;&#160;</a></span>Setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Model::Setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_renderer.html">Renderer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>renderer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filePath</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルファイルを読み込んでメッシュを構築する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>3Dレンダラーの参照 </td></tr>
+    <tr><td class="paramname">filePath</td><td>モデルファイルのパス </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功すれば true </dd></dl>
+
+</div>
+</div>
+<a id="a55c16a2311996973ff05976927c8ee2c" name="a55c16a2311996973ff05976927c8ee2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55c16a2311996973ff05976927c8ee2c">&#9670;&#160;</a></span>Terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メッシュリソースを解放する </p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">メンバ詳解</h2>
+<a id="ad55b2a99d6fbbacd6dd40ef68299c6bb" name="ad55b2a99d6fbbacd6dd40ef68299c6bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad55b2a99d6fbbacd6dd40ef68299c6bb">&#9670;&#160;</a></span>m_materialSets</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_material_set.html">MaterialSet</a> Model::m_materialSets[10]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>マテリアルセット配列（最大10） </p>
+
+</div>
+</div>
+<a id="ac49141278ea5cd79ad0a8592ab37f97a" name="ac49141278ea5cd79ad0a8592ab37f97a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac49141278ea5cd79ad0a8592ab37f97a">&#9670;&#160;</a></span>m_pRenderer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_renderer.html">Renderer</a>* Model::m_pRenderer = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>レンダラーへのポインタ </p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>scripts/model/<a class="el" href="model_8h_source.html">model.h</a></li>
+<li>scripts/model/<a class="el" href="model_8cpp.html">model.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_model.html">Model</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>

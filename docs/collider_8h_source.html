@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.17.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>殺虫侍: scripts/component/collider.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+mermaid.initialize({ startOnLoad: true, theme: theme });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">殺虫侍
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.17.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu('',true);
+  init_search();
+});
+</script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1" style="position:absolute;right:8px;top:8px;height:36px;"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2" style="float:right">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('collider_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">collider.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="collider_8h.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">class </span><a class="code hl_class" href="class_sphere.html">Sphere</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span><a class="code hl_class" href="class_renderer.html">Renderer</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_collider.html">   18</a></span><span class="keyword">class </span><a class="code hl_function" href="class_collider.html#aa7186870221f868bbc74c3ae8609fa66">Collider</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_function" href="class_collider.html#aa7186870221f868bbc74c3ae8609fa66">Collider</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_function" href="class_collider.html#a564acde9860f875a32a6638c573d87be">~Collider</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_collider.html#ab8fc3319f0773a04d13f466eb875f577">Intersects</a>(<span class="keyword">const</span> <a class="code hl_function" href="class_collider.html#aa7186870221f868bbc74c3ae8609fa66">Collider</a>&amp; other) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_collider.html#afdaf1bfa46219cc75f6ad7fe3b108da1">   38</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#afdaf1bfa46219cc75f6ad7fe3b108da1">SetPosition</a>(<span class="keyword">const</span> DirectX::XMFLOAT3&amp; pos) { m_position = pos; }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_collider.html#a36b56484c11fbc0ec71156069b5bf470">   44</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#a36b56484c11fbc0ec71156069b5bf470">SetRadius</a>(<span class="keywordtype">float</span> r) { m_radius = r; }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#ae3b826bc78fd6b1614999c56a9a111e3">Initialize</a>(<a class="code hl_class" href="class_renderer.html">Renderer</a>&amp; renderer);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#ad16e5c3e667ac9cb70ee5b817297ec16">Draw</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#a4c07ce16482db6e2faa217972078535f">Update</a>();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_collider.html#ad5ed4c198995065d921f991579c4980f">   62</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_collider.html#ad5ed4c198995065d921f991579c4980f">SetActive</a>(<span class="keywordtype">bool</span> isActive) { m_isActive = isActive; }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_collider.html#ab52d6db9ecf8510f7ea205acfdccbb23">   68</a></span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_collider.html#ab52d6db9ecf8510f7ea205acfdccbb23">GetActive</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_isActive; }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    DirectX::XMFLOAT3 m_position{ 0,0,0 };  </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">float</span> m_radius = 1.0f;                   </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    Sphere* m_pSphere = <span class="keyword">nullptr</span>;             </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    Renderer* m_pRenderer = <span class="keyword">nullptr</span>;         </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">bool</span> m_isActive = <span class="keyword">false</span>;                 </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>};</div>
+</div>
+<div class="ttc" id="aclass_collider_html_a36b56484c11fbc0ec71156069b5bf470"><div class="ttname"><a href="class_collider.html#a36b56484c11fbc0ec71156069b5bf470">Collider::SetRadius</a></div><div class="ttdeci">void SetRadius(float r)</div><div class="ttdoc">コライダーの半径を設定する</div><div class="ttdef"><b>Definition</b> collider.h:44</div></div>
+<div class="ttc" id="aclass_collider_html_a4c07ce16482db6e2faa217972078535f"><div class="ttname"><a href="class_collider.html#a4c07ce16482db6e2faa217972078535f">Collider::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">毎フレームの状態更新</div><div class="ttdef"><b>Definition</b> collider.cpp:40</div></div>
+<div class="ttc" id="aclass_collider_html_a564acde9860f875a32a6638c573d87be"><div class="ttname"><a href="class_collider.html#a564acde9860f875a32a6638c573d87be">Collider::~Collider</a></div><div class="ttdeci">~Collider()</div><div class="ttdoc">デストラクタ</div><div class="ttdef"><b>Definition</b> collider.cpp:8</div></div>
+<div class="ttc" id="aclass_collider_html_aa7186870221f868bbc74c3ae8609fa66"><div class="ttname"><a href="class_collider.html#aa7186870221f868bbc74c3ae8609fa66">Collider::Collider</a></div><div class="ttdeci">Collider()</div><div class="ttdoc">コンストラクタ</div><div class="ttdef"><b>Definition</b> collider.cpp:4</div></div>
+<div class="ttc" id="aclass_collider_html_ab52d6db9ecf8510f7ea205acfdccbb23"><div class="ttname"><a href="class_collider.html#ab52d6db9ecf8510f7ea205acfdccbb23">Collider::GetActive</a></div><div class="ttdeci">const bool GetActive() const</div><div class="ttdoc">コライダーが有効かどうかを返す</div><div class="ttdef"><b>Definition</b> collider.h:68</div></div>
+<div class="ttc" id="aclass_collider_html_ab8fc3319f0773a04d13f466eb875f577"><div class="ttname"><a href="class_collider.html#ab8fc3319f0773a04d13f466eb875f577">Collider::Intersects</a></div><div class="ttdeci">bool Intersects(const Collider &amp;other) const</div><div class="ttdoc">別のコライダーと交差しているか判定する</div><div class="ttdef"><b>Definition</b> collider.cpp:12</div></div>
+<div class="ttc" id="aclass_collider_html_ad16e5c3e667ac9cb70ee5b817297ec16"><div class="ttname"><a href="class_collider.html#ad16e5c3e667ac9cb70ee5b817297ec16">Collider::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">デバッグ用の球体を描画する</div><div class="ttdef"><b>Definition</b> collider.cpp:35</div></div>
+<div class="ttc" id="aclass_collider_html_ad5ed4c198995065d921f991579c4980f"><div class="ttname"><a href="class_collider.html#ad5ed4c198995065d921f991579c4980f">Collider::SetActive</a></div><div class="ttdeci">void SetActive(bool isActive)</div><div class="ttdoc">コライダーの有効・無効を切り替える</div><div class="ttdef"><b>Definition</b> collider.h:62</div></div>
+<div class="ttc" id="aclass_collider_html_ae3b826bc78fd6b1614999c56a9a111e3"><div class="ttname"><a href="class_collider.html#ae3b826bc78fd6b1614999c56a9a111e3">Collider::Initialize</a></div><div class="ttdeci">void Initialize(Renderer &amp;renderer)</div><div class="ttdoc">レンダラーを受け取ってデバッグ描画用球体を初期化する</div><div class="ttdef"><b>Definition</b> collider.cpp:27</div></div>
+<div class="ttc" id="aclass_collider_html_afdaf1bfa46219cc75f6ad7fe3b108da1"><div class="ttname"><a href="class_collider.html#afdaf1bfa46219cc75f6ad7fe3b108da1">Collider::SetPosition</a></div><div class="ttdeci">void SetPosition(const DirectX::XMFLOAT3 &amp;pos)</div><div class="ttdoc">コライダーの中心座標を設定する</div><div class="ttdef"><b>Definition</b> collider.h:38</div></div>
+<div class="ttc" id="aclass_renderer_html"><div class="ttname"><a href="class_renderer.html">Renderer</a></div><div class="ttdoc">Direct3D 11 デバイスとスワップチェーンを管理するレンダラークラス</div><div class="ttdef"><b>Definition</b> renderer.h:21</div></div>
+<div class="ttc" id="aclass_sphere_html"><div class="ttname"><a href="class_sphere.html">Sphere</a></div><div class="ttdoc">スライス・スタック分割による球体ポリゴンを生成・描画するクラス</div><div class="ttdef"><b>Definition</b> sphere.h:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_53e6fa9553ac22a5646d2a2b2d7b97a1.html">scripts</a></li><li class="navelem"><a href="dir_a0738e9b900b46687315e6ae1079a286.html">component</a></li><li class="navelem"><a href="collider_8h.html">collider.h</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
+  </ul>
+</div>
+</body>
+</html>
